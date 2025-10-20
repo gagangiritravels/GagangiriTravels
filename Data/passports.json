@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "fullName": "Mahesh",
+    "dob": "2016-06-15",
+    "gender": "male",
+    "placeOfBirth": "Maharashtra",
+    "address": "sunrise apt 201",
+    "city": "Nashik",
+    "state": "Thane",
+    "zipCode": "421004",
+    "email": "abc@gmail.com",
+    "phone": "8010366946",
+    "nationality": "Indian",
+    "passportType": "normal",
+    "status": "Submitted",
+    "submittedAt": "2025-09-20T05:24:08.510Z"
+  }
+]

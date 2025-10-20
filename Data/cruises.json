@@ -1,0 +1,74 @@
+[
+  {
+    "id": 7,
+    "fullName": "Mahesh",
+    "email": "abc@gmail.com",
+    "phone": "8010366946",
+    "passengers": 2,
+    "travelDate": "2025-09-17",
+    "travelTo": "2025-09-23",
+    "submittedAt": "2025-09-16T05:01:52.611Z"
+  },
+  {
+    "id": 8,
+    "fullName": "Kajal",
+    "email": "abc@gmail.com",
+    "phone": "8010366946",
+    "passengers": 1,
+    "travelDate": "2025-09-17",
+    "travelTo": "2025-09-30",
+    "submittedAt": "2025-09-16T05:33:06.802Z"
+  },
+  {
+    "id": 9,
+    "fullName": "Kajal",
+    "email": "abc@gmail.com",
+    "phone": "9049100625",
+    "passengers": 26,
+    "travelDate": "2025-10-01",
+    "travelTo": "2025-10-10",
+    "submittedAt": "2025-09-27T05:46:02.593Z"
+  },
+  {
+    "id": 11,
+    "cruise": "7-Night Eastern Caribbean Getaway",
+    "fullName": "Ravi Mishra",
+    "email": "abc@gmail.com",
+    "phone": "8010366946",
+    "passengers": 5,
+    "travelDate": "2025-10-22",
+    "travelTo": "2025-10-28",
+    "submittedAt": "2025-10-13T07:19:58.230Z"
+  },
+  {
+    "id": 12,
+    "cruise": "7-Night Eastern Caribbean Getaway",
+    "fullName": "Naresh",
+    "email": "xyz@gmail.com",
+    "phone": "8010366946",
+    "passengers": 25,
+    "travelDate": "2025-10-15",
+    "travelTo": "2025-10-28",
+    "submittedAt": "2025-10-13T08:54:08.434Z"
+  },
+  {
+    "id": 19,
+    "fullName": "Saroj Vithalani",
+    "email": "gagangiri.acc@gmail.com",
+    "phone": "09370262361",
+    "passengers": 24,
+    "travelDate": "2025-10-16",
+    "travelTo": "2025-10-29",
+    "submittedAt": "2025-10-14T11:00:58.952Z"
+  },
+  {
+    "id": 20,
+    "fullName": "Khusi",
+    "email": "gagangiriholidays@gmail.com",
+    "phone": "9665811088",
+    "passengers": 12,
+    "travelDate": "2025-10-16",
+    "travelTo": "2025-10-28",
+    "submittedAt": "2025-10-15T07:11:22.738Z"
+  }
+]

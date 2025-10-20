@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GagangiriTravels - Find Your Perfect Cruise</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&family=Lobster&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #0a2342;
+      --secondary-color: #2ca58d;
+      --accent-color: #f4a261;
+      --light-bg: #f8f9fa;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+    }
+
+    h1, h2, .navbar-brand {
+      font-family: "Playfair Display", serif;
+    }
+
+    /* Hero section */
+    #hero-section {
+      padding: 10rem 0;
+      text-align: center;
+      color: white;
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+        url("https://www.travelturtle.world/wp-content/uploads/2023/08/Cordelia-Cruises-1920x1080.png")
+          no-repeat center center / cover;
+      filter: brightness(1.25) contrast(1.1);
+    }
+
+    #booking-form-container {
+      background: rgba(10, 35, 66, 0.8);
+      padding: 2.5rem;
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-brand {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .btn-brand:hover {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    .cruise-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cruise-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Navbar */
+    .custom-navbar {
+      background-color: #ff6600;
+      padding: 0.5rem 1rem;
+      position: relative;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+    }
+
+    .tagline {
+      font-size: 0.7rem;
+    }
+
+    .exit-btn {
+      font-size: 1rem;
+      padding: 0.4rem 1.2rem;
+    }
+
+    .header-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff7cc;
+      font-family: "Lobster", cursive;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .header-text {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+<!-- Include Google Font in <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+<style>
+    .custom-navbar {
+        background-color: #003366; /* Dark Blue */
+        padding: 0.5rem 1rem;
+        position: relative;
+    }
+
+    .brand-name {
+        font-size: 1.2rem;
+    }
+
+    .tagline {
+        font-size: 0.7rem;
+    }
+
+    .exit-btn {
+        font-size: 1rem;
+        padding: 0.4rem 1.2rem;
+    }
+
+    .header-text {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #FFD700; /* Gold color */
+        font-family: 'Lobster', cursive; /* Stylish font */
+        font-size: 2.5rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+        .header-text {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<!-- Navbar with header text -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar sticky-top">
+    <div class="container d-flex align-items-center position-relative">
+        <!-- Logo -->
+        <div class="d-flex align-items-center">
+            <img src="/images/gtlogo.png" 
+                 alt="Gagangiri Travels Logo" 
+                 class="me-2"
+                 style="height:100px; width:auto; object-fit:contain;" />
+            <div>
+                <div class="brand-name text-white fw-bold">Gagangiri Travels</div>
+                <div class="tagline text-light fst-italic">
+                    For Everything In Travel Affairs
+                </div>
+            </div>
+        </div>
+
+        <!-- Centered header text -->
+        <div class="header-text">
+            Your Voyage Awaits
+        </div>
+
+        <!-- Exit button -->
+        <button class="btn btn-danger ms-auto exit-btn" onclick="window.location.href='Index.html'">
+            Exit
+        </button>
+    </div>
+</nav>
+
+
+  <!-- Hero Section -->
+  <header id="hero-section">
+    <div class="container">
+      <h1 class="display-3 mb-4">Your Voyage Awaits.</h1>
+      <p class="lead mb-4">Find the perfect cruise to create memories that last a lifetime.</p>
+
+      <div id="booking-form-container" class="col-lg-10 mx-auto">
+        <form id="search-form" class="row g-3 align-items-end">
+          <div class="col-md">
+            <label for="destination" class="form-label text-white text-start w-100">Destination</label>
+            <select id="destination" class="form-select form-select-lg"></select>
+          </div>
+          <div class="col-md">
+            <label for="port" class="form-label text-white text-start w-100">Departure Port</label>
+            <select id="port" class="form-select form-select-lg"></select>
+          </div>
+          <div class="col-md">
+            <label for="date" class="form-label text-white text-start w-100">Departure Month</label>
+            <input type="month" id="date" class="form-control form-control-lg" />
+          </div>
+          <div class="col-md-auto">
+            <button type="submit" class="btn btn-brand btn-lg w-100">Find Cruise</button>
+          </div>
+
+          <div class="col-12 mt-3">
+            <label for="cruise-select" class="form-label text-white text-start w-100">Or select a cruise directly</label>
+            <select id="cruise-select" class="form-select form-select-lg">
+              <option value="">Select a cruise to view details</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="py-5" style="background-color: var(--light-bg);">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Cruises</h2>
+      <div id="cruise-results-grid" class="row g-4"></div>
+      <div id="no-results" class="text-center py-5" style="display: none;">
+        <h3>No Cruises Found</h3>
+        <p class="text-muted">Please try adjusting your search criteria.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Booking Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content p-2" style="max-width: 360px; margin:auto;">
+        <div class="modal-header py-2">
+          <h6 class="modal-title">Book Now <span id="modalCruiseName"></span></h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-2">
+          <form id="bookingForm">
+            <input type="hidden" id="selectedCruise" />
+            <div class="mb-1">
+              <label for="fullName" class="form-label small">Full Name</label>
+              <input type="text" class="form-control form-control-sm" id="fullName" required />
+            </div>
+            <div class="mb-1">
+              <label for="email" class="form-label small">Email Address</label>
+              <input type="email" class="form-control form-control-sm" id="email" required />
+            </div>
+            <div class="mb-1">
+              <label for="phone" class="form-label small">Phone Number</label>
+              <input type="tel" class="form-control form-control-sm" id="phone" required />
+            </div>
+            <div class="mb-1">
+              <label for="passengers" class="form-label small">Passengers</label>
+              <input type="number" class="form-control form-control-sm" id="passengers" min="1" required />
+            </div>
+            <div class="row">
+              <div class="col-6 mb-1">
+                <label for="traveldate" class="form-label small">Travel Date</label>
+                <input type="date" class="form-control form-control-sm" id="traveldate" required />
+              </div>
+              <div class="col-6 mb-1">
+                <label for="travelto" class="form-label small">Travel To</label>
+                <input type="date" class="form-control form-control-sm" id="travelto" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100 btn-sm mt-2">Confirm Booking</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center p-4">
+    <p class="mb-0">&copy; 2025 Gagangiri Travels. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="cruiseData.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const resultsGrid = document.getElementById("cruise-results-grid");
+      const noResultsDiv = document.getElementById("no-results");
+      const destinationSelect = document.getElementById("destination");
+      const portSelect = document.getElementById("port");
+      const cruiseSelect = document.getElementById("cruise-select");
+      const searchForm = document.getElementById("search-form");
+
+      // Populate dropdowns
+      function populateFilters() {
+        const destinations = [...new Set(cruiseData.map(c => c.destination))];
+        const ports = [...new Set(cruiseData.map(c => c.departsFrom))];
+        destinationSelect.innerHTML = '<option value="">Any Destination</option>' + destinations.map(d => `<option>${d}</option>`).join('');
+        portSelect.innerHTML = '<option value="">Any Port</option>' + ports.map(p => `<option>${p}</option>`).join('');
+      }
+
+      function populateCruiseDropdown() {
+        cruiseSelect.innerHTML = '<option value="">Select a cruise to view details</option>';
+        cruiseData.forEach(c => {
+          cruiseSelect.innerHTML += `<option value="${c.id}">${c.title}</option>`;
+        });
+      }
+
+      function displayCruises(cruises) {
+        resultsGrid.innerHTML = "";
+        noResultsDiv.style.display = cruises.length ? "none" : "block";
+
+        cruises.forEach(c => {
+          resultsGrid.innerHTML += `
+            <div class="col-lg-4 col-md-6">
+              <div class="card h-100 cruise-card">
+                <img src="${c.image}" class="card-img-top" style="height:200px; object-fit:cover;">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title text-primary">${c.title}</h5>
+                  <p class="text-muted">${c.cruiseLine} - ${c.ship}</p>
+                  <ul class="list-unstyled">
+                    <li><i class="bi bi-pin-map text-success me-2"></i>${c.departsFrom}</li>
+                    <li><i class="bi bi-clock text-success me-2"></i>${c.duration} Nights</li>
+                  </ul>
+                  <div class="mt-auto text-end">
+                    <a href="itinerary.html?id=${c.id}" class="btn btn-brand w-100 mb-2">View Itinerary</a>
+                    <button class="btn btn-outline-success w-100" onclick="openBooking('${c.title}')">Inquiry Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      searchForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const destination = destinationSelect.value;
+        const port = portSelect.value;
+        const date = document.getElementById("date").value;
+
+        const filtered = cruiseData.filter(c =>
+          (!destination || c.destination === destination) &&
+          (!port || c.departsFrom === port) &&
+          (!date || c.departureDate.startsWith(date))
+        );
+        displayCruises(filtered);
+      });
+
+      cruiseSelect.addEventListener("change", e => {
+        const id = e.target.value;
+        if (id) window.location.href = `itinerary.html?id=${id}`;
+      });
+
+      populateFilters();
+      populateCruiseDropdown();
+      displayCruises(cruiseData);
+    });
+
+    function openBooking(name) {
+      document.getElementById("selectedCruise").value = name;
+      document.getElementById("modalCruiseName").innerText = name;
+      new bootstrap.Modal(document.getElementById("bookingModal")).show();
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+      e.preventDefault();
+      alert("🎉 Inquiry submitted successfully!");
+      bootstrap.Modal.getInstance(document.getElementById("bookingModal")).hide();
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

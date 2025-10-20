@@ -1,0 +1,50 @@
+[
+  {
+    "id": 4,
+    "name": "pradeep",
+    "mobile": "8010366946",
+    "email": "abc@gmail.com",
+    "type": "domestic",
+    "country": "",
+    "state": "Maharashtra",
+    "city": "Lonavala",
+    "checkInDate": "2025-09-25",
+    "checkOutDate": "2025-09-30",
+    "guests": 12,
+    "rooms": 3,
+    "status": "Pending",
+    "submittedAt": "2025-09-20T10:16:26.651Z"
+  },
+  {
+    "id": 5,
+    "name": "Kajal",
+    "mobile": "9049100625",
+    "email": "abc@gmail.com",
+    "type": "domestic",
+    "country": "",
+    "state": "Hemiachal",
+    "city": "Shimla",
+    "checkInDate": "2025-10-03",
+    "checkOutDate": "2025-10-10",
+    "guests": 21,
+    "rooms": 8,
+    "status": "Pending",
+    "submittedAt": "2025-09-26T05:11:00.778Z"
+  },
+  {
+    "id": 6,
+    "name": "Shubham",
+    "mobile": "9049100625",
+    "email": "abc@gmail.com",
+    "type": "domestic",
+    "country": "",
+    "state": "maharshtra",
+    "city": "Nashik",
+    "checkInDate": "2025-10-02",
+    "checkOutDate": "2025-10-08",
+    "guests": 13,
+    "rooms": 5,
+    "status": "Pending",
+    "submittedAt": "2025-09-27T05:53:54.622Z"
+  }
+]

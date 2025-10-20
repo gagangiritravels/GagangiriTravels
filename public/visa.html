@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gagangiri Travels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* ====== TRAVEL BACKGROUND ====== */
+    body {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')
+        no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    /* ====== HEADER TOP ====== */
+    .header-top {
+      background: linear-gradient(145deg, #1e3c72, #2a5298);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      padding: 10px 20px;
+      color: #fff;
+    }
+    .header-top img {
+      width: 70px;
+      height: auto;
+      margin-right: 10px;
+    }
+    .brand-name { font-size: 1.4rem; font-weight: bold; }
+    .tagline { font-size: 0.85rem; font-style: italic; color: #e0e0e0; }
+
+    /* ====== NAVBAR ====== */
+    .navbar-custom { background-color: #ff9800; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .navbar-custom .nav-link { color: #fff !important; font-weight: 500; }
+    .navbar-custom .nav-link:hover { color: #222 !important; }
+    .navbar-toggler { border: none; }
+
+    /* ====== COUNTRY CARDS ====== */
+    .country-card {
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 10px;
+      text-align: center;
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .country-card:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .country-flag {
+      width: 40px;
+      margin-bottom: 3px;
+      border-radius: 3px;
+    }
+    .continent-heading {
+      margin: 2rem 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    }
+
+    /* ====== VISA MODAL ====== */
+    #visaModal .modal-dialog { max-width: 500px; margin: 1.5rem auto; }
+    #visaModal .modal-content { border-radius: 0.5rem; }
+    .modal-header { background-color: #1a73e8; color: #fff; padding: 6px 10px !important; }
+    .modal-title { font-size: 0.85rem; margin: 0; }
+    .modal-body { padding: 6px 10px !important; }
+    .form-label { font-size: 0.75rem; margin-bottom: 2px; font-weight: 500; color: #444; }
+    .form-control {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      height: 30px;
+      border-radius: 0.3rem;
+    }
+    textarea.form-control { height: 50px; font-size: 0.75rem; }
+
+    .btn-blue {
+      background-color: #1a73e8;
+      color: #fff;
+      border: none;
+      border-radius: 0.375rem;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+      width: 100%;
+    }
+    .btn-blue:hover { background-color: #0f5dc8; }
+
+    /* ====== WHATSAPP BUTTON ====== */
+    .whatsapp-float {
+      position: fixed;
+      width: 55px;
+      height: 55px;
+      bottom: 35px;
+      right: 35px;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float img { width: 30px; }
+    /* Footer */
+    .footer a { transition: 0.3s; }
+    .footer a:hover { color: #ff9800 !important; transform: translateX(4px); }
+    .footer-social { transition: 0.3s; }
+    .footer-social:hover { background: #ff9800 !important; color: #fff !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+/* ================== Stylish Dropdown ================== */
+.stylish-dropdown {
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  padding: 8px;
+  min-width: 200px;
+  animation: fadeInDown 0.3s ease;
+}
+.stylish-dropdown .dropdown-item {
+  font-weight: 500;
+  color: #333;
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: all 0.3s ease;
+}
+.stylish-dropdown .dropdown-item:hover {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ================== Animations ================== */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header Top -->
+<div class="header-top d-flex align-items-center justify-content-between px-3 py-2" >
+  <!-- Left Side: Logo + Brand -->
+  <div class="d-flex align-items-center">
+    <img src="/images/gtlogo.png" alt="Gagangiri Travels Logo" class="me-2" style="height:100px; width:auto;">
+    <div>
+      <div class="brand-name fw-bold text-white">Gagangiri Travels</div>
+      <div class="tagline text-light">For Everything In Travel Affairs</div>
+    </div>
+  </div>
+
+  <!-- Center: Visa Services -->
+<div class="text-center flex-grow-1 fw-bold fs-4">
+  Tourist Visa &amp; Business Visa Application Services
+</div>
+
+</div>
+
+
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top py-2">
+  <div class="container">
+    <a class="navbar-brand d-lg-none text-white fw-bold" href="#">Gagangiri</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-plane me-1"></i> Tours Packages
+          </a>
+          <ul class="dropdown-menu stylish-dropdown shadow-lg border-0 rounded-3">
+            <li><a class="dropdown-item" href="international.html"> 🌍 International</a></li>
+            <li><a class="dropdown-item" href="domestic.html">🏡 Domestic</a></li>
+            <li><a class="dropdown-item" href="spiritual.html">🕉 Spiritual Tour</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Cruise1.html"><i class="fa-solid fa-ship me-1"></i> Cruise</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#flight-inquiry-section"><i class="fa-solid fa-plane-departure me-1"></i> Flight Inquiry</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Search -->
+  <div class="container mt-4">
+    <div class="row justify-content-end mb-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search countries..."/>
+          <button class="btn btn-outline-warning" id="searchButton">Search</button>
+        </div>
+      </div>
+    </div>
+    <div id="countryGrid"></div>
+  </div>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/919370262361?text=Visa%20Inquiry" target="_blank" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"/>
+  </a>
+  <!-- Footer -->
+<footer class="footer text-white" style="background: linear-gradient(145deg, #1e3c72, #2a5298);">
+  <div class="container py-3"> <!-- Reduced padding from py-4 to py-3 -->
+
+    <div class="row text-start">
+
+      <!-- About / Brand -->
+      <div class="col-md-3 mb-3">
+        <h5 class="fw-bold">🌍 Gagangiri Travels</h5>
+        <p class="small mb-0">
+          For Everything In Travel Affairs. We provide International, Domestic & Spiritual tour packages with best prices and services.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Home</a></li>
+          <li><a href="international.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> International</a></li>
+          <li><a href="domestic.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Domestic</a></li>
+          <li><a href="spiritual.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Spiritual Tours</a></li>
+          <li><a href="visa.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Visa Expert</a></li>
+        </ul>
+      </div>
+
+      <!-- Our Team -->
+      <div class="col-md-3 mb-3 text-start">
+        <h6 class="fw-bold mb-2">Our Team</h6>
+        <div class="d-flex align-items-center mb-2 gap-2">
+          <img src="images/Saroj.jpg" alt="Founder" class="rounded-circle" style="width:50px; height:50px; object-fit:cover;">
+          <div>
+            <p class="mb-0 small fw-bold">Mrs. Saroj Vithalani</p>
+            <small class="text-light">Founder & CEO</small>
+          </div>
+        </div>
+        <p class="mb-0 small fw-bold">Mr. Anand Iyer - Manager & Visa Expert</p>
+        <p class="mb-0 small fw-bold">Mrs. Kajal Telinge - Accountant</p> 
+        <p class="mb-0 small fw-bold">Mr.Pradeep Kanojia - Sales Executive</p>         
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Contact Us</h6>
+        <p class="small mb-1"><i class="fa fa-map-marker-alt me-2"></i> Khopoli, Maharashtra, India</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9370262361</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9665811088</p>
+        <p class="small mb-0"><i class="fa fa-envelope me-2"></i> gagangiritravels@gmail.com</p>
+      </div>
+
+    </div>
+
+    <!-- Socials -->
+    <div class="d-flex align-items-center justify-content-center mt-3 gap-3">
+      <h6 class="fw-bold mb-0">Follow Us:</h6>
+<a href="#"class="footer-social d-inline-block text-center"style="width:32px;height:32px;line-height:32px;background:#fff;color:#2a5298;border-radius:50%;">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    <hr class="border-light mt-3 mb-2">
+ <p class="small mb-0 text-center">&copy; 2025 Gagangiri Travels. All Rights Reserved. | Designed by <span class="text-warning">Pradeep Kanojia</span></p>
+  </div>
+</footer>
+
+  <!-- Booking Model Visa Modal -->
+  <div class="modal fade" id="visaModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Visa Request for <span id="modalCountryName"></span></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="visaForm">
+            <input type="hidden" id="selectedCountry" name="country"/>
+            <div class="mb-2">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" id="fullName" name="name" required/>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" name="email" required/>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Phone *</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required/>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Country</label>
+              <input type="text" class="form-control" id="countryDisplay" readonly/>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">No. of Travellers</label>
+              <input type="number" class="form-control" id="travellers" name="travellers" value="1" min="1"/>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label">Onword Date *</label>
+                <input type="date" class="form-control" id="travelFrom" name="travelFrom" required/>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="form-label">Return Date*</label>
+                <input type="date" class="form-control" id="travelTo" name="travelTo" required/>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" id="description" name="description" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-blue w-100 mt-2">Submit Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const countries = {
+      "Asia": [["Bhutan", "bt"], ["Cambodia", "kh"], ["China", "cn"], ["Hong Kong", "hk"],
+        ["Indonesia", "id"], ["Japan", "jp"], ["Laos", "la"], ["Malaysia", "my"],
+        ["Philippines", "ph"], ["Singapore", "sg"], ["South Korea", "kr"],
+        ["Sri Lanka", "lk"], ["Vietnam", "vn"], ["Thailand", "th"],
+        ["United Arab Emirates", "ae"], ["Saudi Arabia", "sa"], ["Qatar", "qa"], ["Georgia", "ge"],
+        ["Oman", "om"], ["Kuwait", "kw"], ["Bahrain", "bh"], ["Turkey", "tr"],
+        ["Israel", "il"], ["Jordan", "jo"], ["Lebanon", "lb"], ["Nepal", "np"],
+        ["Maldives", "mv"], ["Kazakhstan", "kz"], ["Uzbekistan", "uz"]],
+      "Europe": [["Austria", "at"], ["Czech Republic", "cz"], ["United Kingdom", "gb"], ["Finland", "fi"],
+        ["France", "fr"], ["Germany", "de"], ["Greece", "gr"], ["Iceland", "is"],
+        ["Italy", "it"], ["Netherlands", "nl"], ["Norway", "no"], ["Spain", "es"],
+        ["Sweden", "se"], ["Switzerland", "ch"], ["Denmark", "dk"], ["Ireland", "ie"],
+        ["Portugal", "pt"], ["Belgium", "be"], ["Croatia", "hr"], ["Russia", "ru"],
+        ["Poland", "pl"], ["Hungary", "hu"], ["Ukraine", "ua"], ["Romania", "ro"],
+        ["Bulgaria", "bg"], ["Serbia", "rs"], ["Slovakia", "sk"]],
+      "Africa": [["Egypt", "eg"], ["Ethiopia", "et"], ["Kenya", "ke"], ["Madagascar", "mg"],
+        ["Morocco", "ma"], ["South Africa", "za"], ["Tanzania", "tz"], ["Zimbabwe", "zw"],
+        ["Nigeria", "ng"], ["Ghana", "gh"], ["Algeria", "dz"], ["Tunisia", "tn"]],
+      "North America": [["Canada", "ca"], ["Mexico", "mx"], ["United States", "us"], ["Cuba", "cu"],
+        ["Jamaica", "jm"], ["Dominican Republic", "do"]],
+      "South America": [["Brazil", "br"], ["Argentina", "ar"], ["Colombia", "co"], ["Peru", "pe"],
+        ["Chile", "cl"], ["Ecuador", "ec"]],
+      "Oceania": [["Australia", "au"], ["New Zealand", "nz"], ["Fiji", "fj"], ["Papua New Guinea", "pg"]]
+    };
+
+    const grid=document.getElementById("countryGrid");
+    function renderCountries(filterText=""){
+      grid.innerHTML="";
+      Object.keys(countries).forEach(continent=>{
+        const filtered = countries[continent].filter(([name])=>
+          name.toLowerCase().includes(filterText.toLowerCase())
+        );
+        if(filtered.length>0){
+          const heading=document.createElement("div");
+          heading.className="continent-heading";
+          heading.textContent=continent;
+          grid.appendChild(heading);
+
+          const row=document.createElement("div");
+          row.className="row g-3";
+          filtered.forEach(([name,code])=>{
+            const col=document.createElement("div");
+            col.className="col-6 col-sm-4 col-md-3 d-flex justify-content-center";
+            col.innerHTML=`<div class="country-card" data-name="${name}">
+              <img src="https://flagcdn.com/w40/${code}.png" class="country-flag"/>
+              <div>${name}</div>
+            </div>`;
+            col.querySelector(".country-card").onclick=()=>openModal(name);
+            row.appendChild(col);
+          });
+          grid.appendChild(row);
+        }
+      });
+    }
+    renderCountries();
+
+    function openModal(country){
+      document.getElementById("modalCountryName").textContent=country;
+      document.getElementById("countryDisplay").value=country;
+      document.getElementById("selectedCountry").value=country;
+      new bootstrap.Modal(document.getElementById("visaModal")).show();
+    }
+
+    document.getElementById("visaForm").addEventListener("submit",async e=>{
+      e.preventDefault();
+      const data=Object.fromEntries(new FormData(e.target).entries());
+      data.submittedAt=new Date().toISOString();
+      await fetch("http://localhost:5000/visa",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(data)
+      });
+      alert("Visa request submitted!");
+      e.target.reset();
+      bootstrap.Modal.getInstance(document.getElementById("visaModal")).hide();
+    });
+
+    document.getElementById("searchInput").addEventListener("input",function(){
+      renderCountries(this.value);
+    });
+  </script>
+</body>
+</html>

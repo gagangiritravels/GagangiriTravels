@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Anand",
+    "rating": 5,
+    "comments": "Talk about a range of elements, including customer service",
+    "images": [
+      "/uploads/file_1758367463221.png"
+    ],
+    "date": "2025-09-20T11:24:23.230Z"
+  },
+  {
+    "id": 2,
+    "name": "Bhavin",
+    "rating": 4,
+    "comments": "Trip went well and coordination was smooth there was some misunderstanding regarding the Alcazar show. However that was handled well",
+    "images": [
+      "/uploads/file_1758519229997.jpg"
+    ],
+    "date": "2025-09-22T05:33:50.014Z"
+  },
+  {
+    "id": 3,
+    "name": "Rakesh",
+    "rating": 3,
+    "comments": "It was overall a great service by travel triangle",
+    "images": [
+      "/uploads/file_1758519349271.jpg"
+    ],
+    "date": "2025-09-22T05:35:49.275Z"
+  },
+  {
+    "id": 4,
+    "name": "Sunil",
+    "rating": 3,
+    "comments": "Thank you Gagangiri Travels ",
+    "images": [
+      "/uploads/file_1758612642212.jpg"
+    ],
+    "date": "2025-09-23T07:30:42.248Z"
+  },
+  {
+    "id": 5,
+    "name": "Kajal",
+    "rating": 5,
+    "comments": "Best supports ",
+    "images": [
+      "/uploads/file_1758612691678.jpg"
+    ],
+    "date": "2025-09-23T07:31:31.726Z"
+  },
+  {
+    "id": 6,
+    "name": "Yogesh",
+    "rating": 4,
+    "comments": "Best staff and full supportive",
+    "images": [
+      "/uploads/file_1758612738195.jpg"
+    ],
+    "date": "2025-09-23T07:32:18.213Z"
+  }
+]

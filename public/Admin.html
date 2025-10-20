@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tourism Management System - Admin</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --sidebar-width: 240px;
+      --brand-color: #007bff;
+      --brand-color-dark: #0056b3;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--brand-color);
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 72px; /* space for navbar */
+      color: #fff;
+      overflow-y: auto;
+      z-index: 1050;
+    }
+    .sidebar h4 { margin: 0 0 12px 0; padding: 6px 0; }
+    .sidebar a { color: #fff; display: block; padding: 12px 20px; text-decoration: none; }
+    .sidebar a:hover, .sidebar a.active { background: var(--brand-color-dark); text-decoration: none; }
+
+    /* Navbar */
+    .top-navbar {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      z-index: 1100;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+    }
+    .top-navbar .navbar-brand { margin: 0; font-weight: 700; }
+
+    /* Content area */
+    .content {
+      margin-left: var(--sidebar-width);
+      padding: 80px 20px 20px 20px; /* leave space for navbar */
+    }
+
+    /* UI small bits */
+    .table-img { width: 70px; height: 50px; object-fit: cover; border-radius: 6px; }
+    .banner { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+    .stat-card { background:#fff; padding:20px; border-radius:8px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.06); }
+    .scroll-table { overflow-x: auto; }
+    pre { white-space: pre-wrap; font-size: 14px; line-height: 1.5; background:#f8f9fa; padding:10px; border-radius:6px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 64px; padding-top: 64px; }
+      .top-navbar { left: 64px; }
+      .content { margin-left: 64px; padding-top: 72px; }
+      .sidebar a span.text-label { display: none; }
+      .sidebar h4 { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <div class="text-center">
+      <h4 class="mb-1">GT-Admin</h4>
+    </div>
+    <a href="#" data-page="dashboard" class="active" onclick="showPage(event, 'dashboard')"><i class="fa fa-home"></i> <span class="text-label"> Dashboard</span></a>
+    <a href="#" data-page="packages" onclick="showPage(event, 'packages')"><i class="fa fa-box"></i> <span class="text-label"> Packages</span></a>
+   <!-- <a href="#" data-page="bookings" onclick="showPage(event, 'bookings')"><i class="fa fa-book"></i> <span class="text-label"> Bookings</span></a>-->
+    <a href="#" data-page="cruises" onclick="showPage(event, 'cruises')"><i class="fa fa-ship"></i> <span class="text-label"> Cruises</span></a>
+    <a href="#" data-page="flights" onclick="showPage(event, 'flights')"><i class="fa fa-plane"></i> <span class="text-label"> Flights</span></a>
+    <a href="#" data-page="visa" onclick="showPage(event, 'visa')"><i class="fa fa-passport"></i> <span class="text-label"> Visa</span></a>
+    <a href="#" data-page="hotels" onclick="showPage(event, 'hotels')"><i class="fa-solid fa-hotel me-1"></i> <span class="text-label"> Hotel</span></a>
+    <a href="#" data-page="passports" onclick="showPage(event, 'passports')"><i class="fa fa-passport"></i> <span class="text-label"> Passport</span></a>
+
+
+<a href="#" data-page="bookings" onclick="showPage(event, 'bookings')"> <i class="fa fa-book"></i> <span class="text-label"> Bookings</span>
+            <span class="badge bg-danger rounded-pill ms-2" id="bookingsNotificationBadge" style="display:none;">0</span>
+    </a>
+
+  </div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-2">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    
+    <!-- Left (Empty spacer for alignment) -->
+    <div></div>
+
+    <!-- Center Brand -->
+    <a class="navbar-brand fw-bold mb-0 h4 mx-auto" href="#">Tourism Management System</a>
+
+    <!-- Right Section -->
+    <div class="d-flex align-items-center">
+      <small class="text-muted me-3">Admin Panel</small>
+
+      <!-- Profile Dropdown -->
+      <div class="dropdown">
+        <a class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" 
+           href="#" id="profileDropdown" 
+           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://i.pravatar.cc/40?img=3" 
+               alt="Profile" 
+               class="rounded-circle me-2" width="32" height="32">
+          <span class="fw-semibold">Admin</span>
+        </a>
+     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown" style="background: linear-gradient(135deg, #0a2342, #2ca58d); border-radius: 0.5rem;"><li><a class="dropdown-item text-white fw-bold" href="#" style="background: #ff6f61; margin: 2px; border-radius: 0.25rem;">My Profile</a>
+  </li>
+<li><a class="dropdown-item text-white fw-bold" href="#" data-bs-toggle="modal"data-bs-target="#packageModal" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Add New Package</a></li></li>
+  <li><a class="dropdown-item text-white fw-bold" href="Add_Cruise.html" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Add New Cruise</a></li>
+  <li><a class="dropdown-item text-white fw-bold" href="Invoice.html" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Invoice</a></li>
+  <li><a class="dropdown-item text-white fw-bold" href="#" style="background: #20b2aa; margin: 2px; border-radius: 0.25rem;">Settings</a></li>
+  <li><hr class="dropdown-divider" style="border-top: 1px solid #fff;"></li>
+  <li><a class="dropdown-item fw-bold" href="login.html" onclick="logout()" style="background: #ff4757; color:white; margin: 2px; border-radius: 0.25rem;">
+  Logout</a></li></ul>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="content">
+
+    <div id="dashboard-page">
+      <img src="https://www.shutterstock.com/shutterstock/photos/1144071677/display_1500/stock-photo-travel-collage-of-famous-places-of-the-world-element-for-advertisement-postcard-poster-and-1144071677.jpg" class="banner" alt="Travel banner">
+      <div class="row g-3 mb-3">
+        <div class="col-md-3"><div class="stat-card"><h4 id="statPackages">0</h4><p>Packages</p></div></div>
+        <div class="col-md-3"><div class="stat-card"><h4 id="statBookings">0</h4><p>Bookings</p></div></div>
+        <div class="col-md-3"><div class="stat-card"><h4 id="statCruises">0</h4><p>Cruises</p></div></div>
+        <div class="col-md-3"><div class="stat-card"><h4 id="statFlights">0</h4><p>Flights</p></div></div>
+        <div class="col-md-3 mt-3"><div class="stat-card"><h4 id="statVisa">0</h4><p>Visa</p></div></div>
+        <div class="col-md-3"><div class="stat-card"><h4 id="statHotels">0</h4><p>Hotel</p></div></div>
+        <div class="col-md-3 mt-3"><div class="stat-card"><h4 id="statPassport">0</h4><p>Passport</p></div></div>
+      </div>
+    </div>
+<!-----------------Package------------>
+    <div id="packages-page" style="display:none;">
+      <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Manage Packages</h5>
+          <div class="d-flex gap-2 align-items-center">
+            <select id="filterCategory" class="form-select form-select-sm d-inline w-auto" onchange="loadPackages()">
+              <option value="">All Categories</option>
+              <option value="Domestic">Domestic</option>
+              <option value="International">International</option>
+              <option value="Spiritual">Spiritual</option>
+              <option value="Honeymoon">Honeymoon</option>
+            </select>
+            <input type="text" id="searchBox" class="form-control form-control-sm d-inline w-auto" placeholder="Search..." onkeyup="loadPackages()">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#packageModal" onclick="resetForm()">
+              <i class="fa fa-plus"></i> Add Package
+            </button>
+          </div>
+        </div>
+<!-----------------Table------------>
+        <div class="card-body scroll-table">
+          <table class="table table-bordered" id="packageTable">
+            <thead class="table-light">
+              <tr>
+                <th>#</th><th>Category</th><th>Name</th><th>Duration</th><th>Price</th><th>Image</th><th>Details</th><th>PDF</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+<!-----------------Booking------------>
+
+    <div id="bookings-page" style="display:none;">
+      <div class="card">
+        <div class="card-header bg-white"><h5>Manage Bookings</h5></div>
+        <div class="card-body">
+          <div class="scroll-table">
+            <table class="table table-bordered" id="bookingTable">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th><th>Package</th><th>Customer</th><th>Email</th><th>Phone</th>
+                  <th>Travelers</th><th>Travel Dates</th><th>Remarks</th>
+                  <th>Status</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bookingTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-----------------Flight------------>
+
+    <div id="flights-page" style="display:none;">
+      <div class="card">
+        <div class="card-header bg-white"><h5>Manage Flight Inquiries</h5></div>
+        <div class="card-body">
+          <div class="scroll-table">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+               <th>#</th><th>Name</th><th>Mobile</th><th>Origin</th><th>Destination</th><th>Departure</th><th>Return</th><th>Passengers</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="flightTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-----------------Cruise------------>
+
+    <div id="cruises-page" style="display:none;">
+      <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Manage Cruise Inquiries</h5></div>         
+        <div class="card-body">
+          <div class="scroll-table">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th><th>Name</th><th>Email Address</th><th>Mobile Number</th><th>Passengers</th><th>Travel Dates</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="cruiseTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-----------------Visa------------>
+
+    <div id="visa-page" style="display:none;">
+      <div class="card">
+        <div class="card-header bg-white"><h5>Manage Visa</h5></div>
+        <div class="card-body scroll-table">
+          <table class="table table-bordered table-striped align-middle">
+            <thead class="table-light">
+              <tr>
+                <th class="text-center">ID</th><th>Name</th><th>Email</th><th>Phone</th>
+                <th>Country</th><th class="text-center">Travellers</th><th>Travel Dates</th><th>Description</th><th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="visaTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+<!-----------------Hotel------------>
+<div id="hotels-page" style="display:none;">
+  <div class="card">
+    <div class="card-header bg-white">
+      <h5>Manage Hotel Inquiries</h5>
+    </div>
+    <div class="card-body">
+      <div class="scroll-table">
+        <table class="table table-bordered table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Country/State</th>
+              <th>City</th>
+              <th>Check-In → Check-Out</th>
+              <th>Guests</th>
+              <th>Rooms</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="hotelTableBody">
+            <!-- Rows will be populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Passport Applications Page -->
+
+<div id="passports-page" style="display:none;">
+  <div class="card">
+    <div class="card-header bg-white">
+      <h5>Manage Passport Applications</h5>
+    </div>
+    <div class="card-body">
+      <div class="scroll-table">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>State</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="passportTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </div> <div class="modal fade" id="packageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add / Edit Package</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="packageForm" enctype="multipart/form-data">
+            <input type="hidden" id="PackageId" />
+            <div class="row g-2">
+              <div class="col-md-6 mb-2">
+                <label for="Category" class="form-label">Category</label>
+                <select id="Category" class="form-select" required>
+                  <option value="">-- Select Category --</option>
+                  <option value="Domestic">Domestic</option>
+                  <option value="International">International</option>
+                  <option value="Spiritual">Spiritual</option>
+                  <option value="Honeymoon">Honeymoon</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="Destination" class="form-label">Name</label>
+                <input type="text" id="Destination" class="form-control" required>
+              </div>
+
+              <div class="col-md-4 mb-2">
+                <label for="Duration" class="form-label">Duration</label>
+                <input type="text" id="Duration" class="form-control">
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="Price" class="form-label">Price</label>
+                <input type="text" id="Price" class="form-control" placeholder="Numeric value">
+              </div>
+              <div class="col-md-4 mb-2">
+                <label for="Image" class="form-label">Image URL</label>
+                <input type="url" id="Image" class="form-control" placeholder="https://...">
+              </div>
+
+              <div class="col-12 mb-2">
+                <label for="Overview" class="form-label">Overview</label>
+                <textarea id="Overview" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="col-12 mb-2">
+                <label for="Itinerary" class="form-label">Day-wise Itinerary</label>
+                <textarea id="Itinerary" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="Inclusion" class="form-label">Inclusions</label>
+                <textarea id="Inclusion" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="Exclusion" class="form-label">Exclusions</label>
+                <textarea id="Exclusion" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="col-12 mb-2">
+                <label for="Terms" class="form-label">Terms & Conditions</label>
+                <textarea id="Terms" class="form-control" rows="2"></textarea>
+              </div>
+
+              <div class="col-md-6 mb-2">
+                <label for="ItineraryPdf" class="form-label">Itinerary PDF</label>
+                <input type="file" id="ItineraryPdf" name="pdf" class="form-control" accept="application/pdf">
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <button type="submit" class="btn btn-primary w-100">Save Package</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="cruiseModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add / Edit Cruise Inquiry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="cruiseForm">
+          <input type="hidden" id="CruiseId">
+
+          <div class="mb-2">
+            <label class="form-label">Full Name</label>
+            <input id="FullName" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="Email" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="Phone" class="form-control">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Passengers</label>
+            <input type="number" id="Passengers" class="form-control" min="1">
+          </div>
+          <div class="mb-2 row">
+            <div class="col-md-6">
+              <label class="form-label">Travel Date (From)</label>
+              <input type="date" id="TravelDate" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Travel Date (To)</label>
+              <input type="date" id="TravelTo" class="form-control">
+            </div>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-primary w-100" type="submit">Save Inquiry</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsTitle"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tabOverview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabItinerary">Itinerary</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabInclusions">Inclusions</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabExclusions">Exclusions</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabTerms">Terms</a></li>
+          </ul>
+<div class="tab-content mt-3">
+  <!-- Overview -->
+  <div class="tab-pane fade show active" id="tabOverview">
+    <div id="detailsOverview" class="p-3 text-secondary" style="line-height:1.8; white-space:pre-line;"></div>
+  </div>
+
+  <!-- Itinerary -->
+  <div class="tab-pane fade" id="tabItinerary">
+    <div id="detailsItinerary" class="p-3 text-dark" style="line-height:1.8; white-space:pre-line;"></div>
+  </div>
+
+  <!-- Inclusions -->
+  <div class="tab-pane fade" id="tabInclusions">
+    <div id="detailsInclusions" class="p-3 text-success" style="line-height:1.8; white-space:pre-line;"></div>
+  </div>
+
+  <!-- Exclusions -->
+  <div class="tab-pane fade" id="tabExclusions">
+    <div id="detailsExclusions" class="p-3 text-danger" style="line-height:1.8; white-space:pre-line;"></div>
+  </div>
+
+  <!-- Terms & Conditions -->
+  <div class="tab-pane fade" id="tabTerms">
+    <div id="detailsTerms" class="p-3 text-muted" style="line-height:1.8; white-space:pre-line;"></div>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Passport Modal for View Details -->
+<div class="modal fade" id="passportModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Passport Application Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="passportDetails"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+/* ====== Configuration (change server URLs if needed) ====== */
+const API_PACKAGES = "http://localhost:5000/packages";
+const API_BOOKINGS = "http://localhost:5000/bookings";
+const API_CRUISES = "http://localhost:5000/cruises"; // cruises endpoint
+const API_FLIGHTS = "http://localhost:5000/flights";
+const API_VISA = "http://localhost:5000/visa";
+const API_HOTELS = "http://localhost:5000/hotels";
+const API_Passports = "http://localhost:5000/passports";
+
+
+/* ====== State ====== */
+let packages = [], bookings = [], cruises = [], flights = [], visa = [], hotels = [],passports = [];
+
+
+
+/* ====== Utility helpers ====== */
+function safeText(txt, fallback = '-') {
+  if (txt === null || txt === undefined || txt === '') return fallback;
+  return String(txt);
+}
+
+function formatCurrency(value) {
+  if (value === null || value === undefined || value === '') return '-';
+  const n = Number(String(value).replace(/[^\d.-]/g, ''));
+  if (isNaN(n)) return '₹' + String(value);
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
+}
+
+function imageOrPlaceholder(src, altText = '') {
+  const fallback = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="100"><rect width="100%" height="100%" fill="#e9ecef"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#6c757d" font-size="12">No image</text></svg>`
+  );
+  if (!src) return fallback;
+  return src;
+}
+
+/* ====== Page switching ====== */
+function showPage(eOrPage, pageArg) {
+  let page = pageArg;
+  if (typeof eOrPage === 'string') {
+    page = eOrPage;
+  } else if (eOrPage && typeof eOrPage === 'object') {
+    if (eOrPage.preventDefault) eOrPage.preventDefault();
+    page = pageArg || (eOrPage.currentTarget && eOrPage.currentTarget.dataset && eOrPage.currentTarget.dataset.page);
+  }
+
+  if (!page) page = 'dashboard';
+
+  // highlight active link
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  const activeLink = document.querySelector(`.sidebar a[data-page="${page}"]`);
+  if (activeLink) activeLink.classList.add('active');
+
+  // hide all content panes (direct children of .content)
+  document.querySelectorAll('.content > div').forEach(div => div.style.display = 'none');
+
+  const target = document.getElementById(page + '-page');
+  if (target) {
+    target.style.display = 'block';
+  }
+
+  // load data for the page if needed
+  if (page === 'packages') loadPackages();
+  if (page === 'bookings') loadBookings();
+  if (page === 'cruises') loadCruises();
+  if (page === 'flights') loadFlights();
+  if (page === 'visa') loadVisa();
+  if (page === 'hotels') loadHotels();
+  if (page === 'passports') loadPassport();
+}
+
+/* ================= PACKAGES ================= */
+async function loadPackages() {
+  try {
+    const res = await fetch(API_PACKAGES);
+    if (!res.ok) throw new Error('Network response was not ok');
+    packages = await res.json();
+  } catch (err) {
+    console.error('Failed to fetch packages:', err);
+    packages = [];
+  }
+
+  document.getElementById("statPackages").innerText = packages.length || 0;
+
+  const tbody = document.querySelector("#packageTable tbody");
+  tbody.innerHTML = "";
+
+  const filter = (document.getElementById("filterCategory").value || "").toLowerCase();
+  const search = (document.getElementById("searchBox").value || "").toLowerCase();
+
+  packages
+    .filter(pkg => {
+      const catMatch = !filter || (pkg.category || '').toLowerCase() === filter;
+      const nameMatch = !search || ((pkg.name || '').toLowerCase().includes(search) || (pkg.overview || '').toLowerCase().includes(search));
+      return catMatch && nameMatch;
+    })
+    .forEach((pkg, i) => {
+      const imageSrc = imageOrPlaceholder(pkg.image);
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr>
+          <td>${i+1}</td>
+          <td>${safeText(pkg.category)}</td>
+          <td>${safeText(pkg.name)}</td>
+          <td>${safeText(pkg.duration)}</td>
+          <td>${formatCurrency(pkg.price)}</td>
+          <td><img src="${imageSrc}" class="table-img" alt="${safeText(pkg.name)} image" onerror="this.src='${imageOrPlaceholder()}'"></td>
+          <td><button class="btn btn-info btn-sm" onclick="viewDetails(${pkg.id})">View</button></td>
+          <td>${pkg.pdf ? `<a href="${pkg.pdf}" target="_blank" rel="noopener">View</a>` : '-'}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" onclick="editPackage(${pkg.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deletePackage(${pkg.id})">Delete</button>
+          </td>
+        </tr>
+      `);
+    });
+}
+
+function viewDetails(id) {
+  const pkg = packages.find(p => p.id === id);
+  if (!pkg) return alert('Package not found');
+
+  document.getElementById("detailsTitle").innerText = pkg.name || 'Details';
+  document.getElementById("detailsOverview").innerText = pkg.overview || "No Overview";
+  document.getElementById("detailsItinerary").innerText = pkg.itinerary || "No Itinerary";
+
+  // Inclusions break on full stop (.)
+  document.getElementById("detailsInclusions").innerHTML = pkg.inclusions 
+    ? pkg.inclusions.split(".").map(item => item.trim()).filter(Boolean).join(".<br>")
+    : "No Inclusions";
+
+  // Exclusions break on full stop (.)
+  document.getElementById("detailsExclusions").innerHTML = pkg.exclusions 
+    ? pkg.exclusions.split(".").map(item => item.trim()).filter(Boolean).join(".<br>")
+    : "No Exclusions";
+
+  document.getElementById("detailsTerms").innerText = pkg.terms || "No Terms";
+
+  new bootstrap.Modal(document.getElementById('detailsModal')).show();
+}
+
+
+document.getElementById("packageForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const id = document.getElementById("PackageId").value;
+  const url = id ? `${API_PACKAGES}/${id}` : API_PACKAGES;
+  const method = id ? "PUT" : "POST";
+
+  const formData = new FormData();
+  formData.append("category", document.getElementById("Category").value);
+  formData.append("name", document.getElementById("Destination").value);
+  formData.append("duration", document.getElementById("Duration").value);
+  formData.append("price", document.getElementById("Price").value);
+  formData.append("image", document.getElementById("Image").value);
+  formData.append("overview", document.getElementById("Overview").value);
+  formData.append("itinerary", document.getElementById("Itinerary").value);
+  formData.append("inclusions", document.getElementById("Inclusion").value);
+  formData.append("exclusions", document.getElementById("Exclusion").value);
+  formData.append("terms", document.getElementById("Terms").value);
+
+  const pdfFile = document.getElementById("ItineraryPdf").files[0];
+  if (pdfFile) formData.append("pdf", pdfFile);
+
+  try {
+    const response = await fetch(url, { method, body: formData });
+    if (!response.ok) {
+      const text = await response.text().catch(()=>null);
+      throw new Error('Failed to save package' + (text ? (': '+text) : ''));
+    }
+    const modalEl = document.getElementById('packageModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    if (modalInstance) modalInstance.hide();
+    resetForm();
+    await loadPackages();
+    document.getElementById("statPackages").innerText = packages.length;
+  } catch (error) {
+    console.error("Error saving package:", error);
+    alert("Failed to save package. Check server and console for details.");
+  }
+});
+
+function resetForm() {
+  document.getElementById("packageForm").reset();
+  document.getElementById("PackageId").value = "";
+  const f = document.getElementById("ItineraryPdf");
+  if (f) f.value = '';
+}
+
+function editPackage(id) {
+  const pkg = packages.find(p => p.id === id);
+  if (!pkg) return alert('Package not found');
+  document.getElementById("PackageId").value = pkg.id;
+  document.getElementById("Category").value = pkg.category || '';
+  document.getElementById("Destination").value = pkg.name || '';
+  document.getElementById("Duration").value = pkg.duration || '';
+  document.getElementById("Price").value = pkg.price || '';
+  document.getElementById("Image").value = pkg.image || '';
+  document.getElementById("Overview").value = pkg.overview || '';
+  document.getElementById("Itinerary").value = pkg.itinerary || '';
+  document.getElementById("Inclusion").value = pkg.inclusions || '';
+  document.getElementById("Exclusion").value = pkg.exclusions || '';
+  document.getElementById("Terms").value = pkg.terms || '';
+  new bootstrap.Modal(document.getElementById('packageModal')).show();
+}
+
+async function deletePackage(id) {
+  if (!confirm("Delete this package?")) return;
+  try {
+    const res = await fetch(`${API_PACKAGES}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error('Delete failed');
+    await loadPackages();
+  } catch (err) {
+    console.error('Error deleting package:', err);
+    alert('Failed to delete package. See console for details.');
+  }
+}
+
+/* ================= BOOKINGS ================= */
+async function loadBookings() {
+  try {
+    const res = await fetch(API_BOOKINGS);
+    if (!res.ok) throw new Error('Network response was not ok');
+    bookings = await res.json();
+  } catch (err) {
+    console.error('Failed to fetch bookings:', err);
+    bookings = [];
+  }
+
+  document.getElementById("statBookings").innerText = bookings.length || 0;
+  const tbody = document.getElementById("bookingTableBody");
+  tbody.innerHTML = "";
+
+  bookings.forEach((b, i) => {
+    const travelers = b.travelers ? `Adults: ${b.travelers.adults || 0}, Children: ${b.travelers.children || 0}, Infants: ${b.travelers.infants || 0}` : '-';
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td>${i+1}</td>
+        <td>${safeText(b.packageName)}</td>
+        <td>${safeText(b.name)}</td>
+        <td>${safeText(b.email)}</td>
+        <td>${safeText(b.phone)}</td>
+        <td>${travelers}</td>
+        <td>${safeText(b.fromDate)} to ${safeText(b.toDate)}</td>
+        <td>${safeText(b.requirements)}</td>
+        <td>
+          <select onchange="updateBookingStatus(${b.id}, this.value)" class="form-select form-select-sm">
+            <option value="Pending" ${b.status==="Pending"?"selected":""}>Pending</option>
+            <option value="Confirmed" ${b.status==="Confirmed"?"selected":""}>Confirmed</option>
+            <option value="Cancelled" ${b.status==="Cancelled"?"selected":""}>Cancelled</option>
+          </select>
+        </td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteBooking(${b.id})">Delete</button></td>
+      </tr>
+    `);
+  });
+}
+
+async function updateBookingStatus(id, status) {
+  try {
+    await fetch(`${API_BOOKINGS}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status })
+    });
+    await loadBookings();
+  } catch (err) {
+    console.error('Error updating booking status:', err);
+    alert('Failed to update status.');
+  }
+}
+
+async function deleteBooking(id) {
+  if (!confirm("Delete this booking?")) return;
+  try {
+    await fetch(`${API_BOOKINGS}/${id}`, { method: "DELETE" });
+    await loadBookings();
+  } catch (err) {
+    console.error('Error deleting booking:', err);
+    alert('Failed to delete booking.');
+  }
+}
+
+/* ================= CRUISES ================= */
+async function loadCruises() {
+  try {
+    const res = await fetch(API_CRUISES);
+    if (!res.ok) throw new Error("Network response was not ok");
+    cruises = await res.json();
+  } catch (err) {
+    console.error("Failed to fetch cruises:", err);
+    cruises = [];
+  }
+
+  document.getElementById("statCruises").innerText = cruises.length || 0;
+  const tbody = document.getElementById("cruiseTableBody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  cruises.forEach((cruise, i) => {
+    tbody.insertAdjacentHTML(
+      "beforeend",
+      `<tr>
+        <td>${i + 1}</td>
+        <td>${safeText(cruise.fullName)}</td>
+        <td>${safeText(cruise.email)}</td>
+        <td>${safeText(cruise.phone)}</td>
+        <td>${safeText(cruise.passengers ?? cruise.passenger ?? '')}</td>   <!-- ✅ fallback -->
+        <td>${safeText(cruise.travelDate)} to ${safeText(cruise.travelTo)}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-1" onclick="editCruise(${cruise.id})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCruise(${cruise.id})">Delete</button>
+        </td>
+      </tr>`
+    );
+  });
+}
+
+
+// Reset form
+function resetCruiseForm() {
+  const form = document.getElementById("cruiseForm");
+  if (!form) return;
+  form.reset();
+  document.getElementById("CruiseId").value = "";
+}
+
+// Form submit
+document.getElementById("cruiseForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const id = document.getElementById("CruiseId").value;
+
+  const payload = {
+    fullName: document.getElementById("FullName").value,
+    email: document.getElementById("Email").value,
+    phone: document.getElementById("Phone").value,
+    passengers: document.getElementById("Passengers").value,
+    travelDate: document.getElementById("TravelDate").value,
+    travelTo: document.getElementById("TravelTo").value,
+  };
+
+  try {
+    const url = id ? `${API_CRUISES}/${id}` : API_CRUISES;
+    const method = id ? "PUT" : "POST";
+
+    const res = await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Failed to save cruise");
+
+    // Close modal
+    const modalEl = document.getElementById("cruiseModal");
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    if (modalInstance) modalInstance.hide();
+
+    resetCruiseForm();
+    await loadCruises();
+  } catch (err) {
+    console.error("Error saving cruise:", err);
+    alert("Failed to save cruise. See console for details.");
+  }
+});
+
+// Edit cruise
+function editCruise(id) {
+  const cruise = cruises.find(c => c.id == id);
+  if (!cruise) return alert('Cruise inquiry not found');
+
+  document.getElementById("CruiseId").value = cruise.id;
+  document.getElementById("FullName").value = cruise.fullName || '';
+  document.getElementById("Email").value = cruise.email || '';
+  document.getElementById("Phone").value = cruise.phone || '';
+  document.getElementById("Passengers").value = cruise.passengers || '';
+  document.getElementById("TravelDate").value = cruise.travelDate || '';
+  document.getElementById("TravelTo").value = cruise.travelTo || '';
+
+  new bootstrap.Modal(document.getElementById('cruiseModal')).show();
+}
+
+// Delete cruise
+async function deleteCruise(id) {
+  if (!confirm("Are you sure you want to delete this cruise inquiry?")) return;
+  try {
+    const res = await fetch(`${API_CRUISES}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Failed to delete cruise");
+    await loadCruises();
+  } catch (err) {
+    console.error("Error deleting cruise:", err);
+    alert("Failed to delete cruise. See console for details.");
+  }
+}
+
+/* ================= FLIGHTS ================= */
+async function loadFlights() {
+  try {
+    const res = await fetch(API_FLIGHTS);
+    if (!res.ok) throw new Error('Network response was not ok');
+    flights = await res.json();
+  } catch (err) {
+    console.error('Failed to fetch flights:', err);
+    flights = [];
+  }
+
+  document.getElementById("statFlights").innerText = flights.length || 0;
+  const tbody = document.getElementById("flightTableBody");
+  tbody.innerHTML = "";
+
+  flights.forEach((f, i) => {
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td>${i+1}</td>
+        <td>${safeText(f.name)}</td>
+        <td>${safeText(f.mobile)}</td>
+        <td>${safeText(f.origin)}</td>
+        <td>${safeText(f.destination)}</td>
+        <td>${safeText(f.departureDate)}</td>
+        <td>${safeText(f.returnDate)}</td>
+        <td>${safeText(f.passengers)}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="deleteFlight(${f.id})">Delete</button>
+        </td>
+      </tr>
+    `);
+  });
+}
+
+async function deleteFlight(id) {
+  if (!confirm("Delete this flight inquiry?")) return;
+  try {
+    await fetch(`${API_FLIGHTS}/${id}`, { method: "DELETE" });
+    await loadFlights();
+  } catch (err) {
+    console.error('Error deleting flight:', err);
+    alert('Failed to delete flight.');
+  }
+}
+
+/* ================= VISA ================= */
+async function loadVisa() {
+  try {
+    const res = await fetch(API_VISA);
+    if (!res.ok) throw new Error('Network response was not ok');
+    visa = await res.json();
+  } catch (err) {
+    console.error('Failed to fetch visa:', err);
+    visa = [];
+  }
+
+  document.getElementById("statVisa").innerText = visa.length || 0;
+  const tbody = document.getElementById("visaTableBody");
+  tbody.innerHTML = "";
+
+  visa.forEach((v, i) => {
+tbody.insertAdjacentHTML('beforeend', `
+  <tr>
+    <td class="text-center">${i+1}</td>
+    <td>${safeText(v.name)}</td>
+    <td>${safeText(v.email)}</td>
+    <td>${safeText(v.phone)}</td>
+    <td>${safeText(v.country)}</td>
+    <td class="text-center">${safeText(v.travellers)}</td>
+    <td>${safeText(v.travelFrom)} - ${safeText(v.travelTo)}</td>
+    <td>${safeText(v.description)}</td>
+    <td class="text-center">
+      <button class="btn btn-danger btn-sm" onclick="deleteVisa(${v.id})">Delete</button>
+    </td>
+  </tr>
+`);
+
+
+  });
+}
+
+async function deleteVisa(id) {
+  if (!confirm("Delete this visa inquiry?")) return;
+  try {
+    await fetch(`${API_VISA}/${id}`, { method: "DELETE" });
+    await loadVisa();
+  } catch (err) {
+    console.error('Error deleting visa:', err);
+    alert('Failed to delete visa.');
+  }
+}
+
+/* ================= Hotels ================= */
+
+async function loadHotels() {
+  const tbody = document.getElementById("hotelTableBody");
+  tbody.innerHTML = ""; // clear table first
+
+  try {
+    const res = await fetch(API_HOTELS);
+    if (!res.ok) throw new Error(`Network response was not ok (${res.status})`);
+
+    let hotelsData = await res.json();
+    if (!Array.isArray(hotelsData)) hotelsData = [];
+
+    document.getElementById("statHotels").innerText = hotelsData.length;
+
+    if (hotelsData.length === 0) {
+      tbody.innerHTML = "<tr><td colspan='10' class='text-center'>No hotel bookings found.</td></tr>";
+      return;
+    }
+
+    hotelsData.forEach((h, i) => {
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `
+        <tr>
+          <td class="text-center">${i + 1}</td>
+          <td>${safeText(h.name)}</td>
+          <td>${safeText(h.mobile)}</td>
+          <td>${safeText(h.email)}</td>
+          <td>${safeText(h.country || h.state || "-")}</td>
+          <td>${safeText(h.city)}</td>
+          <td>${safeText(h.checkInDate)} → ${safeText(h.checkOutDate)}</td>
+          <td class="text-center">${safeText(h.guests)}</td>
+          <td class="text-center">${safeText(h.rooms)}</td>
+          <td class="text-center">
+            <button class="btn btn-danger btn-sm" onclick="deleteHotel(${h.id})">Delete</button>
+          </td>
+        </tr>
+      `
+      );
+    });
+
+  } catch (err) {
+    console.error("Failed to fetch hotels:", err);
+    document.getElementById("statHotels").innerText = 0;
+    tbody.innerHTML = "<tr><td colspan='10' class='text-center text-danger'>Error loading hotels. Check console.</td></tr>";
+  }
+}
+
+// ---- Delete Hotel ----
+async function deleteHotel(id) {
+  if (!confirm("Delete this hotel booking?")) return;
+
+  try {
+    const res = await fetch(`${API_HOTELS}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+    await loadHotels(); // refresh table
+  } catch (err) {
+    console.error("Error deleting hotel:", err);
+    alert("Failed to delete hotel booking. Check console for details.");
+  }
+}
+
+
+/* ================= Passport ================= */
+
+
+// Load Passport Applications from backend JSON
+async function loadPassports() {
+  try {
+    const res = await fetch(API_Passports);
+    if (!res.ok) throw new Error("Failed to fetch passports");
+    passports = await res.json();
+
+    document.getElementById("statPassport").innerText = passports.length || 0;
+
+    const tbody = document.getElementById("passportTableBody");
+    tbody.innerHTML = "";
+
+    passports.forEach((p, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${safeText(p.fullName)}</td>
+        <td>${safeText(p.email)}</td>
+        <td>${safeText(p.phone)}</td>
+        <td>${safeText(p.state)}</td>
+        <td>
+          <button class="btn btn-sm btn-info" onclick='viewPassport(${JSON.stringify(p)})'>View</button>
+          <button class="btn btn-sm btn-danger" onclick="deletePassport(${p.id})">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+
+  } catch (err) {
+    console.error("Error loading passports:", err);
+    passports = [];
+  }
+}
+
+// View Passport Details in Modal
+function viewPassport(p) {
+  const detailsDiv = document.getElementById("passportDetails");
+  detailsDiv.innerHTML = `
+    <p><strong>Name:</strong> ${safeText(p.fullName)}</p>
+    <p><strong>Email:</strong> ${safeText(p.email)}</p>
+    <p><strong>Phone:</strong> ${safeText(p.phone)}</p>
+    <p><strong>State:</strong> ${safeText(p.state)}</p>
+    <p><strong>Address:</strong> ${safeText(p.address || '-')}</p>
+    <p><strong>Remarks:</strong> ${safeText(p.remarks || '-')}</p>
+  `;
+  new bootstrap.Modal(document.getElementById('passportModal')).show();
+}
+
+// Delete Passport Entry
+async function deletePassport(id) {
+  if (!confirm("Are you sure you want to delete this passport application?")) return;
+  try {
+    const res = await fetch(`${API_Passports}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Delete failed");
+    await loadPassports();
+  } catch (err) {
+    console.error("Error deleting passport:", err);
+    alert("Failed to delete passport. See console for details.");
+  }
+}
+
+
+// Show details in modal
+function viewPassport(passport) {
+  const detailsDiv = document.getElementById("passportDetails");
+
+  detailsDiv.innerHTML = `
+    <p><strong>Full Name:</strong> ${passport.fullName}</p>
+    <p><strong>Date of Birth:</strong> ${passport.dob}</p>
+    <p><strong>Gender:</strong> ${passport.gender}</p>
+    <p><strong>Place of Birth:</strong> ${passport.placeOfBirth}</p>
+    <p><strong>Address:</strong> ${passport.address}, ${passport.city}, ${passport.state} - ${passport.zipCode}</p>
+    <p><strong>Email:</strong> ${passport.email}</p>
+    <p><strong>Phone:</strong> ${passport.phone}</p>
+    <p><strong>Nationality:</strong> ${passport.nationality}</p>
+    <p><strong>Passport Type:</strong> ${passport.passportType}</p>
+    <p><strong>Status:</strong> ${passport.status}</p>
+    <p><strong>Submitted At:</strong> ${new Date(passport.submittedAt).toLocaleString()}</p>
+  `;
+
+  const modal = new bootstrap.Modal(document.getElementById("passportModal"));
+  modal.show();
+}
+
+// Initial dashboard data load
+window.onload = async () => {
+  await loadPackages();
+  await loadBookings();
+  await loadCruises();
+  await loadFlights();
+  await loadVisa();
+  await loadHotels();
+  await loadPassports();
+  showPage('dashboard');
+};
+
+  </script>
+</body>
+</html>

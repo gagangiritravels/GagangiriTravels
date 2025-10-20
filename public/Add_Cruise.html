@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Cruise Package</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #f1f6f9;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .container-custom {
+    max-width: 950px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .itinerary-day {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .itinerary-day input {
+    flex: 1 1 120px;
+  }
+  .itinerary-day button {
+    flex-shrink: 0;
+  }
+  .btn-add-day {
+    margin-bottom: 15px;
+  }
+  .alert-msg {
+    display: none;
+  }
+  .table thead th {
+    background-color: #0d6efd;
+    color: white;
+  }
+  .table-responsive {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+  .action-btn {
+    margin: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container container-custom">
+<h2 class="text-center mb-4">Add New Cruise Package</h2>
+
+<!-- Back Button at top-right -->
+<div class="d-flex justify-content-end mb-3">
+  <button type="button" class="btn btn-primary" onclick="history.back()">
+    Back
+  </button>
+</div>
+
+<!-- Form -->
+<form id="cruiseForm">
+  <div class="row g-3">
+    <div class="col-md-6"><input type="text" id="title" class="form-control" placeholder="Cruise Title" required></div>
+    <div class="col-md-6"><input type="text" id="cruiseLine" class="form-control" placeholder="Cruise Line" required></div>
+    <div class="col-md-6"><input type="text" id="ship" class="form-control" placeholder="Ship Name" required></div>
+    <div class="col-md-6"><input type="text" id="departsFrom" class="form-control" placeholder="Departs From" required></div>
+    <div class="col-md-4"><input type="number" id="duration" class="form-control" placeholder="Duration (nights)" required></div>
+    <div class="col-md-4"><input type="text" id="destination" class="form-control" placeholder="Destination" required></div>
+    <div class="col-md-4"><input type="text" id="price" class="form-control" placeholder="Price" required></div>
+    <div class="col-md-12"><input type="text" id="image" class="form-control" placeholder="Image URL" required></div>
+  </div>
+</form>
+
+
+    <h4 class="mt-4">Itinerary</h4>
+    <div id="itineraryContainer"></div>
+    <button type="button" id="addDayBtn" class="btn btn-sm btn-success btn-add-day">+ Add Itinerary Day</button>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-4"><textarea id="amenities" class="form-control" placeholder="Amenities (comma separated)" required></textarea></div>
+      <div class="col-md-4"><textarea id="whatsIncluded" class="form-control" placeholder="What's Included (comma separated)" required></textarea></div>
+      <div class="col-md-4"><textarea id="knowBeforeYouGo" class="form-control" placeholder="Know Before You Go (comma separated)" required></textarea></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4 w-100">Add Cruise</button>
+    <div id="successMessage" class="alert alert-success alert-msg mt-3"></div>
+    <div id="errorMessage" class="alert alert-danger alert-msg mt-3"></div>
+  </form>
+
+  <!-- All Cruises -->
+  <h2 class="text-center mt-5 mb-3">All Cruises</h2>
+
+  <div class="input-group mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search cruises by title or ship...">
+    <span class="input-group-text"><i class="bi bi-search"></i>🔍</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>Title</th>
+          <th>Ship</th>
+          <th>Duration</th>
+          <th>Price</th>
+          <th>Destination</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="cruiseTable">
+        <!-- Cruises populated dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Bootstrap JS & Icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.js"></script>
+
+<script>
+const itineraryContainer = document.getElementById('itineraryContainer');
+const addDayBtn = document.getElementById('addDayBtn');
+const form = document.getElementById('cruiseForm');
+const successMessage = document.getElementById('successMessage');
+const errorMessage = document.getElementById('errorMessage');
+const cruiseTableBody = document.getElementById('cruiseTable');
+const searchInput = document.getElementById('searchInput');
+
+let cruises = [];
+
+function addItineraryDay(dayNumber="") {
+  const div = document.createElement('div');
+  div.className = 'itinerary-day';
+  div.innerHTML = `
+    <input type="number" class="day form-control" placeholder="Day" value="${dayNumber}" required>
+    <input type="text" class="port form-control" placeholder="Port" required>
+    <input type="text" class="details form-control" placeholder="Details" required>
+    <input type="text" class="times form-control" placeholder="Times" required>
+    <button type="button" class="btn btn-danger btn-sm removeDayBtn">Remove</button>
+  `;
+  itineraryContainer.appendChild(div);
+  div.querySelector('.removeDayBtn').addEventListener('click', () => div.remove());
+}
+addDayBtn.addEventListener('click', () => addItineraryDay());
+
+async function loadCruises() {
+  try {
+    const res = await fetch("http://localhost:5000/cruisesData");
+    cruises = await res.json();
+    renderCruises(cruises);
+  } catch(err) { console.error(err); }
+}
+
+function renderCruises(list) {
+  cruiseTableBody.innerHTML = "";
+  list.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${c.title}</td>
+      <td>${c.ship}</td>
+      <td>${c.duration} nights</td>
+      <td>${c.price}</td>
+      <td>${c.destination}</td>
+      <td>
+        <button class="btn btn-success btn-sm me-2 edit-btn">Edit</button>
+        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+      </td>
+    `;
+    tr.querySelector(".delete-btn").addEventListener('click', () => deleteCruise(c.id));
+    tr.querySelector(".edit-btn").addEventListener('click', () => editCruise(c.id));
+    cruiseTableBody.appendChild(tr);
+  });
+}
+
+// Search
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  renderCruises(cruises.filter(c => c.title.toLowerCase().includes(query) || c.ship.toLowerCase().includes(query)));
+});
+
+// Delete cruise
+async function deleteCruise(id) {
+  if(!confirm("Are you sure?")) return;
+  try {
+    await fetch(`http://localhost:5000/cruisesData/${id}`, { method: 'DELETE' });
+    cruises = cruises.filter(c => c.id !== id);
+    renderCruises(cruises);
+  } catch(err) { console.error(err); }
+}
+
+// Edit cruise
+// Edit cruise
+function editCruise(id) {
+  const cruise = cruises.find(c => c.id === id);
+  if(!cruise) return;
+
+  // Fill form fields
+  document.getElementById('title').value = cruise.title;
+  document.getElementById('cruiseLine').value = cruise.cruiseLine;
+  document.getElementById('ship').value = cruise.ship;
+  document.getElementById('departsFrom').value = cruise.departsFrom;
+  document.getElementById('duration').value = cruise.duration;
+  document.getElementById('destination').value = cruise.destination;
+  document.getElementById('price').value = cruise.price;
+  document.getElementById('image').value = cruise.image;
+  document.getElementById('amenities').value = cruise.shipDetails.amenities.join(', ');
+  document.getElementById('whatsIncluded').value = cruise.whatsIncluded.join(', ');
+  document.getElementById('knowBeforeYouGo').value = cruise.knowBeforeYouGo.join(', ');
+
+  // Clear and populate itinerary
+  itineraryContainer.innerHTML = "";
+  cruise.itinerary.forEach(day => {
+    const div = document.createElement('div');
+    div.className = 'itinerary-day';
+    div.innerHTML = `
+      <input type="number" class="day form-control" placeholder="Day" value="${day.day}" required>
+      <input type="text" class="port form-control" placeholder="Port" value="${day.port}" required>
+      <input type="text" class="details form-control" placeholder="Details" value="${day.details}" required>
+      <input type="text" class="times form-control" placeholder="Times" value="${day.times}" required>
+      <button type="button" class="btn btn-danger btn-sm removeDayBtn">Remove</button>
+    `;
+    div.querySelector('.removeDayBtn').addEventListener('click', () => div.remove());
+    itineraryContainer.appendChild(div);
+  });
+
+  // Submit updated cruise
+  form.onsubmit = async function(e) {
+    e.preventDefault();
+    const itineraryData = Array.from(document.querySelectorAll('.itinerary-day')).map(row => ({
+      day: parseInt(row.querySelector('.day').value),
+      port: row.querySelector('.port').value,
+      details: row.querySelector('.details').value,
+      times: row.querySelector('.times').value
+    }));
+
+    const updatedCruise = {
+      title: document.getElementById('title').value,
+      cruiseLine: document.getElementById('cruiseLine').value,
+      ship: document.getElementById('ship').value,
+      departsFrom: document.getElementById('departsFrom').value,
+      duration: parseInt(document.getElementById('duration').value),
+      destination: document.getElementById('destination').value,
+      price: document.getElementById('price').value,
+      image: document.getElementById('image').value,
+      itinerary: itineraryData,
+      shipDetails: { 
+        gallery: [document.getElementById('image').value], 
+        amenities: document.getElementById('amenities').value.split(',').map(a=>a.trim()) 
+      },
+      whatsIncluded: document.getElementById('whatsIncluded').value.split(',').map(a=>a.trim()),
+      knowBeforeYouGo: document.getElementById('knowBeforeYouGo').value.split(',').map(a=>a.trim())
+    };
+
+    try {
+      const res = await fetch(`http://localhost:5000/cruisesData/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(updatedCruise)
+      });
+      const result = await res.json();
+      if(res.ok) {
+        successMessage.textContent = `✅ Cruise "${result.data.title}" updated successfully!`;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+        form.reset();
+        itineraryContainer.innerHTML = "";
+        loadCruises();
+        form.onsubmit = addNewCruiseSubmit; // revert submit behavior
+      } else throw new Error(result.message || "Server error");
+    } catch(err) { 
+      errorMessage.textContent = "❌ Failed to update cruise: " + err.message; 
+      errorMessage.style.display='block'; 
+    }
+  }
+}
+// Add new cruise submit
+async function addNewCruiseSubmit(e) {
+  e.preventDefault();
+  successMessage.style.display='none'; errorMessage.style.display='none';
+  const itineraryData = Array.from(document.querySelectorAll('.itinerary-day')).map(row => ({
+    day: parseInt(row.querySelector('.day').value),
+    port: row.querySelector('.port').value,
+    details: row.querySelector('.details').value,
+    times: row.querySelector('.times').value
+  }));
+  const newCruise = {
+    title: document.getElementById('title').value,
+    cruiseLine: document.getElementById('cruiseLine').value,
+    ship: document.getElementById('ship').value,
+    departsFrom: document.getElementById('departsFrom').value,
+    duration: parseInt(document.getElementById('duration').value),
+    destination: document.getElementById('destination').value,
+    price: document.getElementById('price').value,
+    image: document.getElementById('image').value,
+    itinerary: itineraryData,
+    shipDetails: { gallery: [document.getElementById('image').value], amenities: document.getElementById('amenities').value.split(',').map(a=>a.trim()) },
+    whatsIncluded: document.getElementById('whatsIncluded').value.split(',').map(a=>a.trim()),
+    knowBeforeYouGo: document.getElementById('knowBeforeYouGo').value.split(',').map(a=>a.trim())
+  };
+  try {
+    const res = await fetch("http://localhost:5000/cruisesData", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(newCruise)
+    });
+    const result = await res.json();
+    if(res.ok) {
+      successMessage.textContent = `✅ Cruise "${result.data.title}" added successfully!`;
+      successMessage.style.display='block';
+      form.reset();
+      itineraryContainer.innerHTML = "";
+      loadCruises();
+    } else throw new Error(result.message || "Server Error");
+  } catch(err) { errorMessage.textContent = "❌ Failed to save cruise: " + err.message; errorMessage.style.display='block'; }
+}
+
+form.onsubmit = addNewCruiseSubmit;
+loadCruises();
+</script>
+</body>
+</html>

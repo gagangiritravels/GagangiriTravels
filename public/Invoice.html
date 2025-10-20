@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gagangiri Travels Tax Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom CSS Variables */
+        :root {
+            --primary: #008080; /* Teal/Sea Green */
+            --secondary: #FFD700; /* Gold */
+            --light-bg: #f5f8fa;
+            --text-color: #2c3e50;
+        }
+
+        /* General Styles */
+        body { background: var(--light-bg); font-family: 'Open Sans', sans-serif; color: var(--text-color); font-size: 14px; }
+        .invoice-box { width: 210mm; margin: 20px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); page-break-inside: avoid; }
+
+        .company-header {
+            border-bottom: 4px solid var(--primary);
+            padding: 0.5px 1px; /* Increased top & bottom padding for height */
+            margin-bottom: 25px;
+            background-color: #A8E6CF; /* Light Greenish Header */
+            color: #004225; /* Dark Green text for contrast */
+            border-radius: 6px;
+            page-break-inside: avoid;
+        }
+
+        .company-name {
+            font-size: 2rem; /* Increased size */
+            font-weight: 700;
+            color: #E76F00; /* Slightly lighter dark orange */
+        }
+
+        .company-tagline {
+            font-style: italic;
+            color: #22543D;
+            font-size: 1rem; /* Slightly larger for better balance */
+        }
+
+        /* Invoice Title/Details */
+        .invoice-title-block { padding: 15px 20px; background: var(--primary); color: white; border-radius: 6px; text-align: right; page-break-inside: avoid; }
+        .invoice-title-block h2 { margin: 0; font-weight: 700; font-size: 1.8rem; text-transform: uppercase; }
+        .info-card-modern { background: #f8f8f8; padding: 15px; border-left: 5px solid var(--secondary); border-radius: 4px; height: 100%; page-break-inside: avoid; }
+        .info-card-modern h6 { color: var(--primary); font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+
+        /* Form Elements */
+        .form-control-sm { padding: 0.2rem 0.5rem; height: calc(1.5em + 0.5rem + 2px); font-size: 0.85rem; }
+        label { font-size: 0.75rem; font-weight: 600; margin-bottom: 1px; display: block; color: #6c757d; }
+        .invoice-title-block label { color: white !important; }
+
+        /* Invoice Table */
+        .table-invoice th { background: var(--primary); color: white; font-size: 0.9rem; padding: 10px; border: none; }
+        .table-invoice td { padding: 8px; vertical-align: middle; font-size: 0.85rem; border-bottom: 1px solid #eee; }
+        .amount-display { text-align: right; font-weight: 600; }
+
+        /* Totals Table */
+        .totals-horizontal { border: 1px solid var(--primary); border-radius: 4px; width: 100%; margin-top: 15px; table-layout: fixed; border-collapse: collapse; page-break-inside: avoid; }
+        .totals-horizontal thead th { background: var(--primary); color: white; font-size: 0.8rem; padding: 8px 6px; text-align: center; border-right: 1px solid #006666; }
+        .totals-horizontal tbody td { padding: 8px 6px; font-size: 0.9rem; vertical-align: middle; background: white; font-weight: 600; text-align: right; border-right: 1px solid #eee; }
+        .totals-horizontal thead th:last-child, .totals-horizontal tbody td:last-child { border-right: none; }
+        .totals-horizontal .grand-total-amount { background: var(--primary); color: var(--secondary); font-weight: 800; font-size: 1.1rem; }
+        .totals-horizontal .form-control { height: auto; padding: 0.2rem; }
+
+        /* Item Details */
+        .passenger-list { font-size:0.75rem; margin-top: 5px; padding-left: 15px; border-left: 2px solid #ccc; list-style-type: disc; }
+        .passenger-list li { margin-bottom: 2px; }
+        .flight-details-box { background: #f0f0f0; padding: 8px; margin-top: 5px; border-radius: 4px; font-size: 0.8rem; }
+        .flight-details-box p { margin-bottom: 0; }
+        
+        /* New Table for Records Modal - FITTING THE TABLE */
+        #records-table th:nth-child(1), #records-table td:nth-child(1) { width: 50px; } /* ID */
+        #records-table th:nth-child(2), #records-table td:nth-child(2) { width: 100px; } /* Invoice No. */
+        #records-table th:nth-child(3), #records-table td:nth-child(3) { width: auto; } /* Client Name */
+        #records-table th:nth-child(4), #records-table td:nth-child(4) { width: 100px; } /* Services */
+        #records-table th:nth-child(5), #records-table td:nth-child(5) { width: 150px; } /* Ticket No. */
+        #records-table th:nth-child(6), #records-table td:nth-child(6) { width: 80px; } /* PNR */
+        #records-table th:nth-child(7), #records-table td:nth-child(7) { width: 100px; } /* Total Items */
+        #records-table th:nth-child(8), #records-table td:nth-child(8) { width: 80px; } /* Date */
+        #records-table th:nth-child(9), #records-table td:nth-child(9) { width: 100px; } /* Total Amt (₹) */
+        #records-table th:nth-child(10), #records-table td:nth-child(10) { width: 100px; } /* Action */
+        
+        #records-table th { background-color: var(--primary); color: white; }
+        #records-table td { font-size: 0.8rem; vertical-align: middle; }
+        #records-table tbody tr:hover { cursor: pointer; background-color: #f0f0f0; }
+
+
+        /* Footer/Signatory */
+        .signatory-block { text-align: right; padding-top: 20px; page-break-inside: avoid; }
+        .signatory-line { display: block; height: 1px; width: 160px; background: var(--primary); margin-left: auto; margin-top: 40px; margin-bottom: 5px; }
+
+        /* Print Media Queries */
+        @media print {
+            .no-print { display: none !important; }
+            .invoice-box { box-shadow: none; margin: 0; border: none; }
+            body { background: white !important; }
+            .totals-horizontal { border: 1px solid #000; } /* Ensure totals table shows borders on print */
+            #grand-total-display { background: var(--primary) !important; color: var(--secondary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .company-header { border-bottom-color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .invoice-title-block { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invoice-box">
+        <div class="row company-header align-items-center">
+            <div class="col-7 d-flex align-items-center">
+                <img src="/images/gtlogo1.png" alt="Gagangiri Travels Logo" style="width:80px; height:75px; object-fit:cover; border-radius:4px; margin-right:10px;">
+                <div>
+                    <div class="company-name">Gagangiri Travels</div>
+                    <div class="company-tagline">For Everything in Travel Affairs</div>
+                </div>
+            </div>
+            <div class="col-5 text-end company-contact">
+                <p class="mb-0">Address: Tribhuvan, Vidhya Nagar, Bhanvaj Road, Khopoli, Raigad, Maharashtra-410203</p>
+                <p class="mb-0">Contact: 9370262361 / 9665811088</p>
+                <p class="mb-0">Email: gagangiritravels@gmail.com</p>
+                <p class="mb-0">GSTIN: 27AAAAA0000A1Z5</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <div class="info-card-modern">
+                    <h6><i class="fa-solid fa-address-card me-1"></i> Client Details</h6>
+                    <label for="client-name">Client Name</label>
+                    <input type="text" id="client-name" class="form-control form-control-sm" value="">
+                    <label for="client-gstin">GSTIN</label>
+                    <input type="text" id="client-gstin" class="form-control form-control-sm" value="">
+                    <label for="client-pan">PAN No</label>
+                    <input type="text" id="client-pan" class="form-control form-control-sm" value="">
+                    <label for="client-address">Address</label>
+                    <textarea id="client-address" class="form-control form-control-sm" rows="1"></textarea>
+                    <label for="client-email">Client E-mail</label>
+                    <input type="text" class="form-control form-control-sm" id="client-email">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="invoice-title-block">
+                    <h2>TAX INVOICE</h2>
+                    <label class="text-white" for="invoice-no-edit">Invoice No</label>
+                    <input type="text" class="form-control form-control-sm text-end" id="invoice-no-edit" value="" readonly>
+                    <label class="text-white mt-2" for="invoice-date">Date</label>
+                    <input type="date" class="form-control form-control-sm text-end" id="invoice-date">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 no-print d-flex gap-2">
+            <select id="add-service-select" class="form-select form-select-sm" style="max-width: 250px;">
+                <option value="">-- Select Service --</option>
+                <option value="Air Ticket">Air Ticket</option>                    
+                <option value="Hotel Booking">Hotel Booking</option>
+                <option value="Tour Package">Tour Package</option>
+                <option value="Visa">Visa</option>
+                <option value="Transportation/Cab/Bus">Transportation/Cab/Bus</option>
+                <option value="Travel Insurance">Travel Insurance</option>
+                <option value="Miscellaneous Service">Miscellaneous Service</option>
+            </select>
+            <button id="add-service-btn" class="btn btn-primary btn-sm" style="background: var(--primary); border-color: var(--primary);"><i class="fa-solid fa-plus me-1"></i> Add Item</button>
+            <button id="save-invoice-btn" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk me-1"></i> Save Invoice</button>
+            <button id="print-invoice-btn" class="btn btn-warning btn-sm"><i class="fa-solid fa-print me-1"></i> Print Invoice</button>
+            <button id="show-records-btn" class="btn btn-info btn-sm"><i class="fa-solid fa-list-ul me-1"></i> Show Records</button>
+            <button id="clear-invoice-btn" class="btn btn-danger btn-sm"><i class="fa-solid fa-file-invoice me-1"></i> New</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-invoice">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th style="width:70px;">Qty</th>
+                        <th style="width:120px;">Unit Price (₹)</th>
+                        <th style="width:120px;">Amount (₹)</th>
+                        <th class="no-print" style="width:60px;">Details</th>
+                        <th class="no-print" style="width:60px;">Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="invoice-items">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="row justify-content-start mt-4">
+            <div class="col-12">
+                <table class="totals-horizontal">
+                    <thead>
+                        <tr>
+                            <th>Subtotal</th>
+                            <th>Service Charge (SC)</th>
+                            <th>CGST (9% on SC)</th>
+                            <th>SGST (9% on SC)</th>
+                            <th id="grand-total-title">Grand Total</th>
+                            <th>Received Amount</th>
+                            <th>Balance Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="subtotal-display" class="amount-display">0.00</td>
+                            <td><input type="number" id="service-charge" class="form-control form-control-sm text-end" value="00" min="0" step="0.01"></td>
+                            <td id="cgst-display" class="amount-display">0.00</td>
+                            <td id="sgst-display" class="amount-display">0.00</td>
+                            <td id="grand-total-display">0.00</td>
+                            <td><input type="number" id="received-amount" class="form-control form-control-sm text-end" value="0" min="0" step="0.01"></td>
+                            <td id="balance-amount" class="amount-display text-danger">0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5 pt-3 border-top border-2">
+            <div class="col-md-6">
+                <h5 class="text-primary"><i class="fa-solid fa-building-columns me-1"></i>Bank Details</h5>
+                <p class="mb-0">Bank: HDFC Bank</p>
+                <p class="mb-0">A/C Name: Gagangiri Travels</p>
+                <p class="mb-0">A/C No: <span class="fw-bold">XXXXXXXXXXXX</span></p>
+                <p class="mb-0">IFSC: <span class="fw-bold">XXXXXXXXXXXXXX</span></p>
+                <p class="mb-0">UPI: <span class="fw-bold">XXXXXXXXXXXXXXX</span></p>
+            </div>
+            <div class="col-md-6 signatory-block">
+                <p>For Gagangiri Travels</p>
+                <span class="signatory-line"></span>
+                <small>Authorized Signatory</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="ticketDetailsModal" tabindex="-1" aria-labelledby="ticketDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--primary); color: white;">
+                    <h5 class="modal-title" id="ticketDetailsModalLabel"><i class="fa-solid fa-plane me-2"></i>Add Flight/Ticket Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-row-index" value="-1">
+                    <div class="row mb-3 g-2">
+                        <div class="col-4">
+                            <label for="ticket-type">Ticket Type</label>
+                            <select id="ticket-type" class="form-select form-select-sm">
+                                <option value="Domestic Flight Ticket">Domestic Flight Ticket</option>
+                                <option value="International Flight Ticket">International Flight Ticket</option>
+
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="airlines">Purchased From</label>
+                            <input type="text" id="airlines" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-4">
+                            <label for="ticket-no">Ticket No.</label>
+                            <input type="text" id="ticket-no" class="form-control form-control-sm" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 g-2">
+                        <div class="col-3">
+                            <label for="pnr">PNR</label>
+                            <input type="text" id="pnr" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-3">
+                            <label for="from-city">From </label>
+                            <input type="text" id="from-city" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-3">
+                            <label for="to-city-modal">To </label>
+                            <input type="text" id="to-city-modal" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-3">
+                            <label for="flight-no">Flight No.</label>
+                            <input type="text" id="flight-no" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-3">
+                            <label for="flight-class">Class</label>
+                            <input type="text" id="flight-class" class="form-control form-control-sm" placeholder="">
+                        </div>
+                        <div class="col-3">
+                            <label for="travel-date">Departure Date</label>
+                            <input type="date" id="travel-date" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h6><i class="fa-solid fa-user me-1"></i> Passenger Details</h6>
+                    <div id="passenger-inputs">
+                        <div class="row g-2 mb-2 passenger-row">
+                            <div class="col-5">
+                                <label for="passenger-name-0">Name</label>
+                                <input type="text" class="form-control form-control-sm passenger-name" id="passenger-name-0" placeholder="Passenger">
+                            </div>
+                          
+                            <div class="col-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger btn-sm remove-passenger-btn" disabled><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="add-passenger-btn"><i class="fa-solid fa-plus me-1"></i> Add Passenger</button>
+                    
+
+                    <hr>
+
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <label for="basic-fare">Basic Fare (₹)</label>
+                            <input type="number" 
+                                id="basic-fare" 
+                                class="form-control form-control-sm text-end" 
+                                value="0" 
+                                min="0" 
+                                step="0.01" 
+                                oninput="calculateTotalFare()"> 
+                        </div>
+                        <div class="col-4">
+                            <label for="taxes">Taxes/Fees (₹)</label>
+                            <input type="number" 
+                                id="taxes" 
+                                class="form-control form-control-sm text-end" 
+                                value="0" 
+                                min="0" 
+                                step="0.01" 
+                                oninput="calculateTotalFare()"> 
+                        </div>
+                        <div class="col-4">
+                            <label for="total-fare">Total Selling Fare (₹)</label>
+                            <input type="number" 
+                                id="total-fare" 
+                                class="form-control form-control-sm text-end" 
+                                value="0" 
+                                min="0" 
+                                step="0.01"
+                                readonly> 
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-ticket-details-btn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="recordsModal" tabindex="-1" aria-labelledby="recordsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--primary); color: white;">
+                    <h5 class="modal-title" id="recordsModalLabel"><i class="fa-solid fa-list-ul me-2"></i>Saved Invoice Records</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="records-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">ID</th>
+                                    <th style="width:100px;">Invoice No.</th>
+                                    <th style="width:200px;">Client Name</th>
+                                    <th style="width:100px;">Services</th>
+                                    <th style="width:150px;">Ticket No.</th>
+                                    <th style="width:80px;">PNR</th>
+                                    <th style="width:100px;">PAX</th>
+                                    <th style="width:80px;">Date</th>
+                                    <th style="width:100px;">Total Amt (₹)</th>
+                                    <th style="width:100px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="records-table-body">
+                                </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8" class="text-end fw-bold">Total Grand Amount:</td>
+                                    <td class="text-end fw-bold" id="records-total-display">0.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ======== Constants and Variables ========
+        const CGST_RATE = 0.09;
+        const SGST_RATE = 0.09;
+
+        const itemsTableBody = document.getElementById('invoice-items');
+        const subtotalDisplay = document.getElementById('subtotal-display');
+        const cgstDisplay = document.getElementById('cgst-display');
+        const sgstDisplay = document.getElementById('sgst-display');
+        const grandTotalDisplay = document.getElementById('grand-total-display');
+        const balanceDisplay = document.getElementById('balance-amount');
+        const serviceChargeInput = document.getElementById('service-charge');
+        const receivedAmountInput = document.getElementById('received-amount');
+        const addServiceSelect = document.getElementById('add-service-select');
+        const addServiceBtn = document.getElementById('add-service-btn');
+        const invoiceNoEdit = document.getElementById('invoice-no-edit');
+        const invoiceDate = document.getElementById('invoice-date');
+        const saveInvoiceBtn = document.getElementById('save-invoice-btn');
+        const showRecordsBtn = document.getElementById('show-records-btn');
+        const printInvoiceBtn = document.getElementById('print-invoice-btn');
+        const clearInvoiceBtn = document.getElementById('clear-invoice-btn');
+        const saveTicketDetailsBtn = document.getElementById('save-ticket-details-btn');
+        const passengerInputsContainer = document.getElementById('passenger-inputs');
+        const addPassengerBtn = document.getElementById('add-passenger-btn');
+        const ticketDetailsModalElement = document.getElementById('ticketDetailsModal');
+        const ticketDetailsModal = new bootstrap.Modal(ticketDetailsModalElement);
+        const recordsModalElement = document.getElementById('recordsModal');
+        const recordsModal = new bootstrap.Modal(recordsModalElement);
+        const recordsTableBody = document.getElementById('records-table-body');
+        const recordsTotalDisplay = document.getElementById('records-total-display');
+        
+        let INVOICE_RECORDS = JSON.parse(localStorage.getItem('invoiceRecords')) || []; // LocalStorage for MOCK persistence
+        let currentEditingRowIndex = -1; // Stores the index of the row being edited via the modal
+
+        // Initial Calculations on load and input change
+        serviceChargeInput.addEventListener('input', calculateTotals);
+        receivedAmountInput.addEventListener('input', calculateTotals);
+        document.getElementById('client-name').addEventListener('input', calculateTotals); 
+        // Force initial calculations on load to set up the display
+        document.addEventListener('DOMContentLoaded', () => {
+            setInitialInvoiceDetails();
+            calculateTotals(); 
+            // Add listeners for dynamically created item inputs
+            itemsTableBody.addEventListener('input', (event) => {
+                if (event.target.classList.contains('item-qty') || event.target.classList.contains('item-price')) {
+                    const row = event.target.closest('tr');
+                    updateRowAmount(row);
+                    calculateTotals();
+                }
+            });
+        });
+
+
+        // ======= Utility Functions =======
+
+        function formatIndianRupees(amount) {
+            if (isNaN(amount) || amount === null) return '0.00';
+            const num = parseFloat(amount).toFixed(2);
+            // Indian number format (lakhs, crores)
+            let parts = num.split('.');
+            let integerPart = parts[0];
+            let lastThree = integerPart.substring(integerPart.length - 3);
+            let otherNumbers = integerPart.substring(0, integerPart.length - 3);
+            if (otherNumbers !== '') {
+                lastThree = ',' + lastThree;
+                otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+            }
+            return otherNumbers + lastThree + '.' + parts[1];
+        }
+
+        // --- Function to auto-calculate Total Fare in the Ticket Details Modal ---
+        window.calculateTotalFare = function() {
+            const basicFare = parseFloat(document.getElementById('basic-fare').value) || 0;
+            const taxes = parseFloat(document.getElementById('taxes').value) || 0;
+            const totalFare = basicFare + taxes;
+            document.getElementById('total-fare').value = totalFare.toFixed(2);
+            
+            // Also update the unit price in the main table if the modal is for an existing row
+            if (currentEditingRowIndex !== -1) {
+                const row = itemsTableBody.rows[currentEditingRowIndex];
+                if (row) {
+                    const priceInput = row.querySelector('.item-price');
+                    priceInput.value = totalFare.toFixed(2);
+                    updateRowAmount(row);
+                    calculateTotals();
+                }
+            }
+        }
+
+        // --- Helper to calculate and update row amount ---
+        function updateRowAmount(row) {
+            const qtyInput = row.querySelector('.item-qty');
+            const priceInput = row.querySelector('.item-price');
+            const amountCell = row.cells[3];
+            
+            const qty = parseFloat(qtyInput ? qtyInput.value : 0) || 0;
+            const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
+            const amount = qty * price;
+            
+            amountCell.textContent = formatIndianRupees(amount);
+            row.dataset.amount = amount.toFixed(2);
+        }
+
+        // --- Main Totals Calculation ---
+        function calculateTotals() {
+            let subtotal = 0;
+            itemsTableBody.querySelectorAll('tr').forEach(row => {
+                subtotal += parseFloat(row.dataset.amount || 0);
+            });
+
+            const serviceCharge = parseFloat(serviceChargeInput.value) || 0;
+            const cgst = serviceCharge * CGST_RATE;
+            const sgst = serviceCharge * SGST_RATE;
+            const grandTotal = subtotal + serviceCharge + cgst + sgst;
+            const receivedAmount = parseFloat(receivedAmountInput.value) || 0;
+            const balanceDue = grandTotal - receivedAmount;
+
+            // Update displays
+            subtotalDisplay.textContent = formatIndianRupees(subtotal);
+            cgstDisplay.textContent = formatIndianRupees(cgst);
+            sgstDisplay.textContent = formatIndianRupees(sgst);
+            grandTotalDisplay.textContent = formatIndianRupees(grandTotal);
+            balanceDisplay.textContent = formatIndianRupees(balanceDue);
+            
+            // Set data attributes for easy retrieval during save/print
+            grandTotalDisplay.dataset.grandTotal = grandTotal.toFixed(2);
+            grandTotalDisplay.dataset.subtotal = subtotal.toFixed(2);
+            grandTotalDisplay.dataset.cgst = cgst.toFixed(2);
+            grandTotalDisplay.dataset.sgst = sgst.toFixed(2);
+            balanceDisplay.dataset.balanceDue = balanceDue.toFixed(2);
+        }
+
+        // --- Function to clear and reset the modal form ---
+        function resetTicketDetailsModal(selectedService = 'Domestic Flight Ticket') {
+            document.getElementById('edit-row-index').value = -1;
+            document.getElementById('ticket-type').value = selectedService;
+            document.getElementById('airlines').value = '';
+            document.getElementById('ticket-no').value = '';
+            document.getElementById('pnr').value = '';
+            document.getElementById('from-city').value = '';
+            document.getElementById('to-city-modal').value = '';
+            document.getElementById('flight-no').value = '';
+            document.getElementById('flight-class').value = '';
+            document.getElementById('travel-date').value = '';
+            document.getElementById('basic-fare').value = '0';
+            document.getElementById('taxes').value = '0';
+            document.getElementById('total-fare').value = '0.00';
+
+            // Reset passenger inputs (keep at least one blank row)
+            passengerInputsContainer.innerHTML = '';
+            addPassengerInputRow(true); // Add one default row
+            
+            document.getElementById('ticketDetailsModalLabel').textContent = 'Add Flight/Ticket Details';
+            calculateTotalFare(); // Recalculate based on reset values
+        }
+        
+        // --- Function to load data into the modal for editing ---
+        function loadDataIntoModal(rowIndex) {
+            currentEditingRowIndex = rowIndex;
+            const row = itemsTableBody.rows[rowIndex];
+            const ticketDataStr = row.dataset.ticketData;
+            const ticketData = ticketDataStr ? JSON.parse(ticketDataStr) : null;
+
+            resetTicketDetailsModal(row.cells[0].querySelector('.item-desc').value); // Use the item description as a suggestion for type
+            document.getElementById('edit-row-index').value = rowIndex;
+            document.getElementById('ticketDetailsModalLabel').textContent = 'Edit Item Details';
+            
+            if (ticketData) {
+                document.getElementById('ticket-type').value = ticketData.type || '';
+                document.getElementById('airlines').value = ticketData.airlines || '';
+                document.getElementById('ticket-no').value = ticketData.ticketNo || '';
+                document.getElementById('pnr').value = ticketData.pnr || '';
+                document.getElementById('from-city').value = ticketData.fromCity || '';
+                document.getElementById('to-city-modal').value = ticketData.toCity || '';
+                document.getElementById('flight-no').value = ticketData.flightNo || '';
+                document.getElementById('flight-class').value = ticketData.flightClass || '';
+                document.getElementById('travel-date').value = ticketData.travelDate || '';
+                document.getElementById('basic-fare').value = ticketData.basicFare || '0';
+                document.getElementById('taxes').value = ticketData.taxes || '0';
+                document.getElementById('total-fare').value = (parseFloat(ticketData.basicFare || 0) + parseFloat(ticketData.taxes || 0)).toFixed(2);
+
+                // Load passenger details
+                passengerInputsContainer.innerHTML = '';
+                if (ticketData.passengers && ticketData.passengers.length > 0) {
+                    ticketData.passengers.forEach((p, i) => addPassengerInputRow(false, p.name, p.ticketNo));
+                } else {
+                     addPassengerInputRow(true); // Add one default row if no passengers saved
+                }
+            } else {
+                 // If no data, populate with what's visible in the table
+                const qty = row.querySelector('.item-qty').value;
+                const price = row.querySelector('.item-price').value;
+                document.getElementById('basic-fare').value = price;
+                document.getElementById('taxes').value = '0';
+                document.getElementById('total-fare').value = price;
+            }
+
+            calculateTotalFare(); // Final calculation and display update
+        }
+
+        // --- Function to get data from the modal ---
+        function getModalData() {
+            const passengers = [];
+            passengerInputsContainer.querySelectorAll('.passenger-row').forEach(row => {
+                const name = row.querySelector('.passenger-name').value.trim();
+                const ticket = row.querySelector('.passenger-ticket').value.trim();
+                if (name || ticket) {
+                    passengers.push({ name, ticketNo: ticket });
+                }
+            });
+
+            return {
+                type: document.getElementById('ticket-type').value,
+                airlines: document.getElementById('airlines').value.trim(),
+                ticketNo: document.getElementById('ticket-no').value.trim(),
+                pnr: document.getElementById('pnr').value.trim(),
+                fromCity: document.getElementById('from-city').value.trim(),
+                toCity: document.getElementById('to-city-modal').value.trim(),
+                flightNo: document.getElementById('flight-no').value.trim(),
+                flightClass: document.getElementById('flight-class').value.trim(),
+                travelDate: document.getElementById('travel-date').value,
+                basicFare: parseFloat(document.getElementById('basic-fare').value) || 0,
+                taxes: parseFloat(document.getElementById('taxes').value) || 0,
+                totalFare: parseFloat(document.getElementById('total-fare').value) || 0,
+                passengers: passengers
+            };
+        }
+
+
+        // --- Create a new row for an invoice item ---
+        function createInvoiceItemRow(description, qty = 1, unitPrice = 0, ticketData = null) {
+            const amount = (qty * unitPrice).toFixed(2);
+            const newRow = itemsTableBody.insertRow();
+            newRow.dataset.amount = amount; // Store calculated amount as a data attribute for easier retrieval
+
+            let detailsHtml = '<button type="button" class="btn btn-info btn-sm btn-details" title="Add/Edit Details"><i class="fa-solid fa-file-lines"></i></button>';
+            let descriptionInputHtml = `<input type="text" class="form-control form-control-sm item-desc" value="${description || ''}" oninput="calculateTotals()">`;
+            let unitPriceInputHtml = `<input type="number" class="form-control form-control-sm text-end item-price" value="${unitPrice.toFixed(2)}" min="0" step="0.01">`;
+            let qtyInputHtml = `<input type="number" class="form-control form-control-sm text-end item-qty" value="${qty}" min="1" step="1">`;
+
+            if (ticketData) {
+                newRow.dataset.ticketData = JSON.stringify(ticketData);
+                // Create a summary for printing/display
+                const paxCount = ticketData.passengers ? ticketData.passengers.length : 0;
+                const summary = `${description} (${paxCount} Pax) <div class="flight-details-box">
+                    <p class="mb-0"><strong>Ref:</strong> ${ticketData.ticketNo || 'N/A'} | <strong>PNR:</strong> ${ticketData.pnr || 'N/A'}</p>
+                    <p class="mb-0"><strong>Route:</strong> ${ticketData.fromCity || 'N/A'} to ${ticketData.toCity || 'N/A'}</p>
+                </div>`;
+                descriptionInputHtml = `<input type="hidden" class="item-desc" value="${description || ''}">${summary}`;
+            }
+
+            newRow.innerHTML = `
+                <td>${descriptionInputHtml}</td>
+                <td>${qtyInputHtml}</td>
+                <td>${unitPriceInputHtml}</td>
+                <td class="amount-display">${formatIndianRupees(amount)}</td>
+                <td class="no-print text-center">${detailsHtml}</td>
+                <td class="no-print text-center"><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fa-solid fa-trash"></i></button></td>
+            `;
+
+            // Add listeners for the new row's inputs and buttons
+            const qtyInput = newRow.querySelector('.item-qty');
+            const priceInput = newRow.querySelector('.item-price');
+            qtyInput.addEventListener('input', () => { updateRowAmount(newRow); calculateTotals(); });
+            priceInput.addEventListener('input', () => { updateRowAmount(newRow); calculateTotals(); });
+
+            newRow.querySelector('.btn-delete').addEventListener('click', () => {
+                newRow.remove();
+                calculateTotals();
+            });
+
+            // ⭐ Details Button Listener (for editing) ⭐
+            newRow.querySelector('.btn-details').addEventListener('click', () => {
+                const index = Array.from(itemsTableBody.rows).indexOf(newRow);
+                loadDataIntoModal(index);
+                ticketDetailsModal.show();
+            });
+
+            calculateTotals();
+            return newRow;
+        }
+
+        // --- Create a passenger input row in the modal ---
+        function addPassengerInputRow(isFirst = false, name = '', ticketNo = '') {
+            const index = passengerInputsContainer.children.length;
+            const row = document.createElement('div');
+            row.className = 'row g-2 mb-2 passenger-row';
+            row.innerHTML = `
+                <div class="col-5">
+                    <label for="passenger-name-${index}" class="form-label-custom">Name</label>
+                    <input type="text" class="form-control form-control-sm passenger-name" id="passenger-name-${index}" placeholder="" value="${name}">
+                </div>
+              
+                <div class="col-1 d-flex align-items-end">
+                    <button type="button" class="btn btn-danger btn-sm remove-passenger-btn" ${isFirst ? 'disabled' : ''}><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
+            
+            row.querySelector('.remove-passenger-btn').addEventListener('click', (e) => {
+                e.currentTarget.closest('.passenger-row').remove();
+            });
+
+            passengerInputsContainer.appendChild(row);
+        }
+
+        // --- Populate the invoice from saved data ---
+        function loadInvoice(record) {
+            // Clear current invoice
+            clearInvoice();
+
+            // Load Client Info
+            document.getElementById('client-name').value = record.clientName || '';
+            document.getElementById('client-gstin').value = record.clientGstin || '';
+            document.getElementById('client-pan').value = record.clientPan || '';
+            document.getElementById('client-address').value = record.clientAddress || '';
+            document.getElementById('client-email').value = record.clientEmail || '';
+            
+            // Load Invoice Info
+            invoiceNoEdit.value = record.invoiceNo;
+            invoiceDate.value = record.date;
+            document.querySelector('.invoice-box').dataset.recordId = record.id; // Set record ID for updates
+
+            // Load Items
+            record.items.forEach(item => {
+                createInvoiceItemRow(item.description, item.qty, item.unitPrice, item.ticketData);
+            });
+
+            // Load Totals
+            serviceChargeInput.value = record.totals.serviceCharge.toFixed(2);
+            receivedAmountInput.value = record.totals.receivedAmount.toFixed(2);
+            calculateTotals();
+            alert(`Invoice ${record.invoiceNo} loaded successfully.`);
+        }
+
+        // --- Clear the whole invoice form ---
+        function clearInvoice() {
+            document.getElementById('client-name').value = '';
+            document.getElementById('client-gstin').value = '';
+            document.getElementById('client-pan').value = '';
+            document.getElementById('client-address').value = '';
+            document.getElementById('client-email').value = '';
+            itemsTableBody.innerHTML = '';
+            serviceChargeInput.value = '0';
+            receivedAmountInput.value = '0';
+            document.querySelector('.invoice-box').dataset.recordId = '';
+            setInitialInvoiceDetails();
+            calculateTotals();
+        }
+
+        // --- Set initial invoice number and date ---
+        async function setInitialInvoiceDetails() {
+             const existingId = document.querySelector('.invoice-box').dataset.recordId;
+             if (!existingId) {
+                invoiceNoEdit.value = await getNextInvoiceNo();
+                invoiceDate.value = new Date().toISOString().substring(0, 10); // Current Date
+             }
+        }
+        
+        // --- Populate Records Modal ---
+        function populateRecordsModal() {
+            recordsTableBody.innerHTML = '';
+            let totalGrandAmount = 0;
+            
+            INVOICE_RECORDS.sort((a, b) => b.id - a.id).forEach(record => {
+                const totalItems = record.items.length;
+                const totalPax = record.items.reduce((sum, item) => sum + (item.ticketData?.passengers?.length || 0), 0);
+                const firstTicket = record.items.find(item => item.ticketData);
+                const ticketNos = record.items.map(item => item.ticketData?.ticketNo || '').filter(n => n).join(', ');
+                const pnr = firstTicket?.ticketData?.pnr || 'N/A';
+                const services = record.items.map(item => item.description).join(', ');
+
+                const newRow = recordsTableBody.insertRow();
+                newRow.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.invoiceNo}</td>
+                    <td>${record.clientName}</td>
+                    <td>${services.length > 30 ? services.substring(0, 27) + '...' : services}</td>
+                    <td>${ticketNos.length > 25 ? ticketNos.substring(0, 22) + '...' : ticketNos || 'N/A'}</td>
+                    <td>${pnr}</td>
+                    <td>${totalPax > 0 ? totalPax : totalItems}</td>
+                    <td>${record.date}</td>
+                    <td class="text-end">${formatIndianRupees(record.totals.grandTotal)}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-primary btn-sm btn-load-record me-1" data-id="${record.id}"><i class="fa-solid fa-file-invoice"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm btn-delete-record" data-id="${record.id}"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+
+                totalGrandAmount += record.totals.grandTotal;
+            });
+            
+            recordsTotalDisplay.textContent = formatIndianRupees(totalGrandAmount);
+
+            // Add event listeners to load/delete buttons
+            recordsTableBody.querySelectorAll('.btn-load-record').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    const record = INVOICE_RECORDS.find(r => r.id === id);
+                    if (record) {
+                        loadInvoice(record);
+                        recordsModal.hide();
+                    }
+                });
+            });
+
+            recordsTableBody.querySelectorAll('.btn-delete-record').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent row click event
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    if (confirm('Are you sure you want to delete this invoice record?')) {
+                        deleteInvoiceRecord(id);
+                    }
+                });
+            });
+        }
+
+
+        // ======= Event Handlers and Core Logic =======
+
+        // --- Add Item Button Handler (Opens Modal) ---
+        addServiceBtn.addEventListener('click', () => {
+            const selectedService = addServiceSelect.value;
+            if (!selectedService) {
+                alert('Please select a service type first.');
+                return;
+            }
+            
+            resetTicketDetailsModal(selectedService);
+            currentEditingRowIndex = -1; // New item
+            ticketDetailsModal.show();
+        });
+
+        // --- Save Ticket Details Button Handler (Adds/Updates Row) ---
+        saveTicketDetailsBtn.addEventListener('click', () => {
+            const ticketData = getModalData();
+            const description = ticketData.type;
+            const unitPrice = ticketData.totalFare;
+            const qty = ticketData.passengers.length > 0 ? ticketData.passengers.length : 1;
+
+            if (unitPrice <= 0) {
+                 alert('Total Selling Fare must be greater than zero.');
+                 return;
+            }
+
+            if (currentEditingRowIndex === -1) {
+                // ⭐ ADD NEW ITEM LOGIC ⭐
+                createInvoiceItemRow(description, qty, unitPrice, ticketData);
+            } else {
+                // ⭐ EDIT EXISTING ITEM LOGIC ⭐
+                const row = itemsTableBody.rows[currentEditingRowIndex];
+                if (row) {
+                    row.dataset.ticketData = JSON.stringify(ticketData);
+                    
+                    // Update main table row details
+                    const paxCount = ticketData.passengers.length;
+                    const summary = `${description} (${paxCount} Pax) <div class="flight-details-box">
+                        <p class="mb-0"><strong>Ref:</strong> ${ticketData.ticketNo || 'N/A'} | <strong>PNR:</strong> ${ticketData.pnr || 'N/A'}</p>
+                        <p class="mb-0"><strong>Route:</strong> ${ticketData.fromCity || 'N/A'} to ${ticketData.toCity || 'N/A'}</p>
+                    </div>`;
+                    
+                    // Update Description Cell (which contains the hidden input and the summary)
+                    const descCell = row.cells[0];
+                    descCell.innerHTML = `<input type="hidden" class="item-desc" value="${description}">${summary}`;
+
+                    // Update Qty and Price Inputs
+                    row.querySelector('.item-qty').value = qty;
+                    row.querySelector('.item-price').value = unitPrice.toFixed(2);
+                    
+                    updateRowAmount(row);
+                    calculateTotals();
+                }
+            }
+
+            ticketDetailsModal.hide();
+            currentEditingRowIndex = -1; // Reset edit index
+        });
+        
+        // --- Add Passenger Button Handler ---
+        addPassengerBtn.addEventListener('click', () => {
+            addPassengerInputRow();
+        });
+
+        // --- Save/Update Invoice Handler ---
+        saveInvoiceBtn.addEventListener('click', () => {
+            const invoiceData = collectInvoiceData();
+            if (!invoiceData) return; // Validation failed
+
+            // Check if updating an existing record or saving a new one
+            if (invoiceData.id) {
+                // Update logic
+                const index = INVOICE_RECORDS.findIndex(r => r.id == invoiceData.id);
+                if (index !== -1) {
+                    INVOICE_RECORDS[index] = invoiceData;
+                    alert(`Invoice ${invoiceData.invoiceNo} updated successfully!`);
+                } else {
+                    alert('Error: Record ID not found for update.');
+                    return;
+                }
+            } else {
+                // New save logic
+                const newId = INVOICE_RECORDS.length > 0 ? Math.max(...INVOICE_RECORDS.map(r => r.id)) + 1 : 1;
+                invoiceData.id = newId;
+                INVOICE_RECORDS.push(invoiceData);
+                document.querySelector('.invoice-box').dataset.recordId = newId; // Set the new ID
+                alert(`Invoice ${invoiceData.invoiceNo} saved successfully! ID: ${newId}`);
+            }
+
+            localStorage.setItem('invoiceRecords', JSON.stringify(INVOICE_RECORDS));
+            calculateTotals();
+        });
+
+        // --- Show Records Handler ---
+        showRecordsBtn.addEventListener('click', () => {
+            populateRecordsModal();
+            recordsModal.show();
+        });
+
+        // --- Print Invoice Handler ---
+        printInvoiceBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+        // --- Clear/New Invoice Handler ---
+        clearInvoiceBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear the current invoice and start a new one?')) {
+                clearInvoice();
+            }
+        });
+        
+        // --- Delete Invoice Record (MOCK) ---
+        function deleteInvoiceRecord(id) {
+            INVOICE_RECORDS = INVOICE_RECORDS.filter(r => r.id !== id);
+            localStorage.setItem('invoiceRecords', JSON.stringify(INVOICE_RECORDS));
+            
+            // If the deleted record was the one currently loaded, clear the form
+            if (document.querySelector('.invoice-box').dataset.recordId == id) {
+                clearInvoice();
+            }
+            
+            populateRecordsModal(); // Refresh records list
+            alert('Record deleted.');
+        }
+
+
+        // ======= Invoice No. Generation (MOCK API) =======
+        async function getNextInvoiceNo() {
+            // MOCK API call using local storage data for numbering
+            const invoices = INVOICE_RECORDS;
+            
+            if (invoices.length === 0) return 'INV-00001';
+            
+            const maxNum = invoices.reduce((max, inv) => {
+                const match = String(inv.invoiceNo).match(/INV-(\d+)/);
+                const num = match ? parseInt(match[1]) : 0;
+                return Math.max(max, num);
+            }, 0);
+            
+            const nextNum = maxNum + 1;
+            return 'INV-' + String(nextNum).padStart(5, '0');
+        }
+
+    </script>
+</body>
+</html>

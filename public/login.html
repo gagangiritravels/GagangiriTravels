@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - Tourism Management System</title>
+
+<!-- Bootstrap & FontAwesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1502920917128-1aa500764b3a?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
+
+header, main, footer { position: relative; z-index: 1; }
+
+.site-header {
+    background: rgba(0,0,0,0.6);
+    padding: 25px 0;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    backdrop-filter: blur(10px);
+    color: #fff;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.form-area {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.login-container:hover .form-area {
+    display: block;
+    opacity: 1;
+}
+
+.brand-header {
+    background: rgba(0,123,255,0.4);
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.exit-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.exit-btn:hover { color: #ffc107; }
+
+.form-control {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.form-control::placeholder { color: #ddd; }
+.form-control:focus {
+    border-color: #00a2ff;
+    box-shadow: 0 0 0 0.25rem rgba(0,162,255,0.25);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+.btn-primary { background-color: #007bff; border: none; }
+.btn-primary:hover { background-color: #0056b3; }
+
+.site-footer {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+}
+
+.switch-link { cursor: pointer; font-weight: 500; }
+.switch-link:hover { text-decoration: underline; }
+
+#adminLockBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+    <h1><i class="fa-solid fa-globe me-2"></i> Tourism Management System</h1>
+</header>
+
+<main class="login-container">
+    <div id="adminLockBtn">
+        <i class="fa-solid fa-lock"></i> Admin
+    </div>
+
+    <div class="form-area">
+        <div class="brand-header">
+            <i class="fas fa-plane me-2"></i> Admin Panel
+            <button type="button" class="exit-btn" onclick="exitPage()" title="Back to Homepage">&times;</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+            <h4 class="mb-3">Login</h4>
+            <div class="mb-3">
+                <label for="loginEmail" class="form-label text-white-50">Email</label>
+                <input type="email" id="loginEmail" class="form-control" placeholder="Enter email" required>
+            </div>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label text-white-50">Password</label>
+                <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-2">Login</button>
+          <div>
+    <span class="switch-link text-info" style="pointer-events: none; opacity: 0.6;">Register</span> | 
+    <span class="switch-link text-warning" style="pointer-events: none; opacity: 0.6;">Forgot Password?</span>
+</div>
+
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" style="display:none;">
+            <h4 class="mb-3">Register</h4>
+            <div class="mb-3">
+                <label for="regName" class="form-label text-white-50">Name</label>
+                <input type="text" id="regName" class="form-control" placeholder="Enter name" required>
+            </div>
+            <div class="mb-3">
+                <label for="regEmail" class="form-label text-white-50">Email</label>
+                <input type="email" id="regEmail" class="form-control" placeholder="Enter email" required>
+            </div>
+            <div class="mb-3">
+                <label for="regPassword" class="form-label text-white-50">Password</label>
+                <input type="password" id="regPassword" class="form-control" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-2">Register</button>
+            <div><span class="switch-link text-info" onclick="showForm('login')">Back to Login</span></div>
+        </form>
+
+        <!-- FORGOT PASSWORD FORM -->
+        <form id="forgotForm" style="display:none;">
+            <h4 class="mb-3">Forgot Password</h4>
+            <div class="mb-3">
+                <label for="forgotEmail" class="form-label text-white-50">Email</label>
+                <input type="email" id="forgotEmail" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-2">Send Reset Link</button>
+            <div><span class="switch-link text-info" onclick="showForm('login')">Back to Login</span></div>
+        </form>
+
+    </div>
+</main>
+
+<footer class="site-footer">
+    <p>© 2025 Tourism Management System | Designed with ❤️ for Travel Enthusiasts</p>
+</footer>
+
+<script>
+// Exit to homepage
+function exitPage() { window.location.href = 'index.html'; }
+
+// Admin lock prompt
+document.getElementById('adminLockBtn').addEventListener('click', function() {
+    const password = prompt('Enter Admin Password:');
+    if (password === null) return;
+    if (password === 'Pass@123') {
+        document.querySelector('.form-area').style.display = 'block';
+        document.querySelector('.form-area').style.opacity = 1;
+    } else {
+        alert('Wrong Password!');
+        window.location.href = 'index.html';
+    }
+});
+
+// Toggle between forms
+function showForm(type) {
+    document.getElementById('loginForm').style.display = (type==='login') ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = (type==='register') ? 'block' : 'none';
+    document.getElementById('forgotForm').style.display = (type==='forgot') ? 'block' : 'none';
+}
+
+// LOGIN
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const res = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.success) window.location.href = 'Admin.html';
+        else alert('Login Failed: '+data.message);
+    } catch(err){
+        alert('Server connection failed.');
+    }
+});
+
+// REGISTER
+document.getElementById('registerForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+
+    try {
+        const res = await fetch('http://localhost:5000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+        alert(data.message);
+        if(data.success) showForm('login');
+    } catch(err){
+        alert('Server connection failed.');
+    }
+});
+
+// FORGOT PASSWORD
+document.getElementById('forgotForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const email = document.getElementById('forgotEmail').value;
+
+    try {
+        const res = await fetch('http://localhost:5000/forgot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        alert(data.message);
+    } catch(err){
+        alert('Server connection failed.');
+    }
+});
+</script>
+</body>
+</html>

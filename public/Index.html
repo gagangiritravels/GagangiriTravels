@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gagangiri Travels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  /* ================= HEADER TOP ================= */
+ .header-top 
+{ background: linear-gradient(145deg, #1e3c72, #2a5298);
+ box-shadow: 0 4px 6px rgba(0,0,0,0.3); padding: 10px 20px; color: #fff; 
+}
+ .header-top img { width: 70px; height: auto; margin-right: 10px; 
+} 
+.brand-name { font-size: 1.4rem; font-weight: bold; } .tagline { font-size: 0.85rem; font-style: italic; color: #e0e0e0; }
+
+  /* ================= NAVBAR ================= */
+  .navbar-custom {
+    background-color: #ff9800;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .navbar-custom .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+  }
+  .navbar-custom .nav-link:hover {
+    color: #222 !important;
+  }
+  .navbar-toggler {
+    border: none;
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255, 1%29' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+
+  /* ================= HERO CAROUSEL ================= */
+  .carousel-item {
+    height: 80vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+  }
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.55);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 90%;
+    margin: auto;
+  }
+  .carousel-caption h1 {
+    font-size: 2.3rem;
+    font-weight: bold;
+  }
+  .carousel-caption p {
+    font-size: 1.1rem;
+  }
+
+  /* ================= PACKAGE CARDS ================= */
+  .card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  .card-img-top {
+    height: 160px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    width: 100%;
+  }
+  .card:hover .card-img-top {
+    transform: scale(1.05);
+  }
+  .card-body {
+    padding: 0.9rem;
+  }
+  .card-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+    color: #222;
+  }
+  .duration-price {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .duration-price span:last-child {
+    font-weight: 600;
+    color: #0f9d58;
+  }
+  .package-icons {
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .package-icons div {
+    text-align: center;
+    flex: 1 1 20%;
+    margin-bottom: 6px;
+  }
+  .package-icons i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+  .package-icons p {
+    font-size: 0.7rem;
+    margin: 0;
+    color: #555;
+  }
+  .btn-book {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    padding: 6px 0;
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+  .btn-book:hover {
+    background: linear-gradient(90deg, #0056b3, #00408a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ================= WHATSAPP FLOAT BUTTON ================= */
+  #whatsappButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    text-decoration: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+  }
+  #whatsappButton:hover {
+    transform: scale(1.1);
+  }
+
+  /* ================= BOOKING MODAL ================= */
+  #bookingModal .modal-content {
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(135deg, #f9f9f9, #ffffff);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  }
+  #bookingModal .modal-header {
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    color: white;
+    border-bottom: none;
+    padding: 12px 15px;
+  }
+  #bookingModal .modal-title {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  #bookingModal .btn-close {
+    filter: invert(1);
+  }
+  #bookingForm input,
+  #bookingForm textarea {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 6px;
+    font-size: 0.8rem;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  #bookingForm label {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  #bookingForm button {
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  #bookingForm button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* ================= SEARCH FILTER OVERLAY ================= */
+  .search-filter-overlay {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  .search-filter-overlay .form-control,
+  .search-filter-overlay .form-select {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    color: #333;
+  }
+  .stylish-dropdown {
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    padding: 8px;
+    min-width: 200px;
+    animation: fadeInDown 0.3s ease;
+  }
+  .stylish-dropdown .dropdown-item {
+    font-weight: 500;
+    color: #333;
+    border-radius: 6px;
+    padding: 10px 14px;
+    transition: all 0.3s ease;
+  }
+  .stylish-dropdown .dropdown-item:hover {
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    color: #fff;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .qr-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  .qr-code-box {
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    display: inline-block;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+
+  /* Footer */
+  .footer a {
+    transition: 0.3s;
+  }
+  .footer a:hover {
+    color: #ff9800 !important;
+    transform: translateX(4px);
+  }
+  .footer-social {
+    transition: 0.3s;
+  }
+  .footer-social:hover {
+    background: #ff9800 !important;
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 1200px) {
+    .carousel-caption h1 { font-size: 2rem; }
+    .carousel-caption p { font-size: 1rem; }
+    .package-icons div { flex: 1 1 25%; }
+  }
+
+  @media (max-width: 992px) {
+    .header-top { flex-direction: column; align-items: flex-start; }
+    .carousel-caption h1 { font-size: 1.7rem; }
+    .carousel-caption p { font-size: 0.95rem; }
+    .package-icons div { flex: 1 1 33%; margin-bottom: 8px; }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-caption h1 { font-size: 1.5rem; }
+    .carousel-caption p { font-size: 0.9rem; }
+    .card-img-top { height: 140px; }
+    .btn-book { font-size: 0.8rem; padding: 5px 0; }
+    .package-icons div { flex: 1 1 45%; margin-bottom: 10px; }
+    .navbar-nav { text-align: center; }
+  }
+
+  @media (max-width: 576px) {
+    .carousel-caption h1 { font-size: 1.3rem; }
+    .carousel-caption p { font-size: 0.85rem; }
+    .card-img-top { height: 120px; }
+    .package-icons div { flex: 1 1 100%; margin-bottom: 10px; }
+    .btn-book { font-size: 0.75rem; padding: 4px 0; }
+  }
+/* ====== CALL FLOAT BUTTON ====== */
+#callButton {
+  position: fixed;
+  bottom: 90px; /* above WhatsApp button */
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: transform 0.2s ease;
+}
+#callButton:hover {
+  transform: scale(1.1);
+}
+
+
+</style>
+
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<!-- Header Top -->
+<div class="header-top d-flex align-items-center justify-content-between py-2 px-3 bg-primary" 
+     style="height:100px; overflow:hidden;">
+
+  <!-- Left Side: Logo + Brand -->
+  <div class="d-flex align-items-center">
+    <img src="/images/gtlogo.png"alt="Gagangiri Travels Logo" class="me-2"style="height:140px; width:auto; object-fit:contain;" />
+    <div>
+      <div class="brand-name text-white fw-bold fs-5">Gagangiri Travels</div>
+      <div class="tagline text-light fst-italic" style="font-size:0.85rem;">
+        For Everything In Travel Affairs
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Social Icons + QR + Buttons -->
+  <div class="d-flex align-items-center gap-3" style="white-space:nowrap;">
+
+    <!-- Social Icons -->
+    <a href="https://www.facebook.com/YourPageName" target="_blank" class="text-white fs-5">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.instagram.com/YourInstagramHandle" target="_blank" class="text-white fs-5">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/YourChannelName" target="_blank" class="text-white fs-5">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+
+  <!-- Contact Us Button -->
+    <a href="#main-footer" class="btn btn-light btn-sm fw-bold">
+  <i class="fa-solid fa-phone me-1"></i> Contact Us
+</a>
+
+<a href="#gallerySection" class="btn btn-light btn-sm fw-bold">
+  <i class="fa-solid fa-images me-1"></i>Gallery</a>
+
+<a href="javascript:void(0)" class="btn btn-light text-dark fw-semibold" id="galleryBtn">
+  <i class="fa-solid fa-lock"></i> Admin
+</a>
+
+<script>
+document.getElementById("galleryBtn").addEventListener("click", function(e){
+    e.preventDefault(); // default action block
+    var p = prompt('Enter Admin Password:');
+    if (p === null) return; // Cancel clicked
+    if (p === 'Pass@123') {
+        window.location.href = 'login.html';
+    } else {
+        alert('Wrong Password!');
+        window.location.href = 'index.html';
+    }
+});
+</script>
+
+
+
+    <!-- QR Code -->
+<div class="qr-code-box">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=http://localhost:5000/Index.html" 
+       alt="Scan to Review" 
+       class="img-fluid rounded">
+</div>
+
+  </div>
+</div>
+
+  <!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top py-2">
+  <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-0 me-auto"> <!-- ✅ left align -->
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Home</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#flight-inquiry-section"><i class="fa-solid fa-plane-departure me-1"></i> Flight Inquiry</a></li>          
+        <li class="nav-item"><a class="nav-link" href="#hotel-section"><i class="fa-solid fa-hotel me-1"></i> Hotel</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-plane me-1"></i> Tours Packages
+          </a>
+          <ul class="dropdown-menu stylish-dropdown shadow-lg border-0 rounded-3">
+     <li><a class="dropdown-item" href="spiritual.html">🕉 Spiritual Tour</a>
+     <li><a class="dropdown-item" href="domestic.html">🏡 Domestic</a></li>
+     <li><a class="dropdown-item" href="international.html"> 🌍 International</a></li>
+  
+ 
+  </li>
+</ul> </li>       
+        <li class="nav-item"><a class="nav-link" href="visa.html"><i class="fa-solid fa-globe me-1"></i> Visa Expert</a></li>
+        <li class="nav-item"><a class="nav-link" href="#insurance-section"><i class="fa-solid fa-shield-halved me-1"></i> Insurance</a></li>
+        <li class="nav-item"><a class="nav-link" href="Cruise1.html"><i class="fa-solid fa-ship me-1"></i> Cruise</a></li>
+        <li class="nav-item"> <a class="nav-link" href="#passport-section" id="passportLink"><i class="fa-solid fa-passport me-1"></i>Passport</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews-section"><i class="fa-solid fa-star me-1"></i> Rating & Reviews</a></li>       
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO CAROUSEL ================= -->
+<div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000" data-bs-wrap="true">
+  <div class="carousel-inner">
+
+    <!-- Banner 1 -->
+    <div class="carousel-item active">
+      <div class="d-block w-100 banner-slide" style="background-image:url('http://www.pixelstalk.net/wp-content/uploads/2016/08/Free-Desktop-Travel-Backgrounds.jpg');">
+        <div class="carousel-caption">
+          <h1>Explore the World with Us</h1>
+          <p>Best Tour Packages at Affordable Prices</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner 2 -->
+    <div class="carousel-item">
+      <div class="d-block w-100 banner-slide" style="background-image:url('https://m.media-amazon.com/images/I/81DjZ3TKh2L.jpg');">
+        <div class="carousel-caption">
+          <h1>Spiritual Destinations</h1>
+          <p>Spiritual tourism is about visiting holy and spiritual places for inner peace and enlightenment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner 3 -->
+    <div class="carousel-item">
+      <div class="d-block w-100 banner-slide" style="background-image:url('https://blog.irctctourism.com/wp-content/uploads/2023/04/Golden-Triangle-Tour.jpg');">
+        <div class="carousel-caption">
+          <h1>Domestic Life</h1>
+          <p>India has a unique culture and is one of the oldest and greatest civilizations of the world</p>
+        </div>
+      </div>
+    </div>
+ </div>
+</div>
+
+<style>
+  .banner-slide {
+    height: 600px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .carousel-caption {
+    background: rgba(0,0,0,0.4); /* Optional: dark overlay for text readability */
+    padding: 20px;
+    border-radius: 10px;
+  }
+</style>
+
+
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- ================= SEARCH FILTER ================= -->
+  <div class="position-relative">
+    <div class="search-filter-overlay">
+      <div class="container d-flex justify-content-end">
+        <div class="d-flex gap-2" style="max-width:520px;">
+          <input type="text" id="searchInput" class="form-control shadow-sm rounded-pill px-3" placeholder="🔍 Search packages...">
+          <select id="filterSelect" class="form-select shadow-sm rounded-pill px-3">
+            <option value="">All Categories</option>
+            <option value="Domestic">Domestic</option>
+            <option value="International">International</option>
+            <option value="Spiritual">Spiritual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ================= PACKAGES ================= -->
+  <div class="container my-5">
+    <h2 class="text-center mb-4"></h2>
+   <h4 class="mt-4 text-center">🕉 Spiritual Packages</h4><div class="row justify-content-center" id="spiritualContainer"></div>
+    <h4 class="mt-4 text-center">🏡 Domestic Packages</h4><div class="row justify-content-center" id="domesticContainer"></div>
+   <h4 class="mt-4 text-center">🌍 International Packages</h4><div class="row justify-content-center" id="internationalContainer"></div>
+
+  </div>
+
+  <!-- ================= DETAILS MODAL ================= -->
+  <div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalImage" class="img-fluid rounded mb-3" alt="">
+          <p><strong>Duration:</strong> <span id="modalDuration"></span></p>
+          <h6>Overview</h6><p id="modalOverview"></p>
+          <h6>Itinerary</h6><p id="modalItinerary"></p>
+          <h6>Inclusions</h6><ul id="modalInclusions"></ul>
+          <h6>Exclusions</h6><ul id="modalExclusions"></ul>
+          <h6>Terms & Conditions</h6><p id="modalTerms"></p>
+        </div>
+        <div class="modal-footer">
+          <a id="modalPDF" href="#" target="_blank" class="btn btn-secondary">Download PDF</a>
+          <button id="modalBook" type="button" class="btn btn-success">Proceed to Booking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BOOKING MODAL ================= -->
+  <div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Book This Tour: <span id="bookingPkgName" class="text-warning"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="bookingForm" novalidate>
+            <input type="hidden" id="packageId" name="packageId">
+            <div class="mb-2"><input type="text" class="form-control form-control-sm" id="name" placeholder="Your Name" required></div>
+            <div class="mb-2"><input type="email" class="form-control form-control-sm" id="email" placeholder="Your Email" required></div>
+            <div class="mb-2"><input type="tel" class="form-control form-control-sm" id="phone" placeholder="Phone Number" required></div>
+            <label class="form-label">Travelers</label>
+            <div class="row mb-2">
+              <div class="col"><input type="number" class="form-control form-control-sm" id="adults" min="1" value="1" required></div>
+              <div class="col"><input type="number" class="form-control form-control-sm" id="children" min="0" value="0"></div>
+              <div class="col"><input type="number" class="form-control form-control-sm" id="infants" min="0" value="0"></div>
+            </div>
+            <div class="mb-2"><label class="form-label">Travel From</label><input type="date" class="form-control form-control-sm" id="fromDate" required></div>
+            <div class="mb-2"><label class="form-label">Travel To</label><input type="date" class="form-control form-control-sm" id="toDate" required></div>
+            <div class="mb-2"><textarea class="form-control form-control-sm" id="requirements" placeholder="Special Requirements"></textarea></div>
+            <button type="submit" class="btn w-100 btn-sm">Book Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= WHATSAPP FLOAT ================= -->
+  <a href="https://wa.me/919370262361" target="_blank" id="whatsappButton"><i class="fab fa-whatsapp"></i></a>
+ <!-- CALL FLOAT BUTTON -->
+  <a href="tel:+919370262361" id="callButton"><i class="fas fa-phone"></i></a>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Carousel loop fix
+    const bannerCarousel = document.querySelector('#bannerCarousel');
+    const carousel = new bootstrap.Carousel(bannerCarousel, {
+      interval: 3000,
+      ride: 'carousel',
+      wrap: true
+    });
+
+
+  <!-- ================= Package SCRIPTS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let packages = [];
+    const apiURL = "http://localhost:5000/packages";
+    const bookingAPI = "http://localhost:5000/bookings";
+
+    async function loadPackages() {
+      const res = await fetch(apiURL);
+      packages = await res.json();        
+      renderPackages(packages);
+    }
+
+function renderPackages(data) {
+  ["domestic", "international", "spiritual"].forEach(c => document.getElementById(c + "Container").innerHTML = "");
+
+  // Group packages by category
+  const categories = {
+    domestic: data.filter(p => p.category.toLowerCase() === "domestic"),
+    international: data.filter(p => p.category.toLowerCase() === "international"),
+    spiritual: data.filter(p => p.category.toLowerCase() === "spiritual")
+  };
+
+  Object.keys(categories).forEach(cat => {
+    const container = document.getElementById(cat + "Container");
+    const pkgs = categories[cat].slice(0, 8); // Only take first 8 items (2 rows * 4 cols)
+
+    for (let i = 0; i < pkgs.length; i += 4) {
+      const rowPkgs = pkgs.slice(i, i + 4);
+      const row = document.createElement("div");
+      row.className = "row mb-4";
+
+      rowPkgs.forEach(pkg => {
+        const col = document.createElement("div");
+        col.className = "col-md-3 col-sm-6 mb-4";
+        col.innerHTML = `
+          <div class="card h-100">
+            <a href="packagedetails.html?id=${pkg.id}">
+              <img src="${pkg.image}" class="card-img-top" alt="${pkg.name}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">${pkg.name}</h5>
+              <div class="duration-price">
+                <span>${pkg.duration}</span>
+                <span>Price on Request</span>
+              </div>
+              <div class="d-flex justify-content-around package-icons my-3">
+                <div><i class="fa-solid fa-hotel text-primary"></i><p>Hotel</p></div>
+                <div><i class="fa-solid fa-car text-success"></i><p>Cabs</p></div>
+                <div><i class="fa-solid fa-utensils text-danger"></i><p>Meals</p></div>
+                <div><i class="fa-solid fa-mountain-sun text-warning"></i><p>Sightseeing</p></div>
+              </div>
+              <button class="btn btn-book w-100 mt-2" onclick="bookNow('${pkg.id}')">Book Now</button>
+            </div>
+          </div>
+        `;
+        row.appendChild(col);
+      });
+
+      container.appendChild(row);
+    }
+
+    // Add "Load More" button
+    const loadMoreBtn = document.createElement("div");
+    loadMoreBtn.className = "text-center my-3";
+    loadMoreBtn.innerHTML = `<a href="${cat}.html" class="btn btn-primary btn-lg">Load More....</a>`;
+    container.appendChild(loadMoreBtn);
+  });
+}
+
+
+    function showDetails(id) {
+      const pkg = packages.find(p => p.id == id);
+      document.getElementById("modalTitle").innerText = pkg.name;
+      document.getElementById("modalImage").src = pkg.image;
+      document.getElementById("modalDuration").innerText = pkg.duration;
+      document.getElementById("modalOverview").innerText = pkg.overview || "";
+      document.getElementById("modalItinerary").innerText = pkg.itinerary || "";
+      document.getElementById("modalTerms").innerText = pkg.terms || "";
+
+      const incl = Array.isArray(pkg.inclusions) ? pkg.inclusions : (pkg.inclusions ? pkg.inclusions.split(",") : []);
+      const excl = Array.isArray(pkg.exclusions) ? pkg.exclusions : (pkg.exclusions ? pkg.exclusions.split(",") : []);
+      document.getElementById("modalInclusions").innerHTML = incl.map(i=>`<li>${i.trim()}</li>`).join("");
+      document.getElementById("modalExclusions").innerHTML = excl.map(i=>`<li>${i.trim()}</li>`).join("");
+
+      document.getElementById("modalPDF").href = pkg.pdf ? pkg.pdf : "#";
+      document.getElementById("modalPDF").style.display = pkg.pdf ? "inline-block" : "none";
+
+      document.getElementById("modalBook").onclick = () => {
+        bootstrap.Modal.getInstance(document.getElementById("detailsModal")).hide();
+        setTimeout(()=>bookNow(id),500);
+      };
+    }
+
+    async function bookNow(id) {
+      const pkg = packages.find(p => p.id == id);
+      if (!pkg) return;
+      document.getElementById("packageId").value = id;
+      document.getElementById("bookingPkgName").innerText = pkg.name;
+      new bootstrap.Modal(document.getElementById("bookingModal")).show();
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (!this.checkValidity()) { this.reportValidity(); return; }
+      const data = {
+        packageId: document.getElementById("packageId").value,
+        packageName: document.getElementById("bookingPkgName").innerText,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        adults: document.getElementById("adults").value,
+        children: document.getElementById("children").value,
+        infants: document.getElementById("infants").value,
+        fromDate: document.getElementById("fromDate").value,
+        toDate: document.getElementById("toDate").value,
+        requirements: document.getElementById("requirements").value || "N/A"
+      };
+      await fetch(bookingAPI, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(data) });
+      const msg = `Booking Inquiry
+Package: ${data.packageName}
+Name: ${data.name}
+Phone: ${data.phone}
+Travelers: ${data.adults} Adults, ${data.children} Children
+Dates: ${data.fromDate} - ${data.toDate}
+Requirements: ${data.requirements}`;
+      window.open(`https://wa.me/919370262361?text=${encodeURIComponent(msg)}`,"_blank");
+      bootstrap.Modal.getInstance(document.getElementById("bookingModal")).hide();
+      this.reset();
+    });
+
+ function applyFilters() {
+      const searchText = document.getElementById("searchInput").value.toLowerCase();
+      const filterValue = document.getElementById("filterSelect").value;
+      let filtered = packages.filter(pkg => pkg.name.toLowerCase().includes(searchText) && (filterValue === "" || pkg.category === filterValue));
+      renderPackages(filtered);
+    }
+
+    document.getElementById("searchInput").addEventListener("input", applyFilters);
+    document.getElementById("filterSelect").addEventListener("change", applyFilters);
+    loadPackages();
+  </script>
+
+<section id="services" class="text-dark py-5" style="background-color:#FFD580;">
+    <div class="container">
+        <h2 class="text-center mb-4">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h5>International & Domestic Tours</h5>
+                <p>Explore the world with our carefully curated tour packages for both international and domestic travel.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Flight Tickets & Eurail Pass</h5>
+                <p>We offer easy booking for flights worldwide and Eurail passes for a hassle-free train journey across Europe.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Worldwide Hotel Reservations</h5>
+                <p>Get the best deals on hotels worldwide for a comfortable stay during your travels.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Overseas Mediclaim</h5>
+                <p>Your safety is our priority. We provide comprehensive overseas mediclaim for peace of mind during your travels.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Passport & Visa Assistance</h5>
+                <p>We assist you in obtaining your passport and visa for international travel, ensuring a smooth journey.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Cruise Bookings</h5>
+                <p>Experience the luxury of cruise travel with our exclusive booking services for global cruises.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Incentive & MICE Tours</h5>
+                <p>We organize incentive tours, MICE (Meetings, Incentives, Conferences, and Events) to make your corporate travel seamless.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FLIGHT INQUIRY SECTION ===== -->
+<section id="flight-inquiry-section" class="py-5 bg-white rounded shadow-sm mb-5">
+  <div class="container">
+    <h2 class="h4 fw-bold text-center text-primary mb-4">Flight Inquiry</h2>
+
+    <div class="mx-auto p-4 bg-light rounded border" style="max-width: 600px;">
+      <form id="flight-inquiry-form">
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label for="Name" class="form-label small">Name</label>
+            <input type="text" class="form-control form-control-sm" id="Name" required>
+          </div>
+          <div class="col-md-6">
+            <label for="Mobile" class="form-label small">Mobile No.</label>
+            <input type="text" class="form-control form-control-sm" id="Mobile" required>
+          </div>
+          <div class="col-md-6">
+            <label for="flightOrigin" class="form-label small">Origin</label>
+            <input type="text" class="form-control form-control-sm" id="flightOrigin" required>
+          </div>
+          <div class="col-md-6">
+            <label for="flightDestination" class="form-label small">Destination</label>
+            <input type="text" class="form-control form-control-sm" id="flightDestination" required>
+          </div>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label for="departureDate" class="form-label small">Departure Date</label>
+            <input type="date" class="form-control form-control-sm" id="departureDate" required>
+          </div>
+          <div class="col-md-6">
+            <label for="returnDate" class="form-label small">Return Date (Optional)</label>
+            <input type="date" class="form-control form-control-sm" id="returnDate">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="flightPassengers" class="form-label small">Passengers</label>
+          <select class="form-select form-select-sm" id="flightPassengers">
+            <option value="1">1 Passenger</option>
+            <option value="2">2 Passengers</option>
+            <option value="3">3 Passengers</option>
+            <option value="4+">4+ Passengers</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 btn-sm">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>-->
+<script>
+const flightURL = "http://localhost:5000/flights";
+
+document.getElementById("flight-inquiry-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById("Name").value.trim(),
+    mobile: document.getElementById("Mobile").value.trim(),
+    origin: document.getElementById("flightOrigin").value.trim(),
+    destination: document.getElementById("flightDestination").value.trim(),
+    departureDate: document.getElementById("departureDate").value,
+    returnDate: document.getElementById("returnDate").value,
+    passengers: document.getElementById("flightPassengers").value
+  };
+
+  const res = await fetch(flightURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    alert("✅ Flight Inquiry Submitted!");
+    e.target.reset(); // stay on same page
+  } else {
+    alert("❌ Failed to submit inquiry");
+  }
+});
+</script>
+
+<!-- ===== HOTEL BOOKING FORM ===== -->
+<section id="hotel-section" class="py-5 bg-white rounded shadow-sm mb-5">
+  <div class="container">
+    <h2 class="h4 fw-bold text-center text-primary mb-4">Hotel Booking Form</h2>
+
+    <div class="mx-auto p-4 bg-light rounded border" style="max-width: 700px;">
+      <form id="hotel-booking-form">
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <label for="name" class="form-label small">Name</label>
+            <input type="text" class="form-control form-control-sm" id="name" name="name" required>
+          </div>
+          <div class="col-md-4">
+            <label for="mobile" class="form-label small">Mobile</label>
+            <input type="text" class="form-control form-control-sm" id="mobile" name="mobile" required>
+          </div>
+          <div class="col-md-4">
+            <label for="email" class="form-label small">Email</label>
+            <input type="email" class="form-control form-control-sm" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Category</label>
+            <select id="category" class="form-select" name="category" required>
+              <option value="">Select Category</option>
+              <option value="international">International</option>
+              <option value="domestic">Domestic</option>
+            </select>
+          </div>
+
+          <div class="col-md-4" id="countryDiv" style="display:none;">
+            <label class="form-label">Country</label>
+            <input type="text" id="country" name="country" class="form-control form-control-sm" placeholder="Enter Country">
+          </div>
+
+          <div class="col-md-4" id="stateDiv" style="display:none;">
+            <label class="form-label">State</label>
+            <input type="text" id="state" name="state" class="form-control form-control-sm" placeholder="Enter State">
+          </div>
+
+          <div class="col-md-4" id="cityDiv" style="display:none;">
+            <label class="form-label">City</label>
+            <input type="text" id="city" name="city" class="form-control form-control-sm" placeholder="Enter City">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <label for="checkInDate" class="form-label small">Check-In Date</label>
+            <input type="date" class="form-control form-control-sm" id="checkInDate" name="checkInDate" required>
+          </div>
+          <div class="col-md-3">
+            <label for="checkOutDate" class="form-label small">Check-Out Date</label>
+            <input type="date" class="form-control form-control-sm" id="checkOutDate" name="checkOutDate" required>
+          </div>
+          <div class="col-md-3">
+            <label for="guests" class="form-label small">No. of Guests</label>
+            <input type="number" class="form-control form-control-sm" id="guests" name="guests" min="1" value="1" required>
+          </div>
+          <div class="col-md-3">
+            <label for="rooms" class="form-label small">No. of Rooms</label>
+            <input type="number" class="form-control form-control-sm" id="rooms" name="rooms" min="1" value="1" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 btn-sm">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+const hotelURL = "http://localhost:5000/hotels";
+const category = document.getElementById("category");
+const countryDiv = document.getElementById("countryDiv");
+const stateDiv = document.getElementById("stateDiv");
+const cityDiv = document.getElementById("cityDiv");
+
+// Show/hide fields
+category.addEventListener("change", function () {
+  if (this.value === "international") {
+    countryDiv.style.display = "block";
+    stateDiv.style.display = "none";
+    cityDiv.style.display = "block";
+  } else if (this.value === "domestic") {
+    countryDiv.style.display = "none";
+    stateDiv.style.display = "block";
+    cityDiv.style.display = "block";
+  } else {
+    countryDiv.style.display = "none";
+    stateDiv.style.display = "none";
+    cityDiv.style.display = "none";
+  }
+});
+
+// Form submission
+document.getElementById("hotel-booking-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+
+  data.name = data.name.trim();
+  data.email = data.email.trim();
+  data.mobile = data.mobile.trim();
+
+  if (!data.name) return alert("⚠️ Please enter your name.");
+  if (!data.email) return alert("⚠️ Please enter your email.");
+  if (!data.mobile) return alert("⚠️ Please enter your mobile number.");
+
+  // Extra fields based on category
+  if (data.category === "international" && !data.country.trim()) {
+    return alert("⚠️ Please enter the country.");
+  }
+  if (data.category === "domestic" && !data.state.trim()) {
+    return alert("⚠️ Please enter the state.");
+  }
+  if (!data.city.trim()) return alert("⚠️ Please enter the city.");
+
+  console.log("📩 Sending data:", data);
+
+  try {
+    const res = await fetch(hotelURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      alert("✅ Hotel Booking Submitted!");
+      setTimeout(() => e.target.reset(), 200);
+    } else {
+      const err = await res.json();
+      alert("❌ Failed: " + (err.error || "Unknown error"));
+    }
+  } catch (err) {
+    alert("❌ Error: " + err.message);
+  }
+});
+
+</script>
+
+
+<!-- ===== Passport ===== -->
+
+<!-- Passport Form Section (initially hidden) -->
+<section id="passport-section" style="display:none; padding:50px 0; background-color:#e0f7fa;">
+  <div class="form-container">
+    <div class="form-header">
+      <h1>Passport Application Form</h1>
+      <p>Please fill out the form accurately and completely.</p>
+    </div>
+
+    <form id="passport-form" action="#" method="post">
+      <div class="form-section">
+        <h2>Personal Details</h2>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="placeOfBirth">Place of Birth</label>
+          <input type="text" id="placeOfBirth" name="placeOfBirth" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>Contact Information</h2>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State / Province</label>
+          <input type="text" id="state" name="state" required>
+        </div>
+        <div class="form-group">
+          <label for="zipCode">Zip Code</label>
+          <input type="text" id="zipCode" name="zipCode" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>Passport Information</h2>
+        <div class="form-group">
+          <label for="nationality">Nationality</label>
+          <input type="text" id="nationality" name="nationality" required>
+        </div>
+        <div class="form-group">
+          <label for="passportType">Type of Passport</label>
+          <select id="passportType" name="passportType" required>
+            <option value="" disabled selected>Select Passport Type</option>
+            <option value="fresh">Fresh Passport</option>
+            <option value="reissue">Reissue Passport</option>
+            <option value="loss">Loss Passport</option>
+            <option value="tatkal">Tatkal Passport</option>           
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Submit Application</button>
+    </form>
+  </div>
+</section>
+
+<!-- CSS (same as your existing form CSS) -->
+<style>
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #FFC107;
+    --background-color: #e0f7fa;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --border-radius: 12px;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body { font-family:'Poppins',sans-serif; background-color:var(--background-color); }
+
+.form-container {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width:100%; max-width:800px; padding:40px; margin:auto;
+}
+
+.form-header { text-align:center; margin-bottom:30px; }
+
+.form-header h1 { font-family:'Montserrat',sans-serif; color:var(--primary-color); font-size:2.5rem; font-weight:700; margin-bottom:5px; }
+.form-header p { color:#666; font-size:1rem; }
+
+.form-section { border:2px solid var(--primary-color); border-radius:var(--border-radius); padding:20px 30px; margin-bottom:25px; position:relative; }
+.form-section h2 { font-family:'Montserrat',sans-serif; font-size:1.5rem; color:var(--text-color); background-color:var(--card-background); padding:0 10px; display:inline-block; position:absolute; top:-15px; left:20px; }
+
+.form-group { margin-bottom:20px; display:flex; flex-direction:column; }
+.form-group label { font-weight:600; color:var(--text-color); margin-bottom:8px; font-size:0.9rem; }
+.form-group input, .form-group select { width:100%; padding:12px 15px; border:1px solid #ddd; border-radius:8px; font-family:'Poppins',sans-serif; font-size:1rem; transition: all 0.3s ease; }
+.form-group input:focus, .form-group select:focus { outline:none; border-color:var(--secondary-color); box-shadow:0 0 8px rgba(255,193,7,0.5); }
+
+.submit-button { display:block; width:100%; padding:15px; background-color:var(--primary-color); color:white; font-size:1.2rem; font-weight:600; border:none; border-radius:var(--border-radius); cursor:pointer; transition:background-color 0.3s ease, transform 0.2s ease; }
+.submit-button:hover { background-color:#0056b3; transform:translateY(-2px); }
+
+@media (min-width:600px) {
+    .form-section { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+    .form-group:last-child { margin-bottom:0; }
+}
+</style>
+
+<!-- JS to show form on click -->
+<script>
+const passportURL = "http://localhost:5000/passports";
+const passportLink = document.getElementById("passportLink");
+const passportSection = document.getElementById("passport-section");
+
+// Show form section
+passportLink.addEventListener("click", function(e) {
+  e.preventDefault();
+  passportSection.style.display = "block";
+  passportSection.scrollIntoView({ behavior: "smooth" });
+});
+
+// Handle form submission
+document.getElementById("passport-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+
+  try {
+    const res = await fetch(passportURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Passport application submitted!");
+      console.log("📩 Saved:", data);
+      e.target.reset();
+      passportSection.style.display = "none";
+    } else {
+      alert("❌ Error: " + (data.error || "Something went wrong"));
+      console.error("⚠️ Error:", data);
+    }
+  } catch (err) {
+    console.error("❌ Request failed:", err);
+    alert("❌ Failed to submit passport application.");
+  }
+});
+</script>
+
+<!-- ===== insurance ===== -->
+
+<section id="insurance-section" class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4" style="color: #004080;">Travel Insurance</h2>
+        <div class="card border-0 shadow-sm mx-auto" style="max-width: 700px;">
+            <div class="card-body text-center p-4">
+                <p class="text-muted mb-4">
+                    Secure your journey with comprehensive travel insurance policies tailored to your needs.
+                </p>
+                <ul class="list-unstyled text-start mx-auto mb-4" style="max-width: 400px;">
+                    <li class="mb-2"><i class="fa-solid fa-notes-medical text-primary me-2"></i> Medical Emergencies</li>
+                    <li class="mb-2"><i class="fa-solid fa-plane-slash text-primary me-2"></i> Trip Cancellation / Interruption</li>
+                    <li class="mb-2"><i class="fa-solid fa-suitcase-rolling text-primary me-2"></i> Lost Luggage</li>
+                    <li class="mb-2"><i class="fa-solid fa-user-shield text-primary me-2"></i> Personal Liability</li>
+                </ul>
+
+                <!-- WhatsApp Button -->
+                <button class="btn btn-primary px-4 py-2" style="background-color:#4e73df; border:none;"
+                    onclick="sendWhatsApp()">
+                    <i class="fa-solid fa-file-signature me-2"></i> Get a Free Quote
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function sendWhatsApp() {
+    // Apna WhatsApp number yaha daale (country code ke saath, +91 for India)
+    let phoneNumber = "919370262361";  
+    let message = "Hi, I want a free quote for Travel Insurance.";
+    
+    // WhatsApp API URL
+    let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+}
+</script>
+
+<section id="about" class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">About Gagangiri Travels</h2>
+        <p class="lead text-center">
+            Gagangiri Travels is specialized in domestic and international air ticketing.<br> We excel at designing tailor-made tour packages for MICE bookings & Family bookings, Worldwide Hotel bookings, Visa & Passport, Foreign Exchange, Travel Insurance, Local and International Transfers are also included in our services.<br> We also have special rates for some domestic hotels a My nd resorts. We also undertake Cruise bookings for Cordelia Cruises, NCL, MSC, Royal Caribbean, Costa, RW World Cruise, Alaska Cruise, etc.
+        </p>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallerySection" class="py-5 bg-light rounded shadow-sm mb-5">
+  <div class="container">
+    <h2 class="h4 fw-bold text-center text-primary mb-4">Our Travel Gallery</h2>
+    <div class="row g-3" id="home-gallery"></div>
+    <div class="text-center mt-4">
+      <a href="gallery.html" class="btn btn-primary px-4 py-2 fw-bold">
+        Load More Images <i class="fa-solid fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 🌟 Smooth Scroll to Gallery Section
+  document.getElementById("galleryBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if(target){
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  // 📸 Load only 6 recent images for home page
+  fetch("http://localhost:5000/gallery")
+    .then(res => res.json())
+    .then(images => {
+      const galleryContainer = document.getElementById("home-gallery");
+      const recent = images.slice(-6).reverse(); // latest 6 uploads
+      galleryContainer.innerHTML = recent.map(img => `
+        <div class="col-md-4 col-sm-6">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="http://localhost:5000${img.path}" class="card-img-top rounded" alt="Gallery Image">
+          </div>
+        </div>
+      `).join("");
+    });
+</script>
+
+
+<!---------------------Review------------------------------->
+<section id="reviews-section" class="py-5 bg-light rounded shadow-sm mb-5">
+  <div class="container">
+    <h2 class="h4 fw-bold text-center text-primary mb-4">Customer Reviews</h2>
+    
+    <!-- Carousel container -->
+    <div id="reviews-carousel" class="d-flex overflow-auto gap-3" style="scroll-behavior: smooth;">
+      <!-- Reviews will be inserted here dynamically -->
+    </div>
+
+    <!-- Share Experience Button -->
+    <div class="text-center mt-4">
+      <button id="share-experience-btn" class="btn btn-primary btn-lg">
+        Share Your Experience
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  #reviews-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card {
+    flex: 0 0 280px;
+    background: linear-gradient(135deg, #fef9c3, #fcd34d);
+    border-radius: 12px;
+    padding: 0.6rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    transition: transform 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  .review-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid #fff;
+  }
+
+  .review-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .review-stars {
+    color: #f59e0b;
+    font-size: 1.2rem; /* increased size for better visibility */
+    line-height: 1;
+  }
+
+  .review-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .review-date {
+    color: #6b7280;
+    font-size: 0.7rem;
+  }
+
+  .review-content p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("reviews-carousel");
+
+  // Fetch reviews from backend
+  fetch("http://localhost:5000/reviews")
+    .then(res => res.json())
+    .then(reviews => {
+      reviews.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "review-card";
+
+        const stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
+        const imgSrc = r.images && r.images.length > 0 ? r.images[0] : "https://via.placeholder.com/60";
+
+        div.innerHTML = `
+          <img src="${imgSrc}" alt="review image">
+          <div class="review-content">
+            <div class="review-name">${r.name}</div>
+            <div class="review-stars">${stars}</div>
+            <p>${r.comments}</p>
+            <div class="review-date">${new Date(r.date).toLocaleDateString()}</div>
+          </div>
+        `;
+        carousel.appendChild(div);
+      });
+
+      // Auto-scroll every 3 seconds
+      let scrollAmount = 0;
+      setInterval(() => {
+        scrollAmount += 300; // width of card + gap
+        if(scrollAmount >= carousel.scrollWidth - carousel.clientWidth) scrollAmount = 0;
+        carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      }, 3000);
+    });
+
+  // Share Experience button click
+  document.getElementById("share-experience-btn").addEventListener("click", () => {
+    window.location.href = "Review.html";
+  });
+</script>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919370262361?text=Hi%20I%20want%20to%20know%20about%20tour%20packages" target="_blank" id="whatsappButton">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+
+<!-- Footer -->
+<footer id="main-footer" class="footer text-white" style="background: linear-gradient(145deg, #1e3c72, #2a5298);">
+  <div class="container py-3"> <!-- Reduced padding from py-4 to py-3 -->
+
+    <div class="row text-start">
+
+      <!-- About / Brand -->
+      <div class="col-md-3 mb-3">
+        <h5 class="fw-bold">🌍 Gagangiri Travels</h5>
+        <p class="small mb-0">
+          For Everything In Travel Affairs. We provide International, Domestic & Spiritual tour packages with best prices and services.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Home</a></li>
+          <li><a href="international.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> International</a></li>
+          <li><a href="domestic.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Domestic</a></li>
+          <li><a href="spiritual.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Spiritual Tours</a></li>
+          <li><a href="visa.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Visa Expert</a></li>
+          <li><a href="Domestic_Term_condition.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i>Term & condition</a></li>
+        </ul>
+      </div>
+
+      <!-- Our Team -->
+      <div class="col-md-3 mb-3 text-start">
+        <h6 class="fw-bold mb-2">Our Team</h6>
+        <div class="d-flex align-items-center mb-2 gap-2">
+          <img src="images/Saroj.jpg" alt="Founder" class="rounded-circle" style="width:50px; height:50px; object-fit:cover;">
+          <div>
+            <p class="mb-0 small fw-bold">Mrs. Saroj Vithalani</p>
+            <small class="text-light">Founder & CEO</small>
+          </div>
+        </div>
+        <p class="mb-0 small fw-bold">Mr. Anand Iyer - Manager & Visa Expert</p>
+        <p class="mb-0 small fw-bold">Mrs. Kajal Telinge - Accountant</p> 
+        <p class="mb-0 small fw-bold">Mr.Pradeep Kanojia - Sales Executive</p>         
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Contact Us</h6>
+        <p class="small mb-1"><i class="fa fa-map-marker-alt me-2"></i> Khopoli, Maharashtra, India</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9370262361</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9665811088</p>
+        <p class="small mb-0"><i class="fa fa-envelope me-2"></i> gagangiritravels@gmail.com</p>
+      </div>
+
+    </div>
+
+    <!-- Socials -->
+    <div class="d-flex align-items-center justify-content-center mt-3 gap-3">
+      <h6 class="fw-bold mb-0">Follow Us:</h6>
+<a href="#"class="footer-social d-inline-block text-center"style="width:32px;height:32px;line-height:32px;background:#fff;color:#2a5298;border-radius:50%;">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    <hr class="border-light mt-3 mb-2">
+ <p class="small mb-0 text-center">&copy; 2025 Gagangiri Travels. All Rights Reserved. | Designed by <span class="text-warning">Pradeep Kanojia</span></p>
+  </div>
+</footer>
+
+
+</body>
+</html>

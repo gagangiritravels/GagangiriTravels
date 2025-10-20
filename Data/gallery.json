@@ -1,0 +1,42 @@
+[
+  {
+    "id": 2,
+    "path": "/uploads/file_1758604739974.jpg",
+    "uploadedAt": "2025-09-23T05:18:59.993Z"
+  },
+  {
+    "id": 2,
+    "path": "/uploads/file_1758604739976.jpeg",
+    "uploadedAt": "2025-09-23T05:18:59.993Z"
+  },
+  {
+    "id": 3,
+    "path": "/uploads/file_1758604792319.avif",
+    "uploadedAt": "2025-09-23T05:19:52.328Z"
+  },
+  {
+    "id": 6,
+    "path": "/uploads/file_1758607871811.jpg",
+    "uploadedAt": "2025-09-23T06:11:11.859Z"
+  },
+  {
+    "id": 7,
+    "path": "/uploads/file_1758607871815.jpg",
+    "uploadedAt": "2025-09-23T06:11:11.859Z"
+  },
+  {
+    "id": 8,
+    "path": "/uploads/file_1758607871841.jpg",
+    "uploadedAt": "2025-09-23T06:11:11.859Z"
+  },
+  {
+    "id": 10,
+    "path": "/uploads/file_1758607871846.jpg",
+    "uploadedAt": "2025-09-23T06:11:11.859Z"
+  },
+  {
+    "id": 11,
+    "path": "/uploads/file_1758607871846.jpeg",
+    "uploadedAt": "2025-09-23T06:11:11.859Z"
+  }
+]

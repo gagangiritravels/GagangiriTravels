@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gagangiri Travels — International Packages</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+  /* ================== Body & Background ================== */
+body {
+  background: url('https://media.istockphoto.com/id/2093595089/vector/travel-around-the-world-vector-flat-illustration.jpg?s=612x612&w=0&k=20&c=jT16YcZKjiQaWDrp-feGVkz25eIsADyzhJ4cKNalr0o=')
+    no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+
+/* ================== Header ================== */
+.header-top {
+  background: linear-gradient(145deg, #1e3c72, #2a5298);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  padding: 10px 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.header-top img {
+  width: 60px;
+  height: 50px;
+  margin-right: 10px;
+}
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.tagline {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #e0e0e0;
+}
+
+/* ================== Navbar ================== */
+.navbar-custom {
+  background: #ff9800;
+}
+.navbar-custom .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+.navbar-toggler {
+  border-color: #fff;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* ================== Package Cards ================== */
+.card {
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: transform 0.18s;
+}
+.card:hover {
+  transform: translateY(-6px);
+}
+.card img {
+  height: 170px;
+  object-fit: cover;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+.small-info {
+  font-size: .85rem;
+  color: #6c757d;
+}
+.btn-book {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* ================== Responsive Cards ================== */
+@media (max-width: 575px) {
+  .card img { height: 140px; }
+  .card-title { font-size: .95rem; }
+}
+
+/* ================== Booking Modal ================== */
+#bookingModal .modal-content {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+#bookingModal .modal-header {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: white;
+  border-bottom: none;
+  padding: 15px 20px;
+}
+#bookingModal .modal-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+#bookingModal .btn-close {
+  filter: invert(1);
+}
+
+/* ================== Input Fields ================== */
+#bookingForm input,
+#bookingForm textarea {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+#bookingForm input:focus,
+#bookingForm textarea:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 8px rgba(255,152,0,0.5);
+  outline: none;
+}
+#bookingForm .row .col input {
+  text-align: center;
+}
+
+/* ================== Book Now Button ================== */
+#bookingForm button {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#bookingForm button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ================== Labels ================== */
+#bookingForm label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* ================== Compact Form Controls ================== */
+.form-control-sm {
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  height: 28px;
+}
+textarea.form-control-sm {
+  height: 40px;
+  font-size: 0.75rem;
+}
+.modal-body { padding: 6px 8px !important; }
+.modal-header { padding: 6px 10px !important; }
+.form-label, .modal-title { font-size: 0.8rem; margin-bottom: 2px; }
+.btn-sm { padding: 4px 8px; font-size: 0.75rem; }
+
+/* ================== Stylish Dropdown ================== */
+.stylish-dropdown {
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  padding: 8px;
+  min-width: 200px;
+  animation: fadeInDown 0.3s ease;
+}
+.stylish-dropdown .dropdown-item {
+  font-weight: 500;
+  color: #333;
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: all 0.3s ease;
+}
+.stylish-dropdown .dropdown-item:hover {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ================== Animations ================== */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================== Footer ================== */
+.footer a { transition: 0.3s; }
+.footer a:hover { color: #ff9800 !important; transform: translateX(4px); }
+.footer-social { transition: 0.3s; }
+.footer-social:hover {
+  background: #ff9800 !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.section-title {
+    color: orange; /* makes text orange */
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+<!-- Header -->
+<div class="header-top d-flex align-items-center justify-content-between py-2 px-3">
+  
+  <!-- Left Side: Logo + Brand -->
+  <div class="d-flex align-items-center">
+    <img src="/images/gtlogo.png" 
+         alt="Gagangiri Travels Logo" 
+         class="me-2"
+         style="height:90px; width:auto; object-fit:contain;" />
+    <div>
+      <div class="brand-name text-white fw-bold fs-5">Gagangiri Travels</div>
+      <div class="tagline text-light fst-italic" style="font-size:0.85rem;">
+        For Everything In Travel Affairs
+      </div>
+    </div>
+  </div>
+
+  <!-- Centered Title -->
+<div class="mx-auto text-center">
+  <h3 class="section-title text-white mb-0">🏞 Domestic Travel Packages</h3>
+</div>
+
+
+  <!-- Right side empty for spacing -->
+  <div style="width: 200px;"></div>
+</div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-2">
+    <div class="container">
+      <a class="navbar-brand d-lg-none text-white fw-bold" href="#">Gagangiri</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-plane me-1"></i> Tours Packages
+            </a>
+            <ul class="dropdown-menu stylish-dropdown shadow-lg border-0 rounded-3">
+              <li><a class="dropdown-item" href="international.html"> 🌍 International</a></li>
+  <li><a class="dropdown-item" href="domestic.html">🏡 Domestic</a></li>
+  <li><a class="dropdown-item" href="spiritual.html">🕉 Spiritual Tour</a>
+  </li></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="visa.html"><i class="fa-solid fa-passport me-1"></i> Visa Expert</a></li>
+          <li class="nav-item"><a class="nav-link" href="Cruise1.html"><i class="fa-solid fa-ship me-1"></i> Cruise</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> 
+
+  <!-- Packages grid (Domestic) -->
+  <div class="container my-5">
+    <h3 class="section-title"></h3>
+    <div id="packagesRow" class="row g-3"></div>
+    <div id="noPackages" class="text-center text-muted mt-4" style="display:none;">No packages found.</div>
+  </div>
+
+  <!-- DETAILS Modal -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="detailsTitle" class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <img id="detailsImage" class="img-fluid rounded mb-3" alt="">
+          <p><strong>Duration:</strong> <span id="detailsDuration"></span></p>
+          <p><strong>Price:</strong> <span id="detailsPrice"></span></p>
+
+          <ul class="nav nav-tabs mt-3">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabOverview">Overview</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabItinerary">Itinerary</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabInclusions">Inclusions</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabExclusions">Exclusions</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabTerms">Terms</button></li>
+          </ul>
+
+          <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="tabOverview"><div id="detailsOverview"></div></div>
+            <div class="tab-pane fade" id="tabItinerary"><div id="detailsItinerary"></div></div>
+            <div class="tab-pane fade" id="tabInclusions"><ul id="detailsInclusions"></ul></div>
+            <div class="tab-pane fade" id="tabExclusions"><ul id="detailsExclusions"></ul></div>
+            <div class="tab-pane fade" id="tabTerms"><div id="detailsTerms"></div></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a id="detailsPdf" class="btn btn-outline-primary me-auto" target="_blank" style="display:none;"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
+          <button id="detailsBook" type="button" class="btn btn-success">Proceed to Booking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fa-solid fa-suitcase-rolling text-danger me-2"></i>
+            Book This Tour — <span id="bookingPkgName" class="text-primary"></span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="bookingForm" novalidate>
+            <input type="hidden" id="packageId" name="packageId">
+            <input type="hidden" id="packageName" name="packageName">
+
+            <div class="mb-2">
+              <input type="text" class="form-control form-control-sm" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="mb-2">
+              <input type="email" class="form-control form-control-sm" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="mb-2">
+              <input type="tel" class="form-control form-control-sm" name="phone" placeholder="Phone Number" required>
+            </div>
+
+            <label class="form-label fw-bold">Travelers</label>
+            <div class="row mb-2">
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="adults" min="1" value="1" required placeholder="Adults">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="children" min="0" value="0" placeholder="Children">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="infants" min="0" value="0" placeholder="Infants">
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label">Travel From</label>
+              <input type="date" class="form-control form-control-sm" name="fromDate" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Travel To</label>
+              <input type="date" class="form-control form-control-sm" name="toDate" required>
+            </div>
+
+            <div class="mb-2">
+              <textarea class="form-control form-control-sm" name="requirements" placeholder="Special Requirements (optional)"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 btn-sm">Submit Inquiry</button>
+          </form>
+
+          <div id="bookingMsg" class="mt-2 text-center" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp quick -->
+  <a href="https://wa.me/919370262361" target="_blank" style="position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:9999;">
+    <i class="fab fa-whatsapp fa-lg"></i>
+  </a>
+
+  <!-- Footer -->
+ <footer class="footer text-white" style="background: linear-gradient(145deg, #1e3c72, #2a5298);">
+  <div class="container py-3"> <!-- Reduced padding from py-4 to py-3 -->
+
+    <div class="row text-start">
+
+      <!-- About / Brand -->
+      <div class="col-md-3 mb-3">
+        <h5 class="fw-bold">🌍 Gagangiri Travels</h5>
+        <p class="small mb-0">
+          For Everything In Travel Affairs. We provide International, Domestic & Spiritual tour packages with best prices and services.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Home</a></li>
+          <li><a href="international.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> International</a></li>
+          <li><a href="domestic.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Domestic</a></li>
+          <li><a href="spiritual.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Spiritual Tours</a></li>
+          <li><a href="visa.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Visa Expert</a></li>
+        </ul>
+      </div>
+
+      <!-- Our Team -->
+      <div class="col-md-3 mb-3 text-start">
+        <h6 class="fw-bold mb-2">Our Team</h6>
+        <div class="d-flex align-items-center mb-2 gap-2">
+          <img src="images/Saroj.jpg" alt="Founder" class="rounded-circle" style="width:50px; height:50px; object-fit:cover;">
+          <div>
+            <p class="mb-0 small fw-bold">Mrs. Saroj Vithalani</p>
+            <small class="text-light">Founder & CEO</small>
+          </div>
+        </div>
+        <p class="mb-0 small fw-bold">Mr. Anand Iyer - Manager & Visa Expert</p>
+        <p class="mb-0 small fw-bold">Mrs. Kajal Telinge - Accountant</p> 
+        <p class="mb-0 small fw-bold">Mr.Pradeep Kanojia - Sales Executive</p>         
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Contact Us</h6>
+        <p class="small mb-1"><i class="fa fa-map-marker-alt me-2"></i> Khopoli, Maharashtra, India</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9370262361</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9665811088</p>
+        <p class="small mb-0"><i class="fa fa-envelope me-2"></i> gagangiritravels@gmail.com</p>
+      </div>
+
+    </div>
+
+    <!-- Socials -->
+    <div class="d-flex align-items-center justify-content-center mt-3 gap-3">
+      <h6 class="fw-bold mb-0">Follow Us:</h6>
+<a href="#"class="footer-social d-inline-block text-center"style="width:32px;height:32px;line-height:32px;background:#fff;color:#2a5298;border-radius:50%;">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    <hr class="border-light mt-3 mb-2">
+ <p class="small mb-0 text-center">&copy; 2025 Gagangiri Travels. All Rights Reserved. | Designed by <span class="text-warning">Pradeep Kanojia</span></p>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  (function(){
+    const apiURL = "http://localhost:5000/packages";
+    const bookingAPI = "http://localhost:5000/bookings";
+    const waNumber = "918010366946";
+
+    let packages = [];
+
+    const packagesRow = document.getElementById("packagesRow");
+    const noPackages = document.getElementById("noPackages");
+
+    const detailsModal = new bootstrap.Modal(document.getElementById("detailsModal"));
+    const bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
+
+    const bookingForm = document.getElementById("bookingForm");
+    const bookingPkgName = document.getElementById("bookingPkgName");
+    const bookingMsg = document.getElementById("bookingMsg");
+
+    function escapeHtml(s){ return s ? String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;") : ""; }
+
+    function toListHtml(value){
+      if(!value) return "<li class='text-muted'>Not available.</li>";
+      if(Array.isArray(value)) return value.map(i=>`<li>${escapeHtml(i)}</li>`).join("");
+      if(typeof value === "string" && value.includes(",")) return value.split(",").map(i=>`<li>${escapeHtml(i.trim())}</li>`).join("");
+      return `<li>${escapeHtml(value)}</li>`;
+    }
+
+    async function loadPackages(){
+      try{
+        const res = await fetch(apiURL);
+        packages = await res.json();
+      }catch(err){ console.error(err); packages=[]; }
+      renderPackages();
+    }
+
+    function renderPackages(){
+      const domestic = packages.filter(p => (p.category||"").toLowerCase() === "domestic");
+      packagesRow.innerHTML = "";
+      if(!domestic.length){ noPackages.style.display=""; return; }
+      noPackages.style.display="none";
+
+      domestic.forEach(pkg=>{
+        const id = pkg.id || pkg._id || pkg.name;
+        const col=document.createElement("div");
+        col.className="col-12 col-sm-6 col-md-4 col-lg-3";
+        col.innerHTML=`
+          <div class="card h-100">
+            <a href="packagedetails.html?id=${pkg.id}">
+              <img src="${pkg.image}" class="card-img-top" alt="${pkg.name}">
+            </a>           
+            <div class="card-body text-center p-3">
+              <h6 class="card-title mb-1">${escapeHtml(pkg.name||'Package')}</h6>
+              <div class="small-info">${escapeHtml(pkg.duration||'')} &nbsp; | &nbsp; <span class="text-success fw-bold">${escapeHtml(pkg.price||'')}</span></div>
+              <div class="d-flex justify-content-around text-center package-icons my-3">
+                <div><i class="fa-solid fa-hotel text-primary"></i><p>Hotel</p></div>
+                <div><i class="fa-solid fa-car text-success"></i><p>Cabs</p></div>
+                <div><i class="fa-solid fa-utensils text-danger"></i><p>Meals</p></div>
+                <div><i class="fa-solid fa-mountain-sun text-warning"></i><p>Sightseeing</p></div>
+              </div>
+              <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-outline-primary btn-sm view-details" data-id="${id}"><i class="fa-solid fa-eye me-1"></i> View</button>
+                <button class="btn btn-book btn-sm book-now" data-id="${id}"><i class="fa-solid fa-paper-plane me-1"></i> Book Now</button>
+              </div>
+            </div>
+          </div>`;
+        packagesRow.appendChild(col);
+      });
+
+      packagesRow.querySelectorAll(".view-details").forEach(btn=>{ btn.addEventListener("click", ()=> openDetails(btn.dataset.id)); });
+      packagesRow.querySelectorAll(".package-thumb").forEach(a=>{ a.addEventListener("click", e=>{ e.preventDefault(); openDetails(a.dataset.id); }); });
+      packagesRow.querySelectorAll(".book-now").forEach(btn=>{ btn.addEventListener("click", ()=> openBooking(btn.dataset.id)); });
+    }
+
+    function openDetails(id){
+      const pkg=packages.find(p=>String(p.id)===id||String(p._id)===id||String(p.name)===id);
+      if(!pkg) return;
+      document.getElementById("detailsTitle").textContent=pkg.name||"Package";
+      document.getElementById("detailsImage").src=pkg.image||"default_package.jpg";
+      document.getElementById("detailsDuration").textContent=pkg.duration||"-";
+      document.getElementById("detailsPrice").textContent=pkg.price||"-";
+      document.getElementById("detailsOverview").innerHTML=pkg.overview?`<p>${escapeHtml(pkg.overview)}</p>`:"<p class='text-muted'>Not provided.</p>";
+      document.getElementById("detailsItinerary").innerHTML=toListHtml(pkg.itinerary);
+      document.getElementById("detailsInclusions").innerHTML=toListHtml(pkg.inclusions);
+      document.getElementById("detailsExclusions").innerHTML=toListHtml(pkg.exclusions);
+      document.getElementById("detailsTerms").innerHTML=pkg.terms?`<p>${escapeHtml(pkg.terms)}</p>`:"<p class='text-muted'>No special terms.</p>";
+      if(pkg.pdf){ document.getElementById("detailsPdf").href=pkg.pdf; document.getElementById("detailsPdf").style.display=""; } else { document.getElementById("detailsPdf").style.display="none"; }
+      document.getElementById("detailsBook").onclick=()=>{ detailsModal.hide(); setTimeout(()=> openBooking(id),300); };
+      detailsModal.show();
+    }
+
+    function openBooking(id){
+      const pkg=packages.find(p=>String(p.id)===id||String(p._id)===id||String(p.name)===id);
+      if(!pkg) return;
+      bookingForm.reset();
+      document.getElementById("packageId").value=pkg.id||pkg._id||pkg.name;
+      document.getElementById("packageName").value=pkg.name||"";
+      bookingPkgName.textContent=pkg.name||"";
+      bookingMsg.style.display="none";
+      bookingModal.show();
+    }
+
+    bookingForm.addEventListener("submit",async function(e){
+      e.preventDefault();
+      const data=Object.fromEntries(new FormData(bookingForm).entries());
+      if(!data.name||!data.phone){
+        bookingMsg.style.display=""; bookingMsg.className="text-danger mt-2 text-center"; bookingMsg.textContent="Please fill Name & Phone."; return;
+      }
+      try{
+        await fetch(bookingAPI,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+      }catch(err){ console.warn("Booking API error",err); }
+      const msg=`Booking Inquiry
+Package: ${data.packageName}
+Name: ${data.name}
+Phone: ${data.phone}
+Travelers: ${data.adults||0} Adults, ${data.children||0} Children, ${data.infants||0} Infants
+Dates: ${data.fromDate||''} - ${data.toDate||''}
+Requirements: ${data.requirements||'N/A'}`;
+      window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`,"_blank");
+      bookingMsg.style.display=""; bookingMsg.className="text-success mt-2 text-center"; bookingMsg.textContent="Inquiry sent successfully!";
+      setTimeout(()=> bookingModal.hide(),2000);
+      bookingForm.reset();
+    });
+
+    loadPackages();
+  })();
+  </script>
+</body>
+</html>

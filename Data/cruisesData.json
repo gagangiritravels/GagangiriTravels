@@ -1,0 +1,825 @@
+[
+  {
+    "id": 1,
+    "title": "7-Night Eastern Caribbean Getaway",
+    "cruiseLine": "Royal Caribbean",
+    "ship": "Symphony of the Seas",
+    "departsFrom": "Miami, FL",
+    "departureDate": "",
+    "duration": 7,
+    "destination": "Miami, Florida",
+    "price": "On Request",
+    "image": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/star/asset/star-of-the-seas-aerial-bow-angle-evening-crop.jpg?$480x490$",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Miami, Florida",
+        "details": "Welcome aboard! Settle in and explore the ship as we set sail",
+        "times": "Departs at 4:30 PM"
+      },
+      {
+        "day": 2,
+        "port": "2 Days at Sea",
+        "details": "Enjoy the ship's amenities, from pools to world-class dining",
+        "times": "Cruising"
+      },
+      {
+        "day": 3,
+        "port": "3 Days at Sea",
+        "details": "Explore the cobblestone streets of Old San Juan",
+        "times": "Cruising"
+      },
+      {
+        "day": 4,
+        "port": "Philipsburg, St. Maarten",
+        "details": "Famous for its beautiful beaches and duty-free shopping",
+        "times": "8:00 AM - 6:00 PM"
+      },
+      {
+        "day": 5,
+        "port": "Charlotte Amalie, St. Thomas",
+        "details": "Relax and recharge. Catch a show or try your luck at the casino",
+        "times": "7:00 AM - 2:30 PM"
+      },
+      {
+        "day": 6,
+        "port": "Day at Sea",
+        "details": "Royal Caribbean's private island adventure",
+        "times": "Cruising"
+      },
+      {
+        "day": 7,
+        "port": "Perfect Day at CocoCay, Bahamas ",
+        "details": "Enjoy your last full day on this magnificent ship",
+        "times": "8:30 AM - 5:00 PM"
+      },
+      {
+        "day": 8,
+        "port": "Miami, Florida",
+        "details": "Arrive back in Miami with memories to last a lifetime",
+        "times": "Arrives at 6:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/ships/star/asset/star-of-the-seas-aerial-bow-angle-evening-crop.jpg?$480x490$"
+      ],
+      "amenities": [
+        "PackaWater Slidesge",
+        "10+ Restaurants",
+        "Broadway Shows",
+        "Casino",
+        "Spa & Fitness Center"
+      ]
+    },
+    "whatsIncluded": [
+      "Accommodation",
+      "Meals in main dining rooms",
+      "Onboard entertainment",
+      "Access to pools and fitness",
+      "Port taxes and fees center"
+    ],
+    "knowBeforeYouGo": [
+      "Gratuities are not included and will be charged daily",
+      "Visa may be required for certain nationalities",
+      "Shore excursions are available for an extra charge"
+    ],
+    "submittedAt": "2025-10-13T09:37:50.932Z",
+    "updatedAt": "2025-10-13T11:29:37.180Z"
+  },
+  {
+    "id": 2,
+    "title": "13-day Cruise on Norwegian Spirit",
+    "cruiseLine": "NCL Cruise",
+    "ship": "NCL Cruise",
+    "departsFrom": "Sydney, Australia",
+    "departureDate": "",
+    "duration": 12,
+    "destination": "Auckland, New Zealand",
+    "price": "On Request",
+    "image": "https://www.traveltrendstoday.in/storage/posts/norwegianprimainreykjavikiceland.jpeg",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Sydney, Australia",
+        "details": "Sydney’s harbour is the vibrant heart of the city, offering iconic sights like the Opera House and Harbour Bridge, scenic beaches like Bondi and Coogee, and the charming Rocks district for shopping and art",
+        "times": "Departs at 6:45 PM"
+      },
+      {
+        "day": 2,
+        "port": "Eden, Australia",
+        "details": "Eden, a coastal gem in New South Wales, is a natural paradise of beaches, national parks, and oyster farms, offering endless outdoor adventures by land and sea",
+        "times": "8:00 AM - 3:30 PM"
+      },
+      {
+        "day": 3,
+        "port": "Burnie (Tasmania), Australia",
+        "details": "Burnie, on Tasmania’s northwest coast, is a creative hub known for its artisan crafts, local produce, and wildlife, where nature and culture meet by the beach",
+        "times": "10:45 AM - 06:30 PM"
+      },
+      {
+        "day": 4,
+        "port": "Melbourne, Australia",
+        "details": "Melbourne, once a gold rush city, is Australia’s cultural hub with art, wildlife experiences, scenic train rides, and the historic Chinatown",
+        "times": "08:30 AM - 06:30 PM"
+      },
+      {
+        "day": 5,
+        "port": "At Sea",
+        "details": "Melbourne, once a gold rush city, is Australia’s cultural hub with art, wildlife experiences, scenic train rides, and the historic Chinatown",
+        "times": "Cruising"
+      },
+      {
+        "day": 6,
+        "port": "At Sea",
+        "details": "Melbourne, once a gold rush city, is Australia’s cultural hub with art, wildlife experiences, scenic train rides, and the historic Chinatown",
+        "times": "Cruising"
+      },
+      {
+        "day": 7,
+        "port": "Doubtful Sound, New Zealand",
+        "details": "Doubtful Sound, New Zealand’s deepest fjord, is a misty, rain-soaked wonderland of towering waterfalls, lush rainforest, diverse wildlife, and rare black coral",
+        "times": "Cruising"
+      },
+      {
+        "day": 8,
+        "port": "Dunedin (Port Chalmers), New Zealand",
+        "details": "Dunedin, a historic South Island town, is home to wildlife, Victorian architecture, a castle, and local crafts.",
+        "times": "09:30 AM - 07:00 PM"
+      },
+      {
+        "day": 9,
+        "port": "Lyttelton, New Zealand",
+        "details": "LytJust 20 minutes from the centre of Christchurch city,telton, a historic port town near Christchurch, is a vibrant hub of artists, cafés, and unique shops",
+        "times": "09:00 AM - 7:00 PM"
+      },
+      {
+        "day": 10,
+        "port": "Wellington, New Zealand",
+        "details": "Wellington blends Victorian charm, stunning harbour views, beaches, and LOTR filming sites with great shopping for crafts and local goods",
+        "times": "08:00 AM - 04:00 PM"
+      },
+      {
+        "day": 11,
+        "port": "Napier, New Zealand",
+        "details": "Napier, the Art Deco capital, offers beautifully preserved architecture, scenic Marine Parade, and renowned vineyards for wine lovers",
+        "times": "06:00 AM - 02:20 PM"
+      },
+      {
+        "day": 12,
+        "port": "tauranga, New Zealand",
+        "details": "Explore Tauranga’s beaches, parks, and rich history, including a village frozen by volcanic eruption. Don’t miss Hell’s Gate geothermal park with its boiling pools, geysers, and the famous Poutamu mud bath.",
+        "times": "06:30 AM - 05:45 PM"
+      },
+      {
+        "day": 13,
+        "port": "Auckland, New Zealand",
+        "details": "Return & disembark",
+        "times": "Arrives at 7:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://www.ncl.com/sites/default/files/SYD-LG2-950x320.jpg"
+      ],
+      "amenities": [
+        "Children Clubs and activities",
+        "Gym",
+        "pools and relaxation"
+      ]
+    },
+    "whatsIncluded": [
+      "Great service comes as standard",
+      "Full board available in buffet and main restaurant",
+      "Gym",
+      "pools and relaxation",
+      "Port taxes & fees"
+    ],
+    "knowBeforeYouGo": [
+      "Passport & visa check",
+      "Gratuities extra",
+      "Book speciality dining early"
+    ],
+    "submittedAt": "2025-10-13T10:56:29.671Z",
+    "updatedAt": "2025-10-13T11:40:18.858Z"
+  },
+  {
+    "id": 3,
+    "title": "7-Night Dubai, Abu Dhabi & Qatar MSC Cruise",
+    "cruiseLine": "MSC Cruise",
+    "ship": "MSC Cruise",
+    "departsFrom": "Dubai",
+    "departureDate": "",
+    "duration": 7,
+    "destination": "Dubai",
+    "price": "on request",
+    "image": "https://www.aronfeld.com/wp-content/uploads/2022/10/msc-seaview-2-1.jpg",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Dubai, U. Arab Emirates",
+        "details": "Embark and sail",
+        "times": "Departs at 20:00"
+      },
+      {
+        "day": 2,
+        "port": "Doha, Qatar\", details",
+        "details": "Enjoy ship life",
+        "times": "08:00 - 18:00"
+      },
+      {
+        "day": 3,
+        "port": "Bahrain\", details",
+        "details": "Explore Mayan ruins or reef snorkel",
+        "times": "08:00 - 19:00"
+      },
+      {
+        "day": 4,
+        "port": "At sea",
+        "details": "Rainforest zipline / beach time",
+        "times": "Cruising"
+      },
+      {
+        "day": 5,
+        "port": "Abu Dhabi, U. Arab Emirates",
+        "details": "Beaches and ruins",
+        "times": "07:00 - 21:00"
+      },
+      {
+        "day": 6,
+        "port": "Sir Bani Yas Is, U. Arab Emirates",
+        "details": "Private island resort day",
+        "times": "08:00 - 18:00"
+      },
+      {
+        "day": 7,
+        "port": "Dubai, U. Arab Emirates",
+        "details": "Final sea day",
+        "times": "09:00 - 23:59"
+      },
+      {
+        "day": 8,
+        "port": "Dubai, U. Arab Emirates",
+        "details": "Return & disembark",
+        "times": "Arrives at 00:01"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://www.aronfeld.com/wp-content/uploads/2022/10/msc-seaview-2-1.jpg"
+      ],
+      "amenities": [
+        "Children Clubs and activities",
+        "Gym",
+        "pools and relaxation"
+      ]
+    },
+    "whatsIncluded": [
+      "Great service comes as standard",
+      "Full board available in buffet and main restaurant",
+      "Gym",
+      "pools and relaxation",
+      "Port taxes & fees"
+    ],
+    "knowBeforeYouGo": [
+      "Passport & visa check",
+      "Gratuities extra",
+      "Book speciality dining early"
+    ],
+    "submittedAt": "2025-10-13T11:12:29.099Z",
+    "updatedAt": "2025-10-13T11:50:29.390Z"
+  },
+  {
+    "id": 4,
+    "title": "7-Night Alaskan Glacier Cruise",
+    "cruiseLine": "Princess Cruises",
+    "ship": "Majestic Princess",
+    "departsFrom": "Seattle, WA",
+    "departureDate": "",
+    "duration": 7,
+    "destination": "Alaska",
+    "price": "On Request",
+    "image": "https://britneyallover.com/wp-content/uploads/2023/08/Dawes-Glacier-Alaskan-Cruise-1.jpg",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Seattle, Washington",
+        "details": "Embark on your Alaskan adventure from the Emerald City",
+        "times": "Departs at 5:00 PM"
+      },
+      {
+        "day": 2,
+        "port": "At Sea",
+        "details": "Enjoy breathtaking ocean views as we head north.",
+        "times": "Cruising"
+      },
+      {
+        "day": 3,
+        "port": "Ketchikan, Alaska",
+        "details": "Discover the 'Salmon Capital of the World",
+        "times": "9:00 AM - 5:00 PM"
+      },
+      {
+        "day": 4,
+        "port": "Sitka, Alaska",
+        "details": "Visit the Mendenhall Glacier and go whale watching.",
+        "times": "10:00 AM - 6:00 PM"
+      },
+      {
+        "day": 5,
+        "port": "Tracy Arm Fjord (Cruising), Alaska",
+        "details": "Step back in time to the Klike Gold Rush era",
+        "times": "Cruising"
+      },
+      {
+        "day": 6,
+        "port": "Prince Rupert, British Columbia",
+        "details": "Witness the majestic beauty of Glacier Bay National Park.",
+        "times": "10:00 AM - 6:00 PM"
+      },
+      {
+        "day": 7,
+        "port": "Sailing",
+        "details": "Explore the charming, historic city of Victoria.",
+        "times": "Cruising"
+      },
+      {
+        "day": 8,
+        "port": "Seattle, Washington",
+        "details": "Disembark with unforgettable memories of Alaska",
+        "times": "Arrives at 7:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://britneyallover.com/wp-content/uploads/2023/08/Dawes-Glacier-Alaskan-Cruise-1.jpg"
+      ],
+      "amenities": [
+        "Movies Under the Stars",
+        "Fine Dining",
+        "Lotus Spa",
+        "Enclave Thermal Suite",
+        "Live Theater"
+      ]
+    },
+    "whatsIncluded": [
+      "Luxury stateroom",
+      "All meals onboard",
+      "24-hour room service",
+      "Onboard activities and entertainment",
+      "Taxes and port fees"
+    ],
+    "knowBeforeYouGo": [
+      "Warm clothing is highly recommended",
+      "even in summer.",
+      "Binoculars are essential for wildlife viewing",
+      "Canadian visa may be required for the stop in Victoria"
+    ],
+    "submittedAt": "2025-10-14T11:16:19.108Z"
+  },
+  {
+    "id": 5,
+    "title": "7-Night Mediterranean: Italy, Croatia & Greece NCL",
+    "cruiseLine": "Norwegian Cruise Line",
+    "ship": "Norwegian Encore",
+    "departsFrom": "Rome, Italy",
+    "departureDate": "",
+    "duration": 7,
+    "destination": "Mediterranean",
+    "price": "On Request",
+    "image": "https://d23n7ahjfnjotp.cloudfront.net/imgs/iphone/ships/new/476_lg.png",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Rome (Civitavecchia), Italy",
+        "details": "Board the ship in Rome and get settled. Explore the ship’s amenities or enjoy the evening in the port city.",
+        "times": "Departs at 4:00 PM"
+      },
+      {
+        "day": 2,
+        "port": "Salerno, Italy",
+        "details": "Discover the Amalfi Coast and enjoy scenic views. You can visit historic Salerno, stroll through its medieval streets, or relax by the waterfront.",
+        "times": "07:00 AM - 06:00 PM"
+      },
+      {
+        "day": 3,
+        "port": "Catania, Italy",
+        "details": "Explore Catania’s vibrant markets, Baroque architecture, and the stunning views of Mount Etna.",
+        "times": "07:00 AM - 04:00 PM"
+      },
+      {
+        "day": 4,
+        "port": "Corfu, Greece",
+        "details": "Visit Corfu’s Old Town, a UNESCO World Heritage site, or relax on its beautiful beaches.",
+        "times": "10:00 AM - 07:30 PM"
+      },
+      {
+        "day": 5,
+        "port": "Kotor, Montenegro",
+        "details": "Explore the medieval town of Kotor, its city walls, and the scenic bay.",
+        "times": "08:00 AM - 06:00 PM"
+      },
+      {
+        "day": 6,
+        "port": "Split, Croatia",
+        "details": "Visit Diocletian’s Palace, wander through the old town, or enjoy the Adriatic coastline.",
+        "times": "07:00 AM - 05:00 PM"
+      },
+      {
+        "day": 7,
+        "port": "Koper, Slovenia",
+        "details": "Discover the charming port town of Koper, its historic square, and nearby Venetian architecture.",
+        "times": "08:00 AM - 07:00 PM"
+      },
+      {
+        "day": 8,
+        "port": "Venice (Ravenna), Italy",
+        "details": "Arrive in Venice. Enjoy the canals, St. Mark’s Square, and the historic city of Ravenna.",
+        "times": "Arrives at 06:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://www.ncl.com/sites/default/files/GEM-7-EUR-CIV-58682%20(1).png"
+      ],
+      "amenities": [
+        "Enjoy tons of dining options",
+        "world-class spa on board Norwegian Gem",
+        "Explore the best of Italy",
+        "Greece and Croatia"
+      ]
+    },
+    "whatsIncluded": [
+      "Unlimited Open Bar",
+      "Excursion Credits",
+      "Specialty Dining",
+      "Wi-fi Package"
+    ],
+    "knowBeforeYouGo": [
+      "Check your specific sailing for exact departure and arrival times",
+      "All times are local to the port",
+      "Itineraries are subject to change at any time without notice",
+      "Due to security reasons",
+      "all guests must be on board 2 hours before sailing on Day 1 of cruise",
+      "Disembarkation usually begins 2 hours after docking on final day of cruise."
+    ],
+    "submittedAt": "2025-10-14T11:23:31.296Z"
+  },
+  {
+    "id": 6,
+    "title": "6-Day Western Caribbean from Tampa, FL",
+    "cruiseLine": "Carnival Cruise Line",
+    "ship": "Carnival Miracle",
+    "departsFrom": "Honolulu, HI",
+    "departureDate": "",
+    "duration": 6,
+    "destination": "Tampa",
+    "price": "On Request",
+    "image": "https://www.carnival.com/-/media/images/ships/mi/itinerary/carnival-ships-itinerary-miracle-8.jpg",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Tampa",
+        "details": "Set sail from Tampa’s Gulf Coast for an exciting cruise adventure filled with culture and fun. Explore Ybor City’s Cuban charm, visit the Salvador Dalí Museum, or relax on the beautiful beaches of St. Pete and Clearwater.",
+        "times": "Departs at 3:30 PM"
+      },
+      {
+        "day": 2,
+        "port": "Fun Day at Sea",
+        "details": "No port today! It’s a great time to explore your ship and its exciting entertainment, food and activities! Or take it easy at the pool, spa, or... if you book a room with a balcony, enjoy the waves",
+        "times": "Cruising"
+      },
+      {
+        "day": 3,
+        "port": "Cozumel",
+        "details": "Cozumel is proof that Mexico can do ‘island flavor’ with the best of the Caribbean. It may not be the biggest island in the sea, but Cozumel offers a huge variety of things to do, see, taste and explore. This island just happens to be perched atop a coral reef, which promises hours of snorkeling or scuba diving fun.",
+        "times": "8:00 AM - 4:00 PM"
+      },
+      {
+        "day": 4,
+        "port": "Belize",
+        "details": "A cruise to Belize offers the perfect mix of adventure and paradise — from lush rainforests and ancient Mayan ruins to vibrant coral reefs. Explore underground caves, snorkel the world’s second-largest barrier reef, and unwind on silky tropical beaches surrounded by natural beauty.",
+        "times": "8:00 AM - 5:00 PM"
+      },
+      {
+        "day": 5,
+        "port": "Costa Maya",
+        "details": "Cruise to Costa Maya and experience Mexico’s Caribbean charm with turquoise waters, white-sand beaches, and ancient Mayan ruins. Explore the Chacchoben temples, dive into the Great Mesoamerican Reef, or relax by the stunning Lake of Seven Colors for the perfect tropical escape",
+        "times": "8:00 AM - 5:00 PM"
+      },
+      {
+        "day": 6,
+        "port": "Fun Day at Sea",
+        "details": "Fun Day at Sea\", details: \"No port today! It’s a great time to explore your ship and its exciting entertainment, food and activities! Or take it easy at the pool, spa, or... if you book a room with a balcony, enjoy the waves",
+        "times": "Cruising"
+      },
+      {
+        "day": 7,
+        "port": "Tampa, Florida",
+        "details": "Return to Tampa and explore Ybor City, local museums, or relax on nearby beaches before heading home.",
+        "times": "Arrives at 8:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://www.carnival.com/-/media/images/ships/mi/itinerary/carnival-ships-itinerary-miracle-8.jpg"
+      ],
+      "amenities": [
+        "WaterWorks Aqua Park",
+        "Serenity Adult-Only Retreat",
+        "Punchliner Comedy Club",
+        "RedFrog Pub",
+        "Seuss at Sea"
+      ]
+    },
+    "whatsIncluded": [
+      "Your stateroom",
+      "Dining in main restaurants and Lido Marketplace",
+      "Onboard activities and nightlife",
+      "Youth programs for kids."
+    ],
+    "knowBeforeYouGo": [
+      "US citizens do not require a passport for this itinerary",
+      "Book popular excursions like luaus and volcano tours early as they sell out."
+    ],
+    "submittedAt": "2025-10-14T11:31:02.443Z"
+  },
+  {
+    "id": 7,
+    "title": "9-Day Mediterranean: Italy, France & Greece",
+    "cruiseLine": "Norwegian Cruise Line",
+    "ship": "Norwegian Viva",
+    "departsFrom": "Barcelona, Spain",
+    "departureDate": "",
+    "duration": 9,
+    "destination": "Mediterranean",
+    "price": "On Request",
+    "image": "https://www.ncl.com/sites/default/files/Hero-Breakway-Mobile-2018_0.jpg",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Barcelona, Spain",
+        "details": "Embark and enjoy the lively cafés, bars, and Mediterranean charm.",
+        "times": "Departs at 4:00 PM"
+      },
+      {
+        "day": 2,
+        "port": "Nice/Monaco (Villefranche), France",
+        "details": "Explore the French Riviera. This is a Tender Port.",
+        "times": "9:00 AM - 7:00 PM"
+      },
+      {
+        "day": 3,
+        "port": "Florence/Pisa (Livorno), Italy",
+        "details": "Visit the Leaning Tower of Pisa or the Piazza del Duomo in Florence",
+        "times": "7:00 AM - 9:00 PM"
+      },
+      {
+        "day": 4,
+        "port": "Rome (Civitavecchia), Italy",
+        "details": "Gateway to the Eternal City and its historic sites",
+        "times": "6:45 AM - 5:00 PM"
+      },
+      {
+        "day": 5,
+        "port": "Salerno, Italy",
+        "details": "Explore the Amalfi Coast region.",
+        "times": "7:00 AM - 6:00 PM"
+      },
+      {
+        "day": 6,
+        "port": "Messina (Sicily), Italy",
+        "details": "Enjoy Sicilian culture and cuisine",
+        "times": "7:00 AM - 6:00 PM"
+      },
+      {
+        "day": 7,
+        "port": "Corfu, Greece",
+        "details": "Visit the stunning 19th-century Achilleion Palace",
+        "times": "10:30 AM - 6:30 PM"
+      },
+      {
+        "day": 8,
+        "port": "Kotor, Montenegro",
+        "details": "Discover this UNESCO World Heritage site. This is a Tender Port",
+        "times": "8:00 AM - 7:00 PM"
+      },
+      {
+        "day": 9,
+        "port": "Split, Croatia",
+        "details": "People-watch at The Riva, Split's buzzing seaside promenade",
+        "times": "7:00 AM - 5:00 PM"
+      },
+      {
+        "day": 10,
+        "port": "Venice (Ravenna), Italy",
+        "details": "Disembarkation with unforgettable memories",
+        "times": "Arrives at 6:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://www.ncl.com/sites/default/files/VIV-9-EUR-BCN-60910.png"
+      ],
+      "amenities": [
+        "The Drop (Free-fall Dry Slide)",
+        "Onda by Scarpetta (Italian Dining)",
+        "Indulge Food Hall",
+        "Los Lobos (Mexican Dining)",
+        "Go-Karts at Sea (NCL Signature)"
+      ]
+    },
+    "whatsIncluded": [
+      "Beverage Package (More at Sea Offer)",
+      "Specialty Dining Package (More at Sea Offer)",
+      "Excursion Credits (More at Sea Offer)",
+      "Wi-fi Package (More at Sea Offer)"
+    ],
+    "knowBeforeYouGo": [
+      "Check specific sailing for exact times",
+      "Guests must be on board 2 hours before sailing",
+      "Disembarkation begins 2 hours after docking",
+      "Pricing is subject to change based on date and cabin type"
+    ],
+    "submittedAt": "2025-10-14T11:41:01.649Z"
+  },
+  {
+    "id": 8,
+    "title": "5-Night Bahamian Cruise with Disney",
+    "cruiseLine": "Disney Cruise Line",
+    "ship": "Disney Dream",
+    "departsFrom": "Fort Lauderdale, FL",
+    "departureDate": "",
+    "duration": 5,
+    "destination": "Bahamas / Caribbean",
+    "price": "On Request",
+    "image": "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3200/900/75/dam/disney-cruise-line/cruise-products/castaway-cay/castaway-cay-06-32x9.jpg?1714370545968",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Fort Lauderdale, Florida",
+        "details": "With miles of golden beaches and a glamorous downtown district brimming with trendy shops and gourmet eateries, Fort Lauderdale blends South Florida chic and oceanfront family-fun",
+        "times": "Departs at 3:00 PM"
+      },
+      {
+        "day": 2,
+        "port": "Disney Castaway Cay",
+        "details": "Reserved for Disney Cruise Line Guests, this private island paradise is home to white-sand beaches and recreation for all ages",
+        "times": "8:30 AM - 4:45 PM"
+      },
+      {
+        "day": 3,
+        "port": "Nassau, Bahamas",
+        "details": "Former pirate territory, this island capital dazzles with its colonial charm, tropical beaches and unique shopping.",
+        "times": "9:00 AM - 5:00 PM"
+      },
+      {
+        "day": 4,
+        "port": "Disney Lookout Cay at Lighthouse Point",
+        "details": "Escape to a vibrant tropical retreat that uniquely celebrates the rich culture, traditions and stories of The Bahamas—all brought to life with the magic of Disney",
+        "times": "8:30 AM - 4:45 PM"
+      },
+      {
+        "day": 5,
+        "port": "Day at Sea",
+        "details": "A seemingly endless array of one-of-a-kind offerings to inspire and delight awaits you throughout the ship.",
+        "times": "Cruising"
+      },
+      {
+        "day": 6,
+        "port": "Fort Lauderdale, Florida",
+        "details": "With miles of golden beaches and a glamorous downtown district brimming with trendy shops and gourmet eateries, Fort Lauderdale blends South Florida chic and oceanfront family-fun.",
+        "times": "Arrives at 8:00 AM"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3200/900/75/dam/disney-cruise-line/cruise-products/castaway-cay/castaway-cay-06-32x9.jpg?1714370545968"
+      ],
+      "amenities": [
+        "Broadway-style Shows",
+        "Character Meet & Greet",
+        "Pools & Slides",
+        "Fine Dining",
+        "Youth Clubs"
+      ]
+    },
+    "whatsIncluded": [
+      "Accommodation",
+      "Meals in main dining rooms",
+      "Entertainment & activities",
+      "Port taxes & fees"
+    ],
+    "knowBeforeYouGo": [
+      "Passport required",
+      "Gratuities extra",
+      "Book excursions early"
+    ],
+    "submittedAt": "2025-10-14T11:56:28.055Z"
+  },
+  {
+    "id": 9,
+    "title": "8- Night Bali Adventure Holiday Cruise ",
+    "cruiseLine": "Royal Caribbean Cruises",
+    "ship": "Ovation of the Seas",
+    "departsFrom": "Singapore ",
+    "departureDate": "",
+    "duration": 8,
+    "destination": "Singapore (Round Trip)",
+    "price": "On Request",
+    "image": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/ovation-exterior-back-aerial-sunset-port-ship.jpg?$676x610$",
+    "itinerary": [
+      {
+        "day": 1,
+        "port": "Singapore",
+        "details": "Taxis in Singapore are plentiful, but locals increasingly use applications (namely, the ",
+        "times": "Departs at 4:30 pm"
+      },
+      {
+        "day": 2,
+        "port": "Days at Sea ",
+        "details": "Make the most of your day at sea by enjoying our Wi-Fi, beverage, and Specialty Dining Packages. These services are available at an additional cost",
+        "times": "Cruising "
+      },
+      {
+        "day": 3,
+        "port": "Days at Sea ",
+        "details": "Make the most of your day at sea by enjoying our Wi-Fi, beverage, and Specialty Dining Packages. These services are available at an additional cost",
+        "times": "Cruising "
+      },
+      {
+        "day": 4,
+        "port": "Celukan Bawang, Bali ",
+        "details": "Respect local customs by dressing modestly at temples. Enjoy friendly market haggling while shopping — just remember to bargain with a smile. Keep your camera close to capture unforgettable moments as you explore onshore.",
+        "times": " 7:00 am - 11:00 pm"
+      },
+      {
+        "day": 5,
+        "port": "Benoa, Bali ",
+        "details": "Don't underestimate the size of Bali. While destinations like Kuta and Ubud appear to be close to Benoa, unpredictable driving conditions mean it's best to stay relatively closeby. Be careful when converting local currency amounts. Think of each 10,000 rupiah note as a $1 bill (even though it's slightly less valuable) to avoid getting confused by large denominations",
+        "times": "7:00 am - 11:00 pm"
+      },
+      {
+        "day": 6,
+        "port": "Lombok, Indonesia",
+        "details": "Locals tend to dress conservatively outside of beach villages. A sarong can easily double as a beach blanket and cover-up when needed.Many of the best food stands and souvenir merchants don't take credit cards, so have cash on hand.It's polite to greet people with your right hand.",
+        "times": "7:00 am - 11:00 pm"
+      },
+      {
+        "day": 7,
+        "port": "Days at Sea ",
+        "details": "Make the most of your day at sea by enjoying our Wi-Fi, beverage, and Specialty Dining Packages. These services are available at an additional cost",
+        "times": "Cruising "
+      },
+      {
+        "day": 8,
+        "port": "Days at Sea ",
+        "details": "Make the most of your day at sea by enjoying our Wi-Fi, beverage, and Specialty Dining Packages. These services are available at an additional cost",
+        "times": "Cruising "
+      },
+      {
+        "day": 9,
+        "port": "Singapore",
+        "details": " Although Singaporeans speak English natively, the accent (lovingly called ",
+        "times": "Arrives at 7:00 am"
+      }
+    ],
+    "shipDetails": {
+      "gallery": [
+        "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/content/dam/royal/content/fleet-landing/ovation-exterior-back-aerial-sunset-port-ship.jpg?$676x610$"
+      ],
+      "amenities": [
+        "Dedicated Check In Line",
+        "Priority Boarding",
+        "Coastal Kitchen Dinner",
+        "Royal Caribbean Bathrobes for use onboard",
+        "Luxury Bathroom Amenities",
+        "In Room Lavazza Espresso Coffee Maker/Tea Service (kettle)"
+      ]
+    },
+    "whatsIncluded": [
+      "Standard beverages like water",
+      "coffee",
+      "juice and tea optionsm",
+      "Food and snacks at our cafes and buffets",
+      "Shows",
+      "live music",
+      "and entertainment",
+      "Most onboard experiences"
+    ],
+    "knowBeforeYouGo": [
+      "Snag these upgrades at an additional cost",
+      "World-class dining at speciality restaurants",
+      "Cocktails",
+      "specialty coffees",
+      "sodas and bottled water",
+      "Wi-Fi to stay connected at sea",
+      "Spa treatments",
+      "Shore excursions",
+      "Professional photography",
+      "Laundry services"
+    ],
+    "submittedAt": "2025-10-15T06:54:17.553Z",
+    "updatedAt": "2025-10-15T07:20:34.990Z"
+  }
+]
