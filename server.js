@@ -6,7 +6,8 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // ------------------ DIR SETUP ------------------
 const __filename = fileURLToPath(import.meta.url);
