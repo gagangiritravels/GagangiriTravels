@@ -49,22 +49,5 @@
     "fromDate": "2025-10-05",
     "toDate": "2025-10-11",
     "requirements": "No Need"
-  },
-  {
-    "id": 12,
-    "status": "Pending",
-    "packageId": "1757138250570",
-    "packageName": "Jagannath Puri",
-    "name": "SAROJ SHAILESH VITHALANI",
-    "email": "gagangiritravels@gmail.com",
-    "phone": "09370262361",
-    "travelers": {
-      "adults": 7,
-      "children": 0,
-      "infants": 0
-    },
-    "fromDate": "2025-10-18",
-    "toDate": "2025-10-26",
-    "requirements": "bbbbbb"
   }
 ]

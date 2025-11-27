@@ -58,5 +58,25 @@
       "/uploads/file_1758612738195.jpg"
     ],
     "date": "2025-09-23T07:32:18.213Z"
+  },
+  {
+    "id": 7,
+    "name": "Aatish Gupta",
+    "rating": 5,
+    "comments": "Travel online have been helpful and supportive. Easy to contact and always got back to us. They take the stress out of travel.\r\nWe would recommend Travel Online without hesitation.",
+    "images": [
+      "/uploads/file_1763718267438.jpg"
+    ],
+    "date": "2025-11-21T09:44:27.444Z"
+  },
+  {
+    "id": 8,
+    "name": "Mr.Yogesh",
+    "rating": 5,
+    "comments": "Excellent service and help, all went without a problem and we had a great time.",
+    "images": [
+      "/uploads/file_1763718424186.jpg"
+    ],
+    "date": "2025-11-21T09:47:04.216Z"
   }
 ]

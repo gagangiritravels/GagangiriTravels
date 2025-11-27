@@ -76,6 +76,22 @@
       .sidebar a span.text-label { display: none; }
       .sidebar h4 { display: none; }
     }
+ #bookingTable {
+    width: 100%;
+    table-layout: auto;   /* Auto adjust columns */
+    border-collapse: collapse;
+  }
+
+  #bookingTable th, 
+  #bookingTable td {
+    white-space: nowrap;   /* Prevent long wrap – optional */
+    vertical-align: top;
+  }
+
+  .scroll-table {
+    width: 100%;
+    overflow-x: auto;
+  }
   </style>
 </head>
 <body>
@@ -127,7 +143,7 @@
   </li>
 <li><a class="dropdown-item text-white fw-bold" href="#" data-bs-toggle="modal"data-bs-target="#packageModal" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Add New Package</a></li></li>
   <li><a class="dropdown-item text-white fw-bold" href="Add_Cruise.html" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Add New Cruise</a></li>
-  <li><a class="dropdown-item text-white fw-bold" href="Invoice.html" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Invoice</a></li>
+  <li><a class="dropdown-item text-white fw-bold" href="#" style="background: #6a5acd; margin: 2px; border-radius: 0.25rem;">Invoice</a></li>
   <li><a class="dropdown-item text-white fw-bold" href="#" style="background: #20b2aa; margin: 2px; border-radius: 0.25rem;">Settings</a></li>
   <li><hr class="dropdown-divider" style="border-top: 1px solid #fff;"></li>
   <li><a class="dropdown-item fw-bold" href="login.html" onclick="logout()" style="background: #ff4757; color:white; margin: 2px; border-radius: 0.25rem;">
@@ -188,24 +204,35 @@
 <!-----------------Booking------------>
 
     <div id="bookings-page" style="display:none;">
-      <div class="card">
-        <div class="card-header bg-white"><h5>Manage Bookings</h5></div>
-        <div class="card-body">
-          <div class="scroll-table">
-            <table class="table table-bordered" id="bookingTable">
-              <thead class="table-light">
-                <tr>
-                  <th>#</th><th>Package</th><th>Customer</th><th>Email</th><th>Phone</th>
-                  <th>Travelers</th><th>Travel Dates</th><th>Remarks</th>
-                  <th>Status</th><th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="bookingTableBody"></tbody>
-            </table>
-          </div>
-        </div>
+  <div class="card">
+    <div class="card-header bg-white">
+      <h5>Manage Bookings</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="scroll-table">
+        <table class="table table-bordered" id="bookingTable">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Package</th>
+              <th>Customer</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Travelers</th>
+              <th>Travel Dates</th>
+              <th>Remarks</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingTableBody"></tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>
+
 
 <!-----------------Flight------------>
 

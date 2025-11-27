@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gagangiri Travels - Cruise Bookings</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #0077b6;
+      --secondary-color: #1e3c72;
+      --accent-color: #ff9800;
+    }
+
+    body {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')
+      no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .header-top {
+      background: linear-gradient(145deg, var(--secondary-color), #2a5298);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      padding: 10px 20px;
+      color: #fff;
+    }
+    .header-top img {
+      width: 70px;
+      height: auto;
+      margin-right: 10px;
+    }
+    .brand-name { font-size: 1.4rem; font-weight: bold; }
+    .tagline { font-size: 0.85rem; font-style: italic; color: #e0e0e0; }
+
+    .navbar-custom { background-color: var(--accent-color); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .navbar-custom .nav-link { color: #fff !important; font-weight: 500; }
+    .navbar-custom .nav-link:hover { color: #222 !important; }
+    .navbar-toggler { border: none; }
+
+    .filter-box {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .card { 
+      border-radius: 15px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+      transition: transform 0.3s ease; 
+      border: none;
+      background-color: #ffffff;
+    }
+    .card:hover { transform: translateY(-5px); }
+
+    .btn-book { 
+      background: var(--primary-color);
+      color: #fff; 
+      border-radius: 20px; 
+      transition: background-color 0.3s ease;
+      border: none; 
+    }
+    .btn-book:hover { background: #005f99; color: #fff; }
+    
+    .btn-whatsapp {
+        background: #25D366;
+        color: white;
+        border-radius: 20px;
+    }
+
+    .cruise-company { font-style: italic; color: #6c757d; }
+    .price-tag { font-size: 1.2rem; font-weight: bold; color: #e63946; }
+
+    #bookingModal .modal-content { border-radius: 20px; }
+    #bookingModal .modal-header {
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem;
+      border-bottom: none;
+    }
+    #bookingModal .btn-close { filter: invert(1); }
+
+    .footer {
+      background: var(--secondary-color);
+      color: #fff;
+      padding: 3rem 0 1.5rem;
+      margin-top: 4rem;
+    }
+    .footer a { color: #adb5bd; text-decoration: none; transition: color 0.3s; }
+    .footer a:hover { color: var(--accent-color) !important; }
+  </style>
+</head>
+<body>
+<div class="header-top d-flex align-items-center justify-content-between py-2 px-3">
+  <!-- Left: Logo and Brand -->
+  <div class="d-flex align-items-center">
+    <img src="/images/gtlogo.png" alt="Gagangiri Travels Logo" class="me-2" style="height:90px; width:auto; object-fit:contain;" />
+    <div>
+      <div class="brand-name text-white fw-bold fs-5">Gagangiri Travels</div>
+      <div class="tagline text-light fst-italic" style="font-size:0.85rem;">For Everything In Travel Affairs</div>
+    </div>
+  </div>
+
+  <!-- Centered Text -->
+  <div class="mx-auto text-center text-white fw-bold fs-5">
+    Cruises Book with Gagangiri Travels
+  </div>
+</div>
+
+
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-2">
+    <div class="container">
+      <a class="navbar-brand d-lg-none text-white fw-bold" href="#">Gagangiri</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa-solid fa-house me-1"></i> Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fa-solid fa-plane me-1"></i> Tours Packages</a>
+            <ul class="dropdown-menu shadow-lg border-0 rounded-3">
+              <li><a class="dropdown-item" href="international.html">🌍 International</a></li>
+              <li><a class="dropdown-item" href="domestic.html">🏡 Domestic</a></li>
+              <li><a class="dropdown-item" href="spiritual.html">🕉 Spiritual Tour</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="cruise.html"><i class="fa-solid fa-ship me-1"></i> Cruise</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <h1 class="text-center mb-5 display-5 fw-bold" style="color:#ff9800;">Cruise Bookings</h1>
+
+    <div class="filter-box mb-5">
+      <h4 class="mb-3 text-secondary">Find Your Perfect Cruise</h4>
+      <form id="filterForm" class="row g-3">
+        <div class="col-md-3">
+          <label for="typeFilter" class="form-label fw-bold">Cruise Type</label>
+          <select class="form-select" id="typeFilter">
+            <option value="all">All</option>
+            <option value="domestic">Domestic (India)</option>
+            <option value="international">International</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="countryFilter" class="form-label fw-bold">Country</label>
+          <select class="form-select" id="countryFilter">
+            <option value="all">All</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Spain">Spain</option>
+            <option value="Italy">Italy</option>
+            <option value="Greece">Greece</option>
+            <option value="Canada">Canada</option>
+            <option value="Japan">Japan</option>
+            <option value="United Arab Emirates">UAE</option>
+            <option value="France">France</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="cityFilter" class="form-label fw-bold">Departure City</label>
+          <select class="form-select" id="cityFilter">
+            <option value="all">All</option>
+            <option value="Goa">Goa</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Cochin">Cochin</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Miami">Miami</option>
+            <option value="Seattle">Seattle</option>
+            <option value="Singapore City">Singapore City</option>
+            <option value="Dubai">Dubai</option>
+            <option value="Tokyo">Tokyo</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Rome (Civitavecchia)">Rome (Civitavecchia)</option>
+            <option value="Athens (Piraeus)">Athens (Piraeus)</option>
+            <option value="Marseille">Marseille</option>
+            <option value="Vancouver">Vancouver</option>
+          </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+          <button type="button" class="btn btn-primary w-100" onclick="filterCruises()">Search Cruises</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="row" id="cruiseResults"></div>
+  </div>
+
+  <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content p-2" style="max-width: 360px; margin:auto;">
+        <div class="modal-header py-2">
+          <h6 class="modal-title">Book <span id="modalCruiseName"></span></h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-2">
+          <form id="bookingForm">
+            <input type="hidden" id="selectedCruise" />
+            <div class="mb-1">
+              <label for="fullName" class="form-label small">Full Name</label>
+              <input type="text" class="form-control form-control-sm" id="fullName" required>
+            </div>
+            <div class="mb-1">
+              <label for="email" class="form-label small">Email Address</label>
+              <input type="email" class="form-control form-control-sm" id="email" required>
+            </div>
+            <div class="mb-1">
+              <label for="phone" class="form-label small">Phone Number</label>
+              <input type="tel" class="form-control form-control-sm" id="phone" required>
+            </div>
+            <div class="mb-1">
+              <label for="passengers" class="form-label small">Passengers</label>
+              <input type="number" class="form-control form-control-sm" id="passengers" min="1" required>
+            </div>
+            <div class="row">
+              <div class="col-6 mb-1">
+                <label for="traveldate" class="form-label small">Travel Date</label>
+                <input type="date" class="form-control form-control-sm" id="traveldate" required>
+              </div>
+              <div class="col-6 mb-1">
+                <label for="travelto" class="form-label small">Travel To</label>
+                <input type="date" class="form-control form-control-sm" id="travelto" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100 btn-sm mt-2">Confirm Booking</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<footer class="footer text-white" style="background: linear-gradient(145deg, #1e3c72, #2a5298);">
+  <div class="container py-3"> <!-- Reduced padding from py-4 to py-3 -->
+
+    <div class="row text-start">
+
+      <!-- About / Brand -->
+      <div class="col-md-3 mb-3">
+        <h5 class="fw-bold">🌍 Gagangiri Travels</h5>
+        <p class="small mb-0">
+          For Everything In Travel Affairs. We provide International, Domestic & Spiritual tour packages with best prices and services.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="index.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Home</a></li>
+          <li><a href="international.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> International</a></li>
+          <li><a href="domestic.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Domestic</a></li>
+          <li><a href="spiritual.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Spiritual Tours</a></li>
+          <li><a href="visa.html" class="text-white text-decoration-none"><i class="fa fa-angle-right me-1"></i> Visa Expert</a></li>
+        </ul>
+      </div>
+
+      <!-- Our Team -->
+      <div class="col-md-3 mb-3 text-start">
+        <h6 class="fw-bold mb-2">Our Team</h6>
+        <div class="d-flex align-items-center mb-2 gap-2">
+          <img src="images/Saroj.jpg" alt="Founder" class="rounded-circle" style="width:50px; height:50px; object-fit:cover;">
+          <div>
+            <p class="mb-0 small fw-bold">Mrs. Saroj Vithalani</p>
+            <small class="text-light">Founder & CEO</small>
+          </div>
+        </div>
+        <p class="mb-0 small fw-bold">Mr. Anand Iyer - Manager & Visa Expert</p>
+        <p class="mb-0 small fw-bold">Mrs. Kajal Telinge - Accountant</p> 
+        <p class="mb-0 small fw-bold">Mr.Pradeep Kanojia - Sales Executive</p>         
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Contact Us</h6>
+        <p class="small mb-1"><i class="fa fa-map-marker-alt me-2"></i> Khopoli, Maharashtra, India</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9370262361</p>
+        <p class="small mb-1"><i class="fa fa-phone me-2"></i> +91 9665811088</p>
+        <p class="small mb-0"><i class="fa fa-envelope me-2"></i> gagangiritravels@gmail.com</p>
+      </div>
+
+    </div>
+
+    <!-- Socials -->
+    <div class="d-flex align-items-center justify-content-center mt-3 gap-3">
+      <h6 class="fw-bold mb-0">Follow Us:</h6>
+<a href="#"class="footer-social d-inline-block text-center"style="width:32px;height:32px;line-height:32px;background:#fff;color:#2a5298;border-radius:50%;">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="footer-social d-inline-block text-center" 
+         style="width:32px;height:32px;line-height:32px;background:#fff;
+                color:#2a5298;border-radius:50%;">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    <hr class="border-light mt-3 mb-2">
+ <p class="small mb-0 text-center">&copy; 2025 Gagangiri Travels. All Rights Reserved. | Designed by <span class="text-warning">Pradeep Kanojia</span></p>
+  </div>
+</footer>
+
+  <script>
+    const cruises = [
+        { id: 1, name: "Golden Triangle Cruise", company: "Cordelia Cruises", type: "domestic", country: "India", city: "Goa", price: "Price On Request", duration: "4 Days / 3 Nights", description: "A delightful coastal journey along the Konkan coast, visiting scenic beaches and historic sites." },
+        { id: 2, name: "Arabian Sea Luxury Cruise", company: "Cordelia Cruises", type: "domestic", country: "India", city: "Mumbai", price: "Price On Request", duration: "7 Days / 6 Nights", description: "Luxury sailing in the Arabian Sea with world-class amenities and entertainment." },
+        { id: 3, name: "Kerala Backwaters & Sea", company: "Cordelia Cruises", type: "domestic", country: "India", city: "Cochin", price: "Price On Request", duration: "5 Days / 4 Nights", description: "Explore the scenic beauty of the Malabar Coast and backwaters." },
+        { id: 4, name: "Jewel of the East Coast", company: "Cordelia Cruises", type: "domestic", country: "India", city: "Chennai", price: "Price On Request", duration: "3 Days / 2 Nights", description: "A quick getaway cruise from Chennai, exploring the Bay of Bengal." },
+        { id: 5, name: "Goa to Lakshadweep Explorer", company: "Costa Cruises", type: "domestic", country: "India", city: "Goa", price: "Price On Request", duration: "6 Days / 5 Nights", description: "An incredible journey to the pristine islands of Lakshadweep from Goa." },
+        { id: 6, name: "Grand Caribbean Explorer", company: "Royal Caribbean", type: "international", country: "USA", city: "Miami", price: "Price On Request", duration: "10 Days / 9 Nights", description: "A comprehensive trip covering multiple Caribbean islands from Miami." },
+        { id: 7, name: "Alaskan Glaciers Discovery", company: "Royal Caribbean", type: "international", country: "USA", city: "Seattle", price: "Price On Request", duration: "7 Days / 6 Nights", description: "Witness the breathtaking glaciers and wildlife of the Inside Passage." },
+        { id: 8, name: "Western Mediterranean Classic", company: "MSC Cruises", type: "international", country: "Spain", city: "Barcelona", price: "Price On Request", duration: "7 Days / 6 Nights", description: "Explore Spain, France, and Italy's historic ports." },
+        { id: 9, name: "Ancient Rome & Isles", company: "MSC Cruises", type: "international", country: "Italy", city: "Rome (Civitavecchia)", price: "Price On Request", duration: "8 Days / 7 Nights", description: "Discover the heritage of Italy and Greece, starting near Rome." },
+        { id: 10, name: "Mykonos & Aegean Wonders", company: "MSC Cruises", type: "international", country: "Greece", city: "Athens (Piraeus)", price: "Price On Request", duration: "9 Days / 8 Nights", description: "Island hopping and ancient history in the beautiful Greek Isles." },
+        { id: 11, name: "French Riviera & Italy", company: "Costa Cruises", type: "international", country: "France", city: "Marseille", price: "Price On Request", duration: "6 Days / 5 Nights", description: "A luxurious cruise exploring the picturesque coasts of France and Italy." },
+        { id: 12, name: "Jewel of Asia Cruise", company: "Royal Caribbean", type: "international", country: "Singapore", city: "Singapore City", price: "Price On Request", duration: "3 Days / 2 Nights", description: "Short, power-packed cruise perfect for a weekend getaway to Malaysia/Thailand." },
+        { id: 13, name: "Arabian Gulf Odyssey", company: "MSC Cruises", type: "international", country: "United Arab Emirates", city: "Dubai", price: "Price On Request", duration: "7 Days / 6 Nights", description: "Experience a magical journey through the modern cities of the Arabian Gulf." },
+        { id: 14, name: "Japan's Cultural Wonders", company: "Costa Cruises", type: "international", country: "Japan", city: "Tokyo", price: "Price On Request", duration: "10 Days / 9 Nights", description: "A deep dive into Japan's rich culture, from ancient temples to modern cities." },
+        { id: 15, name: "Inside Passage Explorer", company: "Royal Caribbean", type: "international", country: "Canada", city: "Vancouver", price: "Price On Request", duration: "7 Days / 6 Nights", description: "A picturesque journey through the rugged coasts of Alaska and Canada." }
+    ];
+    
+    // Your WhatsApp number with country code, e.g., +918076615024
+    const WHATSAPP_NUMBER = "919370262361"; 
+
+    function displayCruises(list) {
+      const container = document.getElementById("cruiseResults");
+      container.innerHTML = "";
+      if (list.length === 0) {
+        container.innerHTML = "<div class='col-12'><div class='alert alert-warning text-center'>No cruises found.</div></div>";
+        return;
+      }
+      list.forEach(c => {
+        container.innerHTML += `
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card p-4 h-100">
+              <h4 class="card-title text-primary">${c.name}</h4>
+              <p class="cruise-company">${c.company}</p>
+              <p>${c.description}</p>
+              <p><strong>Duration:</strong> ${c.duration}</p>
+              <p><strong>Departure:</strong> ${c.city}, ${c.country}</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="price-tag">${c.price}</span>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-book px-4" onclick="openBooking('${c.name}')">Book Now</button>
+                    <button class="btn btn-whatsapp" onclick="openWhatsApp('${c.name}', '${c.price}')"><i class="fab fa-whatsapp"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filterCruises() {
+      const type = document.getElementById("typeFilter").value;
+      const country = document.getElementById("countryFilter").value;
+      const city = document.getElementById("cityFilter").value;
+      const filtered = cruises.filter(c =>
+        (type === "all" || c.type === type) &&
+        (country === "all" || c.country === country) &&
+        (city === "all" || c.city === city)
+      );
+      displayCruises(filtered);
+    }
+
+    function openBooking(name) {
+      document.getElementById("selectedCruise").value = name;
+      document.getElementById("modalCruiseName").innerText = name;
+      const modal = new bootstrap.Modal(document.getElementById("bookingModal"));
+      modal.show();
+    }
+    
+    // New function to handle WhatsApp button
+    function openWhatsApp(name, price) {
+        const message = `Hello, I am interested in the cruise "${name}". The price is listed as "${price}". Please provide more details.`;
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const booking = {
+        cruiseName: document.getElementById("selectedCruise").value,
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        passengers: document.getElementById("passengers").value,
+        travelDate: document.getElementById("traveldate").value,
+        travelTo: document.getElementById("travelto").value
+      };
+      try {
+        const res = await fetch("http://localhost:5000/cruises", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(booking)
+        });
+        const data = await res.json();
+        alert(`🎉 Booking confirmed for ${booking.fullName} on ${booking.cruiseName}`);
+        bootstrap.Modal.getInstance(document.getElementById("bookingModal")).hide();
+        document.getElementById("bookingForm").reset();
+      } catch (err) {
+        console.error("❌ Error:", err);
+        alert("⚠️ Error: Please check if server is running.");
+      }
+    });
+
+
+    window.onload = () => displayCruises(cruises);
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
